@@ -11,6 +11,9 @@ fi
 source ~/.cargo/env
 export PATH="Users/jsonnull/.local/bin:$PATH"
 
+# For Cargo RustFmt:
+export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
+
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 export EDITOR='vim'
@@ -55,3 +58,6 @@ export PATH="/Users/jsonnull/.npm-packages/bin:/Users/jsonnull/.config/yarn/glob
 
 # MacPorts
 export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+
+# Rust+Cargo
+export PATH="$HOME/.cargo/bin:$PATH"
