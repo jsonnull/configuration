@@ -19,7 +19,7 @@ export HISTSIZE=10000
 export EDITOR='vim'
 
 function git-branch-name {
-  git symbolic-ref HEAD 2>/dev/null | cut -d"/" -f 3
+  git symbolic-ref HEAD 2>/dev/null | gcut -d"/" -f 1,2 --complement
 }
 function git-branch-prompt {
   local branch=`git-branch-name`
