@@ -94,6 +94,27 @@ function! SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+" Scrolling
+function SmoothScroll(up)
+    if a:up
+        let scrollaction="2\<C-y>"
+    else
+        let scrollaction="2\<C-e>"
+    endif
+    let counter=0
+    while counter<&scroll
+        let counter+=2
+        exec "normal " . scrollaction
+        redraw
+        sleep 6m
+    endwhile
+endfunction
+
+nnoremap <C-U> :call SmoothScroll(1)<Enter>
+nnoremap <C-D> :call SmoothScroll(0)<Enter>
+inoremap <C-U> <Esc>:call SmoothScroll(1)<Enter>i
+inoremap <C-D> <Esc>:call SmoothScroll(0)<Enter>i
+
 " Insert newline without going into insert mode
 nmap <CR> :a<CR><CR>.<CR>
 
@@ -128,7 +149,7 @@ autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Toggle NERDTree with CTRL-n 
 map <C-n> :NERDTreeToggle<CR>
-map <C-y> :NERDTreeFind<CR>
+map <C-f> :NERDTreeFind<CR>
 
 " NERDTress File highlighting
 function! NERDTreeHighlightFile(extension, fg, bg, guifg, guibg)
@@ -211,14 +232,14 @@ map <C-p> :call FZFOpen(':Files')<CR>
 " =====================================
 " Plain text and markdown configuration
 " =====================================
-"augroup pencil
-"  autocmd!
-"  autocmd FileType markdown,mkd call pencil#init({'wrap': 'hard', 'autoformat': 1})
-"  autocmd FileType text         call pencil#init()
-"augroup END
+" augroup pencil
+ " autocmd!
+ " autocmd FileType markdown,mkd call pencil#init({'wrap': 'hard', 'autoformat': 1})
+ " autocmd FileType text         call pencil#init()
+" augroup END
 
 " Ditto
-au FileType markdown,text DittoOn
+" au FileType markdown,text DittoOn
 nmap <leader>di <Plug>ToogleDitto
 
 " Set the textwidth for pencil enabled files
