@@ -1,2 +1,2 @@
-COPY_ALWAYS="FirefoxProfile/chrome/userContent.css"
+COPY_ALWAYS="FirefoxProfile/chrome/*"
 UNDOTTED="FirefoxProfile"
