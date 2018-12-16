@@ -1,0 +1,32 @@
+#sidebar-box #sidebar-header {
+	display: none !important;
+}
+
+#PlacesToolbarItems .bookmark-item {
+	padding-top: 6px !important;
+	padding-bottom: 6px !important;
+	padding-right: 8px !important;
+	padding-left: 8px !important;
+	font-size: 13px !important;
+}
+
+#nav-bar {
+	padding-left: 81px !important;
+}
+#TabsToolbar {
+	visibility: collapse !important;
+}
+
+.tab {
+	font-size: 13px !important;
+}
+
+.browserContainer {
+	background-color: black !important;
+}
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+toolbarbutton#alltabs-button {
+	-moz-binding: url("userChrome.xml#js");
+}
