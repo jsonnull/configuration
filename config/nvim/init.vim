@@ -73,6 +73,7 @@ set tabstop=2
 set shiftwidth=2
 set laststatus=2
 set hidden
+set mouse=a
 " Custom invisibles
 set listchars=eol:¬,tab:->,trail:~,extends:>,precedes:<,space:·
 set list
