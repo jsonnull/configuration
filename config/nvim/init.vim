@@ -69,22 +69,25 @@ syntax on
 set autoindent
 set ai
 set number
-set expandtab
 set tabstop=2
 set shiftwidth=2
 set laststatus=2
 set hidden
 " Custom invisibles
-set listchars=eol:¬,tab:\ \ ,trail:~,extends:>,precedes:< ",space:·
+set listchars=eol:¬,tab:->,trail:~,extends:>,precedes:<,space:·
 set list
 set colorcolumn=80
 set background=light
 set backspace=2
-" colorscheme typo
+colorscheme typo
 " This tells vim how to write the file so that webpack can detect it
 set backupcopy=yes
 " Conceal-level helps for markdown documents
 set conceallevel=3
+" Turn on syntax folding
+" set foldmethod=syntax
+set fillchars=fold:\ 
+set clipboard=unnamedplus
 
 " Syntax helper function
 function! SynStack()
@@ -95,7 +98,7 @@ function! SynStack()
 endfunc
 
 " Scrolling
-function SmoothScroll(up)
+function! SmoothScroll(up)
     if a:up
         let scrollaction="2\<C-y>"
     else
@@ -176,11 +179,12 @@ let g:NERDTreeIndicatorMapCustom = {
 " ================
 hi Todo cterm=bold ctermfg=white ctermbg=red
 hi Search ctermbg=green ctermfg=black
-hi Visual term=reverse cterm=reverse ctermfg=white ctermbg=black
+hi Visual term=none cterm=none ctermfg=white ctermbg=11
 hi ColorColumn ctermbg=black
 hi VertSplit ctermbg=black ctermfg=black
 hi LineNr ctermbg=black ctermfg=8
 hi StatusLine ctermbg=black ctermfg=12 cterm=none
+hi Folded ctermbg=black ctermfg=blue
 hi StatusLineNC ctermbg=black ctermfg=8 cterm=none
 hi SpecialKey ctermfg=8
 hi NonText ctermfg=8
@@ -296,6 +300,7 @@ let g:jsx_ext_required = 0
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_typescript = ['prettier']
 let g:neoformat_enabled_markdown = ['prettier']
+let g:coverage_json_report_path = 'coverage_jest/coverage-final.json'
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.ts Neoformat
 autocmd BufWritePre *.md Neoformat
