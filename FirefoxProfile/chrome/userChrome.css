@@ -1,7 +1,3 @@
-#sidebar-box #sidebar-header {
-	display: none !important;
-}
-
 #PlacesToolbarItems .bookmark-item {
 	padding-top: 6px !important;
 	padding-bottom: 6px !important;
@@ -21,12 +17,58 @@
 	font-size: 13px !important;
 }
 
-.browserContainer {
-	background-color: black !important;
+/* .browserContainer { */
+	/* background-color: black !important; */
+/* } */
+
+/*
+ * Disable for demo
+ */
+#sidebar-box {
+	box-sizing: border-box;
+  overflow: hidden;
+  min-width: 60px;
+  max-width: 60px;
+  position: fixed;
+	right: 0;
+  transition: all 0.2s ease;
+}
+
+#sidebar-box:hover,
+#sidebar-header,
+#sidebar {
+  min-width: 250px !important;
+  max-width: 250px !important;
+}
+
+#sidebar-header,
+#sidebar-splitter {
+  display: none;
+}
+
+#sidebar {
+  height: 100vh;
+}
+
+#appcontent {
+  margin-right: 60px;
+}
+
+#main-window[inFullscreen][inDOMFullscreen] #appcontent {
+  margin-right: 0;
+}
+
+#main-window[inFullscreen] #sidebar {
+  height: 100vh;
+}
+/*
+ * End disable
+ */
+#sidebar-header {
+  display: none;
 }
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
-
 toolbarbutton#alltabs-button {
 	-moz-binding: url("userChrome.xml#js");
 }
