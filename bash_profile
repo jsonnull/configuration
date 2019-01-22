@@ -26,11 +26,11 @@ export RIPGREP_CONFIG_PATH="/Users/jasonnall/.ripgreprc"
 ### Rust
 if [ -f ~/.cargo/env ]; then
 	source ~/.cargo/env
+
+	# For Cargo RustFmt:
+	export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
 fi
 export PATH="Users/jsonnull/.local/bin:$PATH"
-
-# For Cargo RustFmt:
-export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
 
 function git-repo-name {
   basename `git rev-parse --show-toplevel`
