@@ -14,6 +14,8 @@ alias treetop='tree -L 1'
 
 test -f ~/.git-completion.bash && . $_
 
+set -o vi
+
 # --files: List files that would be searched but do not search
 # --no-ignore: Do not respect .gitignore, etc...
 # --hidden: Search hidden files and folders
