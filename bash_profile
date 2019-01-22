@@ -1,5 +1,6 @@
 # vim: filetype=sh
 
+# Source environment and completions
 if [ -f ~/.bashrc ]; then
   source ~/.bashrc
 fi
@@ -8,22 +9,41 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
   . $(brew --prefix)/etc/bash_completion
 fi
 
-source ~/.cargo/env
+if [ -f ~/.npmrc_bash ]; then
+  source ~/.npmrc_bash
+fi
+
+test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
+
+# General
+export HISTFILESIZE=10000
+export HISTSIZE=10000
+export EDITOR='nvim'
+
+# Ripgrep configuration
+export RIPGREP_CONFIG_PATH="/Users/jasonnall/.ripgreprc"
+
+### Rust
+if [ -f ~/.cargo/env ]; then
+	source ~/.cargo/env
+fi
 export PATH="Users/jsonnull/.local/bin:$PATH"
 
 # For Cargo RustFmt:
 export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
 
-export HISTFILESIZE=10000
-export HISTSIZE=10000
-export EDITOR='vim'
-
+function git-repo-name {
+  basename `git rev-parse --show-toplevel`
+}
 function git-branch-name {
   git symbolic-ref HEAD 2>/dev/null | gcut -d"/" -f 1,2 --complement
 }
 function git-branch-prompt {
   local branch=`git-branch-name`
-  if [ $branch ]; then printf "  %s" $branch; fi
+  if [ $branch ]; then
+    it2setkeylabel set status "$(git-repo-name)/$branch" > /dev/null
+    printf "  %s" $branch;
+  fi
 }
 
 BG_BLUE="\[\033[44m\]"
@@ -61,3 +81,4 @@ export PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 
 # Rust+Cargo
 export PATH="$HOME/.cargo/bin:$PATH"
+
