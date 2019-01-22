@@ -57,21 +57,23 @@ FG_WHITE="\[\033[0;97m\]"
 FG_WHITE_BOLD="\[\033[1;97m\]"
 FG_BLACK="\[\033[0;30m\]"
 FG_BLACK_BOLD="\[\033[1;30m\]"
+FG_RED="\[\033[0;31m\]"
 FG_ORANGE_BOLD="\[\033[1;93m\]"
+FG_GREEN="\[\033[0;32m\]"
 FG_YELLOW="\[\033[0;33m\]"
+FG_BLUE="\[\033[0;34m\]"
+FG_BLUE_BOLD="\[\033[1;34m\]"
 
 BG0=$BG_BLUE
 BG1=$BG_YELLOW
 
-FG0=$FG_WHITE
-FG1=$FG_WHITE_BOLD
-FGBLUE="\[\033[1;34m\]" # bold blue
-FG2=$FG_BLACK
-FG3=$FG_YELLOW
+FG1=$FG_GREEN
+FG2=$FG_BLUE
 
 RESET="\[\033[0m\]"
 
-PS1="${FG0}${BG0} \u ${FG1}\W ${FGBLUE}${BG1}${FG2}${BG1}\$(git-branch-prompt) ${RESET}${FG3}${RESET} \$ "
+# PS1="${FG0}${BG0} \u ${FG1}\W ${FGBLUE}${BG1}${FG2}${BG1}\$(git-branch-prompt) ${RESET}${FG3}${RESET} \$ "
+PS1="\W${FG1}\$(git-branch-prompt) ${FG2}\$ ${RESET}"
 
 # NPM 5
 export PATH="/Users/jsonnull/.npm-packages/bin:/Users/jsonnull/.config/yarn/global/node_modules/.bin:$PATH"
