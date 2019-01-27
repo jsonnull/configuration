@@ -27,16 +27,18 @@
 #sidebar-box {
 	box-sizing: border-box;
   overflow: hidden;
-  min-width: 60px;
-  max-width: 60px;
+  min-width: 70px;
+  max-width: 70px;
   position: fixed;
 	right: 0;
+	opacity: 0;
   transition: all 0.2s ease;
 }
 
 #sidebar-box:hover,
 #sidebar-header,
 #sidebar {
+	opacity: 1;
   min-width: 250px !important;
   max-width: 250px !important;
 }
@@ -50,9 +52,9 @@
   height: 100vh;
 }
 
-#appcontent {
-  margin-right: 60px;
-}
+/* #appcontent { */
+  /* margin-right: 60px; */
+/* } */
 
 #main-window[inFullscreen][inDOMFullscreen] #appcontent {
   margin-right: 0;
