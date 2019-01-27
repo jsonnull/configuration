@@ -36,6 +36,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'flowtype/vim-flow'
 Plugin 'mxw/vim-jsx'
+Plugin 'jxnblk/vim-mdx-js'
 Plugin 'HerringtonDarkholme/yats.vim'
 "Plugin 'mhartington/nvim-typescript'
 "Plugin 'fleischie/vim-styled-components'
@@ -99,25 +100,25 @@ function! SynStack()
 endfunc
 
 " Scrolling
-function! SmoothScroll(up)
-    if a:up
-        let scrollaction="2\<C-y>"
-    else
-        let scrollaction="2\<C-e>"
-    endif
-    let counter=0
-    while counter<&scroll
-        let counter+=2
-        exec "normal " . scrollaction
-        redraw
-        sleep 6m
-    endwhile
-endfunction
+" function! SmoothScroll(up)
+    " if a:up
+        " let scrollaction="2\<C-y>"
+    " else
+        " let scrollaction="2\<C-e>"
+    " endif
+    " let counter=0
+    " while counter<&scroll
+        " let counter+=2
+        " exec "normal " . scrollaction
+        " redraw
+        " sleep 6m
+    " endwhile
+" endfunction
 
-nnoremap <C-U> :call SmoothScroll(1)<Enter>
-nnoremap <C-D> :call SmoothScroll(0)<Enter>
-inoremap <C-U> <Esc>:call SmoothScroll(1)<Enter>i
-inoremap <C-D> <Esc>:call SmoothScroll(0)<Enter>i
+" nnoremap <C-U> :call SmoothScroll(1)<Enter>
+" nnoremap <C-D> :call SmoothScroll(0)<Enter>
+" inoremap <C-U> <Esc>:call SmoothScroll(1)<Enter>i
+" inoremap <C-D> <Esc>:call SmoothScroll(0)<Enter>i
 
 " Insert newline without going into insert mode
 nmap <CR> :a<CR><CR>.<CR>
