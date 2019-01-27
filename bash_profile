@@ -41,7 +41,7 @@ function git-branch-name {
 function git-branch-prompt {
   local branch=`git-branch-name`
   if [ $branch ]; then
-    it2setkeylabel set status "$(git-repo-name)/$branch" > /dev/null
+    command -v it2setkeylabel set status "$(git-repo-name)/$branch" > /dev/null
     printf "  %s" $branch;
   fi
 }
