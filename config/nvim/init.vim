@@ -25,6 +25,7 @@ Plugin 'tpope/vim-rhubarb'
 " Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 " syntax
+Plugin 'valloric/youcompleteme'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
