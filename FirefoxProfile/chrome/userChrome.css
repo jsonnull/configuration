@@ -6,11 +6,19 @@
 	font-size: 13px !important;
 }
 
-#nav-bar {
-	padding-left: 81px !important;
+#urlbar, .searchbar-textbox {
+	border: none !important;
+	box-shadow: none !important;
 }
-#TabsToolbar {
-	visibility: collapse !important;
+
+/* Firefox 65+ hide tabs */
+#TabsToolbar > .toolbar-items,
+#TabsToolbar > .titlebar-spacer {
+  visibility: hidden
+}
+#nav-bar {
+  margin-top: -32px;
+  padding: 0px 15px 0px 75px !important;
 }
 
 .tab {
@@ -51,10 +59,6 @@
 #sidebar {
   height: 100vh;
 }
-
-/* #appcontent { */
-  /* margin-right: 60px; */
-/* } */
 
 #main-window[inFullscreen][inDOMFullscreen] #appcontent {
   margin-right: 0;
