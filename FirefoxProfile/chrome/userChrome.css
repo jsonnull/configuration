@@ -6,15 +6,9 @@
 	font-size: 13px !important;
 }
 
-#back-button {
-	padding-top: 0 !important;
-	padding-bottom: 0 !important;
-}
-
 #urlbar, .searchbar-textbox {
 	border: none !important;
 	box-shadow: none !important;
-	margin: 0 5px !important;
 }
 
 /* Firefox 65+ hide tabs */
@@ -49,6 +43,11 @@
   transition: all 0.2s ease;
 }
 
+#main-window[title^="about:newtab"] #sidebar-box,
+#main-window[title^="New Tab"] #sidebar-box,
+#main-window[title^="Nightly"] #sidebar-box,
+#main-window[title^="Mozilla Firefox"] #sidebar-box, 
+#main-window[title^="Firefox"] #sidebar-box,
 #sidebar-box:hover,
 #sidebar-header,
 #sidebar {
