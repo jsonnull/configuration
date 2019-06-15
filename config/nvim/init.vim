@@ -21,6 +21,7 @@ Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plugin 'junegunn/fzf.vim'
 " git
 Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-unimpaired'
 Plugin 'tpope/vim-rhubarb'
 " Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
@@ -79,7 +80,7 @@ set mouse=a
 " Custom invisibles
 set listchars=eol:¬,tab:->,trail:~,extends:>,precedes:<,space:·
 set list
-set colorcolumn=80
+set colorcolumn=100
 set background=light
 set backspace=2
 colorscheme typo
@@ -132,6 +133,7 @@ autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
 autocmd BufNewFile,BufReadPost *.babelrc set filetype=json
 autocmd BufNewFile,BufReadPost *.hbs set filetype=mustache
 autocmd BufNewFile,BufReadPost *.prettierrc set filetype=yaml
+autocmd FileType gitcommit set filetype=markdown
 
 " Prevent bad highlighting in CSS3 properties with dashes
 augroup VimCSS3Syntax
@@ -235,6 +237,7 @@ function! FZFOpen(command_str)
 endfunction
 
 map <C-p> :call FZFOpen(':Files')<CR>
+map <C-e> :call FZFOpen(':Rg')<CR>
 
 " =====================================
 " Plain text and markdown configuration
@@ -313,3 +316,29 @@ autocmd BufWritePre *.md Neoformat
 " ====
 let g:rustfmt_autosave = 1
 let g:rustfmt_command = "rustup run nightly rustfmt"
+
+
+" Markdown
+function! MarkdownLevel()
+    if getline(v:lnum) =~ '^# .*$'
+        return ">1"
+    endif
+    if getline(v:lnum) =~ '^## .*$'
+        return ">2"
+    endif
+    if getline(v:lnum) =~ '^### .*$'
+        return ">3"
+    endif
+    if getline(v:lnum) =~ '^#### .*$'
+        return ">4"
+    endif
+    if getline(v:lnum) =~ '^##### .*$'
+        return ">5"
+    endif
+    if getline(v:lnum) =~ '^###### .*$'
+        return ">6"
+    endif
+    return "=" 
+endfunction
+au BufEnter *.md setlocal foldexpr=MarkdownLevel()  
+au BufEnter *.md setlocal foldmethod=expr     
