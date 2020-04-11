@@ -13,6 +13,10 @@ if [ -f ~/.npmrc_bash ]; then
   source ~/.npmrc_bash
 fi
 
+if [ -f ~/z/z.sh ]; then
+  . ~/z/z.sh
+fi
+
 test -e "${HOME}/.iterm2_shell_integration.bash" && source "${HOME}/.iterm2_shell_integration.bash"
 
 # General
