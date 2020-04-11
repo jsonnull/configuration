@@ -21,7 +21,7 @@ set -o vi
 # --hidden: Search hidden files and folders
 # --follow: Follow symlinks
 # --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*" --glob "!node_modules/*" --glob "!built/*" --glob "!coverage/*" --glob "!coverage_jest/*"'
 
 vagrant(){
     if [[ $@ == "ip" ]]; then
