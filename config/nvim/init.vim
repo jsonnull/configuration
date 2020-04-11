@@ -26,7 +26,9 @@ Plugin 'tpope/vim-rhubarb'
 " Plugin 'Xuyuanp/nerdtree-git-plugin'
 Plugin 'airblade/vim-gitgutter'
 " syntax
-Plugin 'valloric/youcompleteme'
+Plugin 'valloric/youcompleteme', { 'dir': '~/.vim/bundle/youcompleteme', 'do': './install.py --ts-completer' }
+" Plugin 'mhartington/nvim-typescript', {'do': './install.sh'}
+" Plugin 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/syntastic'
@@ -35,12 +37,14 @@ Plugin 'sbdchd/neoformat'
 Plugin 'rust-lang/rust.vim'
 Plugin 'tpope/vim-haml'
 Plugin 'pangloss/vim-javascript'
+Plugin 'HerringtonDarkholme/yats.vim'
+Plugin 'jparise/vim-graphql'
 Plugin 'tikhomirov/vim-glsl'
 Plugin 'flowtype/vim-flow'
 Plugin 'mxw/vim-jsx'
 Plugin 'jxnblk/vim-mdx-js'
-Plugin 'HerringtonDarkholme/yats.vim'
-"Plugin 'mhartington/nvim-typescript'
+" Plugin 'HerringtonDarkholme/yats.vim'
+" Plugin 'quramy/tsuquyomi'
 "Plugin 'fleischie/vim-styled-components'
 Plugin 'tpope/vim-markdown'
 Plugin 'groenewege/vim-less'
@@ -83,7 +87,9 @@ set list
 set colorcolumn=100
 set background=light
 set backspace=2
-colorscheme typo
+set notermguicolors
+set t_Co=16
+" colorscheme typo
 " This tells vim how to write the file so that webpack can detect it
 set backupcopy=yes
 " Conceal-level helps for markdown documents
@@ -130,9 +136,12 @@ autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.jess set filetype=javascript
 autocmd BufNewFile,BufReadPost *.pegjs set filetype=javascript
 autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
+autocmd BufNewFile,BufReadPost *.sequelizerc set filetype=javascript
 autocmd BufNewFile,BufReadPost *.babelrc set filetype=json
 autocmd BufNewFile,BufReadPost *.hbs set filetype=mustache
 autocmd BufNewFile,BufReadPost *.prettierrc set filetype=yaml
+" autocmd BufNewFile,BufReadPost *.ts set filetype=typescript
+" autocmd BufNewFile,BufReadPost *.tsx set filetype=typescript
 autocmd FileType gitcommit set filetype=markdown
 
 " Prevent bad highlighting in CSS3 properties with dashes
@@ -145,15 +154,15 @@ augroup END
 " ========
 " NERDTRee
 " ========
-let NERDTreeIgnore = ['node_modules', '.git$', 'coverage', 'flow-typed']
+let NERDTreeIgnore = ['node_modules', '.git$', '.coverage', 'flow-typed', 'built']
 let g:NERDTreeMinimalUI = 1
 
 " Open NERDTree automatically when vim starts up
-autocmd vimenter * NERDTree
+" autocmd vimenter * NERDTree
 
 " Open NERDTree automatically when vim starts up if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
 " Toggle NERDTree with CTRL-n 
 map <C-n> :NERDTreeToggle<CR>
@@ -182,12 +191,13 @@ let g:NERDTreeIndicatorMapCustom = {
 " ================
 " Highlight better
 " ================
-hi Todo cterm=bold ctermfg=white ctermbg=red
-hi Search ctermbg=green ctermfg=black
-hi Visual term=none cterm=none ctermfg=white ctermbg=11
+hi Todo cterm=bold ctermfg=white ctermbg=8
+hi Search ctermbg=8 ctermfg=3
+hi SyntasticError ctermbg=red ctermfg=black
+hi Visual term=none cterm=none ctermfg=white ctermbg=5
 hi ColorColumn ctermbg=black
 hi VertSplit ctermbg=black ctermfg=black
-hi LineNr ctermbg=black ctermfg=8
+hi LineNr ctermbg=black ctermfg=13
 hi StatusLine ctermbg=black ctermfg=12 cterm=none
 hi Folded ctermbg=black ctermfg=blue
 hi StatusLineNC ctermbg=black ctermfg=8 cterm=none
@@ -197,6 +207,8 @@ hi Comment ctermfg=14
 hi NERDTreeFile ctermfg=12
 hi NERDTreeDir ctermfg=12
 hi NERDTreeDirSlash ctermfg=8
+hi StatusLine ctermfg=6
+hi StatusLineNC term=bold cterm=bold ctermfg=13
 
 " ====
 " BBYE
@@ -227,7 +239,16 @@ autocmd VimEnter *
 " --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
 " --color: Search color options
 
-command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>), 1, <bang>0)
+
+command! -bang -nargs=* Find call 
+	\fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --hidden --follow --glob "!{node_modules/*,.git/*,package-lock.json}" --color "always" '.shellescape(<q-args>),
+	\ 1,
+	\ <bang>0)
+
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case --follow --glob "!{node_modules/*,.git/*,package-lock.json,testData/*,tools/amplitude/production_schema.csv}" '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
 
 function! FZFOpen(command_str)
   if (expand('%') =~# 'NERD_tree' && winnr('$') > 1)
@@ -286,9 +307,9 @@ let g:NERDSpaceDelims = 1
 " =========
 " Syntastic
 " =========
-autocmd FileType javascript let b:syntastic_skip_checks=1
-" let g:syntastic_always_populate_loc_list = 0
-" let g:syntastic_auto_loc_list = 0 
+" autocmd FileType javascript let b:syntastic_skip_checks=1
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 0
 " let g:syntastic_check_on_open = 1
 " let g:syntastic_check_on_wq = 0
 let g:syntastic_rust_rustc_exe = 'cargo check'
@@ -296,6 +317,17 @@ let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_javascript_checkers = ['eslint']
+" let g:syntastic_typescript_checkers = ['eslint']
+
+" =============
+" YouCompleteMe
+" =============
+" if !exists("g:ycm_semantic_triggers")
+	" let g:ycm_semantic_triggers = {}
+" endif
+" let g:ycm_semantic_triggers['typescript'] = ['.']
+" let g:deoplete#enable_at_startup = 1
+let g:ycm_always_populate_location_list = 1
 
 " ==========
 " Javascript
@@ -308,8 +340,12 @@ let g:neoformat_enabled_typescript = ['prettier']
 let g:neoformat_enabled_markdown = ['prettier']
 let g:coverage_json_report_path = 'coverage_jest/coverage-final.json'
 autocmd BufWritePre *.js Neoformat
+autocmd BufWritePre *.jsx Neoformat
 autocmd BufWritePre *.ts Neoformat
 autocmd BufWritePre *.md Neoformat
+autocmd BufWritePre *.sequelizerc Neoformat
+
+let g:tsuquyomi_completion_detail = 0
 
 " ====
 " Rust
