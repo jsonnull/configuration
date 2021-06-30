@@ -35,6 +35,7 @@ if [ -f ~/.cargo/env ]; then
 	export DYLD_LIBRARY_PATH=$(rustc --print sysroot)/lib:$DYLD_LIBRARY_PATH
 fi
 export PATH="Users/jsonnull/.local/bin:$PATH"
+export PATH="/usr/local/lib/ruby/gems/2.6.0/bin:$PATH"
 
 function git-repo-name {
   basename `git rev-parse --show-toplevel`
