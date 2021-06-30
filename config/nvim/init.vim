@@ -40,7 +40,7 @@ Plugin 'pangloss/vim-javascript'
 Plugin 'HerringtonDarkholme/yats.vim'
 Plugin 'jparise/vim-graphql'
 Plugin 'tikhomirov/vim-glsl'
-Plugin 'flowtype/vim-flow'
+" Plugin 'flowtype/vim-flow'
 Plugin 'mxw/vim-jsx'
 Plugin 'jxnblk/vim-mdx-js'
 " Plugin 'HerringtonDarkholme/yats.vim'
@@ -83,7 +83,7 @@ set hidden
 set mouse=a
 " Custom invisibles
 set listchars=eol:¬,tab:->,trail:~,extends:>,precedes:<,space:·
-set list
+" set list
 set colorcolumn=100
 set background=light
 set backspace=2
@@ -91,7 +91,7 @@ set notermguicolors
 set t_Co=16
 " colorscheme typo
 " This tells vim how to write the file so that webpack can detect it
-set backupcopy=yes
+" set backupcopy=yes
 " Conceal-level helps for markdown documents
 set conceallevel=3
 " Turn on syntax folding
@@ -135,7 +135,7 @@ nmap <CR> :a<CR><CR>.<CR>
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown
 autocmd BufNewFile,BufReadPost *.jess set filetype=javascript
 autocmd BufNewFile,BufReadPost *.pegjs set filetype=javascript
-autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
+" autocmd BufNewFile,BufReadPost *.flow set filetype=javascript
 autocmd BufNewFile,BufReadPost *.sequelizerc set filetype=javascript
 autocmd BufNewFile,BufReadPost *.babelrc set filetype=json
 autocmd BufNewFile,BufReadPost *.hbs set filetype=mustache
@@ -154,7 +154,7 @@ augroup END
 " ========
 " NERDTRee
 " ========
-let NERDTreeIgnore = ['node_modules', '.git$', '.coverage', 'flow-typed', 'built']
+let NERDTreeIgnore = ['node_modules', '.git$', '.coverage', 'flow-typed', 'built', 'dist']
 let g:NERDTreeMinimalUI = 1
 
 " Open NERDTree automatically when vim starts up
@@ -191,24 +191,24 @@ let g:NERDTreeIndicatorMapCustom = {
 " ================
 " Highlight better
 " ================
-hi Todo cterm=bold ctermfg=white ctermbg=8
-hi Search ctermbg=8 ctermfg=3
-hi SyntasticError ctermbg=red ctermfg=black
-hi Visual term=none cterm=none ctermfg=white ctermbg=5
-hi ColorColumn ctermbg=black
-hi VertSplit ctermbg=black ctermfg=black
-hi LineNr ctermbg=black ctermfg=13
-hi StatusLine ctermbg=black ctermfg=12 cterm=none
-hi Folded ctermbg=black ctermfg=blue
-hi StatusLineNC ctermbg=black ctermfg=8 cterm=none
-hi SpecialKey ctermfg=8
-hi NonText ctermfg=8
-hi Comment ctermfg=14
-hi NERDTreeFile ctermfg=12
-hi NERDTreeDir ctermfg=12
-hi NERDTreeDirSlash ctermfg=8
-hi StatusLine ctermfg=6
-hi StatusLineNC term=bold cterm=bold ctermfg=13
+" hi Todo cterm=bold ctermfg=white ctermbg=8
+" hi Search ctermbg=8 ctermfg=3
+" hi SyntasticError ctermbg=red ctermfg=black
+" hi Visual term=none cterm=none ctermfg=white ctermbg=5
+" hi ColorColumn ctermbg=black
+" hi VertSplit ctermbg=black ctermfg=black
+" hi LineNr ctermbg=black ctermfg=13
+" hi StatusLine ctermbg=black ctermfg=12 cterm=none
+" hi Folded ctermbg=black ctermfg=blue
+" hi StatusLineNC ctermbg=black ctermfg=8 cterm=none
+" hi SpecialKey ctermfg=8
+" hi NonText ctermfg=8
+" hi Comment ctermfg=14
+" hi NERDTreeFile ctermfg=12
+" hi NERDTreeDir ctermfg=12
+" hi NERDTreeDirSlash ctermfg=8
+" hi StatusLine ctermfg=6
+" hi StatusLineNC term=bold cterm=bold ctermfg=13
 
 " ====
 " BBYE
@@ -317,7 +317,8 @@ let g:syntastic_rust_rustc_fname = ''
 let g:syntastic_rust_rustc_args = '--'
 let g:syntastic_rust_checkers = ['rustc']
 let g:syntastic_javascript_checkers = ['eslint']
-" let g:syntastic_typescript_checkers = ['eslint']
+let g:syntastic_typescript_checkers = ['eslint']
+let g:syntastic_typescriptreact_checkers = ['eslint']
 
 " =============
 " YouCompleteMe
@@ -332,16 +333,19 @@ let g:ycm_always_populate_location_list = 1
 " ==========
 " Javascript
 " ==========
-let g:flow#enable = 0
-let g:javascript_plugin_flow = 1
-let g:jsx_ext_required = 0
+" let g:flow#enable = 0
+" let g:javascript_plugin_flow = 1
+" let g:jsx_ext_required = 0
 let g:neoformat_enabled_javascript = ['prettier']
 let g:neoformat_enabled_typescript = ['prettier']
+let g:neoformat_enabled_javascriptreact = ['prettier']
+let g:neoformat_enabled_typescriptreact = ['prettier']
 let g:neoformat_enabled_markdown = ['prettier']
 let g:coverage_json_report_path = 'coverage_jest/coverage-final.json'
 autocmd BufWritePre *.js Neoformat
 autocmd BufWritePre *.jsx Neoformat
 autocmd BufWritePre *.ts Neoformat
+autocmd BufWritePre *.tsx Neoformat
 autocmd BufWritePre *.md Neoformat
 autocmd BufWritePre *.sequelizerc Neoformat
 
