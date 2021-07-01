@@ -1,0 +1,30 @@
+#!/usr/bin/env bash
+
+# vim-plug
+git clone https://github.com/savq/paq-nvim.git \
+    "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/pack/paqs/opt/paq-nvim
+
+# Language servers
+yarn global add \
+	bash-language-server \
+	vscode-css-languageserver-bin \
+	vscode-html-languageserver-bin \
+	vscode-json-languageserver \
+	sql-language-server \
+	typescript typescript-language-server \
+	vim-language-server \
+	vls \
+	yaml-language-server
+brew install efm-langserver rust-analyzer
+
+# Lua LSP
+cd ~/Programming || exit 1
+git clone https://github.com/sumneko/lua-language-server
+cd lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake
+compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+
+echo "Run `nvim +PaqInstall` to finish setup"
