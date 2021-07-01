@@ -6,13 +6,12 @@ local prettier = {
 }
 
 local eslint = {
-    lintCommand = "./node_modules/.bin/eslint -f unix --stdin --stdin-filename ${INPUT}",
+    lintCommand = "eslint_d -f unix --stdin --stdin-filename ${INPUT}",
     lintIgnoreExitCode = true,
     lintStdin = true,
     lintFormats = {"%f:%l:%c: %m"},
-    -- TODO: Usage below if I can use `eslint_d`
-    --formatCommand = "./node_modules/.bin/eslint --fix-to-stdout --stdin --stdin-filename=${INPUT}",
-    --formatStdin = true
+    formatCommand = "eslint_d --fix-to-stdout --stdin --stdin-filename=${INPUT}",
+    formatStdin = true
 }
 
 local tsserver_args = {}
@@ -59,6 +58,7 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
   buf_set_keymap('n', '<leader>lA', '<cmd>Telescope lsp_code_actions<cr>', opts)
   buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+  buf_set_keymap('n', '<c-t>', '<cmd>Telescope lsp_workspace_symbols<cr>', opts)
 
   if client.resolved_capabilities.document_formatting then
     vim.api.nvim_exec([[
@@ -118,6 +118,7 @@ lspconfig.efm.setup({
       javascriptreact = tsserver_args,
       typescript = tsserver_args,
       typescriptreact = tsserver_args,
+      vue = tsserver_args,
       html = {prettier},
       css = {prettier},
       json = {prettier},

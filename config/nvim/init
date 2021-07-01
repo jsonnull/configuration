@@ -7,6 +7,7 @@ git clone https://github.com/savq/paq-nvim.git \
 # Language servers
 yarn global add \
 	bash-language-server \
+	eslint_d \
 	vscode-css-languageserver-bin \
 	vscode-html-languageserver-bin \
 	vscode-json-languageserver \
