@@ -36,3 +36,5 @@ local opts = {
 vim.api.nvim_set_keymap('i', '<c-space>', "compe#complete()", opts)
 vim.api.nvim_set_keymap('i', '<cr>', "compe#confirm('<CR>')", opts)
 vim.api.nvim_set_keymap('i', '<c-c>', "compe#close('<c-c>')", opts)
+-- Make <tab> auto-select the first entry
+vim.api.nvim_set_keymap("i", "<tab>", "compe#confirm({ 'keys': '<tab>', 'select': v:true })", { expr = true })

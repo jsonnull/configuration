@@ -18,11 +18,12 @@ paq('crispgm/telescope-heading.nvim') -- markdown heading
 paq('rmagatti/auto-session') -- auto session
 paq('rmagatti/session-lens') -- session lens for telescope
 
--- view
-paq('preservim/nerdtree') -- file tree
-paq('ryanoasis/vim-devicons') -- file tree icons
+-- IDE
+paq('kyazdani42/nvim-web-devicons') -- file tree icons
+paq('kyazdani42/nvim-tree.lua') -- file tree icons
+paq('akinsho/nvim-bufferline.lua') -- show open buffers
+paq('glepnir/galaxyline.nvim')
 paq('folke/which-key.nvim') -- visual keyboard shortcuts
-paq('bling/vim-bufferline') -- show open buffers
 paq('dstein64/nvim-scrollview') -- scroll bar
 paq('google/vim-searchindex') -- search index
 paq('editorconfig/editorconfig-vim') -- editorconfig support
