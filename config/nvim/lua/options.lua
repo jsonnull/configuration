@@ -35,7 +35,7 @@ opt.completeopt = { 'menuone', 'noselect' }
 opt.hidden = true
 opt.cursorline = true -- show cursor line
 opt.ruler = false -- show ruler line
-opt.colorcolumn = { 100 } -- display a color column when line is longer than 120 chars
+opt.colorcolumn = { 120 } -- display a color column when line is longer than 120 chars
 opt.signcolumn = 'yes' -- show sign column (column of the line number)
 opt.mouse = 'nv' -- enable mouse under normal and visual mode
 cmd('set mousehide') -- hide mouse when characters are typed
