@@ -1,5 +1,15 @@
 # dotfiles
 
-A dotfiles directory, to be placed in `~/.dotfiles`.
+## Installation
 
-Usage, see [rcm(7)](http://thoughtbot.github.io/rcm/rcm.7.html).
+1. Clone the repo to `~/configuration`:
+  
+  ```sh
+  git clone git@github.com:jsonnull/configuration.git ~/configuration
+  ```
+
+2. Depending on which system is being managed, symlink the correct home-manager configuration:
+  
+  ```sh
+  ln -s ~/configuration/home-manager/jsonnull-[system].nix ~/.config/nixpkgs/home.nix
+  ```
