@@ -27,7 +27,10 @@
     pkgs.rust-analyzer
   ];
 
-  home.sessionVariables.NIXPKGS_ALLOW_UNFREE = "1";
+  home.sessionVariables = {
+    NIXPKGS_ALLOW_UNFREE = "1";
+    EDITOR = "nvim";
+  };
 
   programs.zsh = {
     enable = true;
@@ -43,6 +46,23 @@
       gs = "git status -sb";
       vim = "nvim";
     };
+  };
+
+  programs.broot = {
+    enable = true;
+    modal = true;
+    skin = {
+      default = "none none";
+    };
+    verbs = [
+      {
+        invocation = "edit";
+        key = "enter";
+        external = "$EDITOR {file}";
+        leave_broot = false;
+        apply_to = "file";
+      }
+    ];
   };
 
   programs.direnv = {
