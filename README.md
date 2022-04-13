@@ -5,6 +5,7 @@
  - [Install nix](https://nixos.org/download.html)
  - [Install home-manager](https://nix-community.github.io/home-manager/index.html#ch-installation)
  - [Install packer](https://github.com/wbthomason/packer.nvim#quickstart)
+ - [Install Iosevka (patched)](https://www.nerdfonts.com/font-downloads)
 
 ## Install
 
