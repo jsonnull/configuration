@@ -260,5 +260,6 @@ return require('packer').startup(function()
       vim.api.nvim_set_keymap("i", "<tab>", "compe#confirm({ 'keys': '<tab>', 'select': v:true })", { expr = true })
     end
   }
-  use 'rust-lang/rust.vim' -- rust lang support
+  use 'rust-lang/rust.vim' -- rust language support
+  use 'LnL7/vim-nix' -- nix language support
 end)
