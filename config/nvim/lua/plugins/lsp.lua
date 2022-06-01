@@ -62,14 +62,14 @@ function setup()
     buf_set_keymap('n', '<leader>lS', '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>', opts)
     buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     buf_set_keymap('n', '<leader>lA', '<cmd>Telescope lsp_code_actions<cr>', opts)
-    buf_set_keymap('n', '<leader>lf', '<cmd>lua vim.lsp.buf.formatting()<cr>', opts)
+    buf_set_keymap('n', '<leader>lf', '<cmd>vim.lsp.buf.format<cr>', opts)
     buf_set_keymap('n', '<c-t>', '<cmd>Telescope lsp_workspace_symbols<cr>', opts)
 
-    if client.resolved_capabilities.document_formatting then
+    if client.server_capabilities.documentFormattingProvider then
       vim.api.nvim_exec([[
          augroup LspAutocommands
              autocmd! * <buffer>
-             autocmd BufWritePost <buffer> lua vim.lsp.buf.formatting()
+             autocmd BufWritePost <buffer> lua vim.lsp.buf.format()
          augroup END
          ]], true
        )
@@ -94,7 +94,7 @@ function setup()
       documentFormatting = false
     },
     on_attach = function(client, bufnr)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.documentFormattingProvider = false
       on_attach(client, bufnr)
     end,
     root_dir = lspconfig.util.root_pattern('tsconfig.json')
@@ -103,7 +103,7 @@ function setup()
   lspconfig.jsonls.setup({
     cmd = { 'vscode-json-languageserver', '--stdio' },
     on_attach = function(client, bufnr)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.documentFormattingProvider = false
       on_attach(client, bufnr)
     end,
     flags = {

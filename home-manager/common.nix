@@ -14,10 +14,17 @@
   # changes in each release.
   home.stateVersion = "22.05";
 
+  # Add overlay which provides neovim-nightly
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
+    }))
+  ];
+
   home.packages = [
     pkgs.efm-langserver
     # https://github.com/nix-community/home-manager/issues/1907#issuecomment-887573079
-    pkgs.neovim
+    pkgs.neovim-nightly
     pkgs.ripgrep
     pkgs.nodePackages.eslint_d
     pkgs.nodePackages.typescript-language-server
