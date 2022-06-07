@@ -156,7 +156,7 @@ function setup()
     root_dir = lspconfig.util.root_pattern('.git'),
     filetypes = {"javascriptreact", "javascript", "typescript", "typescriptreact", "json", "sh", "html", "css", "yaml", "markdown", "vue"},
     settings = {
-      rootMarkers = {".git/"},
+      rootMarkers = {"package.json", ".git/"},
       languages = {
         javascript = tsserver_args,
         javascriptreact = tsserver_args,
