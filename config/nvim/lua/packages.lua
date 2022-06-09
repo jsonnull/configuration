@@ -264,4 +264,18 @@ return require('packer').startup(function()
   }
   use 'rust-lang/rust.vim' -- rust language support
   use 'LnL7/vim-nix' -- nix language support
+
+  use 'github/copilot.vim'
+
+  use {
+    'pwntester/octo.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim',
+      'kyazdani42/nvim-web-devicons',
+    },
+    config = function ()
+      require"octo".setup()
+    end
+  }
 end)

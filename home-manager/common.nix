@@ -26,6 +26,7 @@
     # https://github.com/nix-community/home-manager/issues/1907#issuecomment-887573079
     pkgs.neovim-nightly
     pkgs.ripgrep
+    pkgs.nodejs-16_x
     pkgs.nodePackages.eslint_d
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
