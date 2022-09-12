@@ -91,10 +91,13 @@ return require('packer').startup(function()
         disable_window_picker = true,
         ignore_ft_on_setup = { 'startify' },
         filters = {
-          custom = { '.git', 'node_modules', '.cache', 'build', 'built' },
+          custom = { '.direnv', '.git/', 'node_modules', '.cache', 'build', 'built' },
         },
         view = {
           width = 40,
+        },
+        git = {
+          ignore = false,
         },
       }
 
@@ -105,6 +108,7 @@ return require('packer').startup(function()
       }
 
       vim.api.nvim_set_keymap('n', '<c-n>', ":NvimTreeToggle<cr>", opts)
+      vim.api.nvim_set_keymap('n', '<c-l>', ":NvimTreeFindFile<cr>", opts)
     end
   }
   use {
@@ -171,11 +175,6 @@ return require('packer').startup(function()
   --[[ ADD THESE BACK IN
   use 'tpope/vim-surround' -- toggle surround
   use 'tpope/vim-commentary' -- toggle comment
-  {
-      'prettier/vim-prettier', -- prettier formatter
-      run = 'yarn install',
-      branch = 'release/0.x',
-  }
   ]]
 
   -- language

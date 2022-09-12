@@ -15,10 +15,10 @@ function setup()
       formatStdin = true
   }
 
-  local tsserver_args = {}
+  local efm_langserver_args = {}
 
-  table.insert(tsserver_args, prettier)
-  table.insert(tsserver_args, eslint)
+  table.insert(efm_langserver_args, prettier)
+  table.insert(efm_langserver_args, eslint)
 
   local format_async = function(err, result, ctx)
     if err ~= nil or result == nil then
@@ -62,7 +62,7 @@ function setup()
     buf_set_keymap('n', '<leader>lS', '<cmd>lua vim.lsp.buf.workspace_symbol()<cr>', opts)
     buf_set_keymap('n', '<leader>lR', '<cmd>lua vim.lsp.buf.rename()<cr>', opts)
     buf_set_keymap('n', '<leader>lA', '<cmd>Telescope lsp_code_actions<cr>', opts)
-    buf_set_keymap('n', '<leader>lf', '<cmd>vim.lsp.buf.format<cr>', opts)
+    buf_set_keymap('n', '<leader>lf', '<cmd>vim.lsp.buf.format()<cr>', opts)
     buf_set_keymap('n', '<c-t>', '<cmd>Telescope lsp_workspace_symbols<cr>', opts)
 
     if client.server_capabilities.documentFormattingProvider then
@@ -156,13 +156,13 @@ function setup()
     root_dir = lspconfig.util.root_pattern('.git'),
     filetypes = {"javascriptreact", "javascript", "typescript", "typescriptreact", "json", "sh", "html", "css", "yaml", "markdown", "vue"},
     settings = {
-      rootMarkers = {"package.json", ".git/"},
+      rootMarkers = {".git/", ".prettierrc"},
       languages = {
-        javascript = tsserver_args,
-        javascriptreact = tsserver_args,
-        typescript = tsserver_args,
-        typescriptreact = tsserver_args,
-        vue = tsserver_args,
+        javascript = efm_langserver_args,
+        javascriptreact = efm_langserver_args,
+        typescript = efm_langserver_args,
+        typescriptreact = efm_langserver_args,
+        vue = efm_langserver_args,
         html = {prettier},
         css = {prettier},
         json = {prettier},
