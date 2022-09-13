@@ -43,7 +43,7 @@ return require('packer').startup(function()
   }
   use {
     'nvim-telescope/telescope.nvim',
-    requires = { {'nvim-lua/plenary.nvim'} },
+    requires = { 'nvim-lua/plenary.nvim' },
     config = function()
       local opts = {
           noremap = true,
@@ -212,53 +212,52 @@ return require('packer').startup(function()
   use {
     'neovim/nvim-lspconfig', -- lsp client config
     requires = { "RRethy/vim-illuminate" }, -- highlight hover word }
-    config = function()
+    config = function ()
       require('plugins.lsp')()
-    end,
+    end
   }
   use {
-    'hrsh7th/nvim-compe', -- completion
-    config = function()
-      require('compe').setup({
-        enabled = true,
-        autocomplete = true,
-        debug = false,
-        min_length = 1,
-        preselect = 'enable',
-        throttle_time = 80,
-        source_timeout = 200,
-        incomplete_delay = 400,
-        max_abbr_width = 100,
-        max_kind_width = 100,
-        max_menu_width = 100,
-        documentation = true,
+    'hrsh7th/nvim-cmp', -- completion
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-nvim-lsp-signature-help',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/cmp-cmdline',
+      { "L3MON4D3/LuaSnip", tag = "v1.*" }, -- snippets
+        'saadparwaiz1/cmp_luasnip',
+    },
+    config = function ()
+      local cmp = require'cmp'
 
-        source = {
-          path = true,
-          buffer = true,
-          calc = true,
-          vsnip = false,
-          nvim_lsp = true,
-          nvim_lua = true,
-          spell = true,
-          tags = true,
-          snippets_nvim = false,
-          treesitter = true,
+      cmp.setup({
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+          end,
         },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-c>'] = cmp.mapping.close(),
+          ['<tab>'] = cmp.mapping.confirm({ select = true }),
+          ['<CR>'] = cmp.mapping.confirm(),
+          ['<C-g>'] = cmp.mapping(function(fallback)
+            vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+          end)
+        }),
+        experimental = {
+          ghost_text = false -- this feature conflict with copilot.vim's preview.
+        },
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'nvim_lsp_signature_help' },
+          { name = 'luasnip' },
+        }, {
+          { name = 'buffer' },
+        })
       })
 
-      local vim = vim
-      local opts = {
-          noremap = true,
-          silent = true,
-          expr = true,
-      }
-
-      vim.api.nvim_set_keymap('i', '<c-space>', "compe#complete()", opts)
-      vim.api.nvim_set_keymap('i', '<cr>', "compe#confirm('<CR>')", opts)
-      vim.api.nvim_set_keymap('i', '<c-c>', "compe#close('<c-c>')", opts)
-      -- Make <tab> auto-select the first entry
-      vim.api.nvim_set_keymap("i", "<tab>", "compe#confirm({ 'keys': '<tab>', 'select': v:true })", { expr = true })
+      require("luasnip.loaders.from_snipmate").lazy_load()
     end
   }
   use 'rust-lang/rust.vim' -- rust language support

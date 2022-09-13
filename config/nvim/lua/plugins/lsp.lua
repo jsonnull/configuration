@@ -1,6 +1,8 @@
 function setup()
   local lspconfig = require('lspconfig');
 
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+
   local prettier = {
     formatCommand = "node_modules/.bin/prettier --stdin-filepath ${INPUT}",
     formatStdin = true
@@ -81,6 +83,7 @@ function setup()
   local servers = { "bashls", "cssls", "html", "solargraph", "vimls", "yamlls" }
   for _, lsp in ipairs(servers) do
     lspconfig[lsp].setup({
+      capabilities = capabilities,
       on_attach = on_attach,
       flags = {
         debounce_text_changes = 100,
@@ -89,6 +92,7 @@ function setup()
   end
 
   lspconfig.tsserver.setup({
+    capabilities = capabilities,
     filetypes = {"javascriptreact", "javascript", "typescript", "typescriptreact", "json"},
     init_options = {
       documentFormatting = false
@@ -101,6 +105,7 @@ function setup()
   })
 
   lspconfig.jsonls.setup({
+    capabilities = capabilities,
     cmd = { 'vscode-json-languageserver', '--stdio' },
     on_attach = function(client, bufnr)
       client.server_capabilities.documentFormattingProvider = false
@@ -112,6 +117,7 @@ function setup()
   })
 
   lspconfig.sqlls.setup({
+    capabilities = capabilities,
     cmd = { '/usr/local/bin/sql-language-server', 'up', '--method', 'stdio' },
     on_attach = on_attach,
     flags = {
@@ -120,6 +126,7 @@ function setup()
   })
 
   lspconfig.rust_analyzer.setup({
+    capabilities = capabilities,
     on_attach = on_attach,
     settings = {
         ["rust-analyzer"] = {
