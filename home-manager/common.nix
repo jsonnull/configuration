@@ -14,6 +14,10 @@
   # changes in each release.
   home.stateVersion = "22.05";
 
+  # Workaround for issue:
+  # https://github.com/nix-community/home-manager/issues/3342
+  manual.manpages.enable = false;
+
   # Add overlay which provides neovim-nightly
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
