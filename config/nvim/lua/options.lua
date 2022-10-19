@@ -16,10 +16,10 @@ opt.updatetime = 300 -- time (in ms) to write to swap file
 opt.timeoutlen = 300 -- time (in ms) to write to swap file
 -- buffer
 opt.expandtab = true -- expand tab
-opt.tabstop = 2 -- tab stop
-opt.softtabstop = 2 -- soft tab stop
+opt.tabstop = 4 -- tab stop
+opt.softtabstop = 4 -- soft tab stop
 opt.autoindent = true -- auto indent for new line
-opt.shiftwidth = 2 -- auto indent shift width
+opt.shiftwidth = 4 -- auto indent shift width
 -- window
 opt.number = true
 opt.relativenumber = true
@@ -49,6 +49,9 @@ opt.shortmess:append('c') -- status line e.g. CTRL+G
 opt.clipboard = 'unnamedplus' -- share system clipboard
 
 vim.g.mapleader = ','
+
+cmd('let g:copilot_no_tab_map = v:true')
+cmd('imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\\<Tab>")')
 
 if not has('gui_running') then
     opt.t_Co = 256

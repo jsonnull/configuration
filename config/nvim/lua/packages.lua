@@ -56,6 +56,11 @@ return require('packer').startup(function()
 
       local actions = require('telescope.actions')
       require('telescope').setup({
+          ["ui-select"] = {
+              require('telescope.themes').get_dropdown({
+                  --
+              })
+          },
           defaults = {
               mappings = {
                   i = {
@@ -67,6 +72,7 @@ return require('packer').startup(function()
     end
   }
   use 'crispgm/telescope-heading.nvim' -- markdown heading
+  use 'nvim-telescope/telescope-ui-select.nvim' -- use telescope for vim.ui.select
   use {
     'rmagatti/session-lens',
     requires = {'rmagatti/auto-session', 'nvim-telescope/telescope.nvim'},
@@ -88,7 +94,6 @@ return require('packer').startup(function()
     config = function()
       require'nvim-tree'.setup {
         open_on_setup = true,
-        disable_window_picker = true,
         ignore_ft_on_setup = { 'startify' },
         filters = {
           custom = { '.direnv', '.git/', 'node_modules', '.cache', 'build', 'built' },
@@ -240,7 +245,7 @@ return require('packer').startup(function()
           ['<C-Space>'] = cmp.mapping.complete(),
           ['<C-c>'] = cmp.mapping.close(),
           ['<tab>'] = cmp.mapping.confirm({ select = true }),
-          ['<CR>'] = cmp.mapping.confirm(),
+          ['<CR>'] = cmp.mapping.confirm({ select = false }),
           ['<C-g>'] = cmp.mapping(function(fallback)
             vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
           end)

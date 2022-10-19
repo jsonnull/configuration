@@ -1,4 +1,5 @@
 require('options')
 require('packages')
+require('plugins.telescope')
 require('mappings')
 require('nix')
