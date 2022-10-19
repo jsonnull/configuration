@@ -26,7 +26,7 @@
    MacBook:
   
    ```sh
-   ln -s ~/configuration/home-manager/macbook/jsonnull-macbook.nix ~/.config/nixpkgs/home.nix
+   ln -s ~/configuration/macbook/jsonnull-macbook.nix ~/.config/nixpkgs/home.nix
    ```
 
 3. Apply the configuration:
