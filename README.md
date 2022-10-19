@@ -12,13 +12,21 @@
 1. Clone the repo to `~/configuration`:
    
    ```sh
-   git clone git@github.com:jsonnull/configuration.git ~/configuration
+   git clone --recurse-submodules git@github.com:jsonnull/configuration.git ~/configuration
    ```
 
 2. Depending on which system is being managed, symlink the correct home-manager configuration:
+
+   WSL:
   
    ```sh
-   ln -s ~/configuration/home-manager/jsonnull-[system].nix ~/.config/nixpkgs/home.nix
+   ln -s ~/configuration/home-manager/jsonnull-wsl.nix ~/.config/nixpkgs/home.nix
+   ```
+
+   MacBook:
+  
+   ```sh
+   ln -s ~/configuration/home-manager/macbook/jsonnull-macbook.nix ~/.config/nixpkgs/home.nix
    ```
 
 3. Apply the configuration:

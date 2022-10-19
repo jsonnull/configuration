@@ -1,0 +1,3 @@
+[submodule "macbook"]
+	path = macbook
+	url = git@github.com:jsonnull/macbook.git
