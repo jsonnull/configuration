@@ -2,12 +2,10 @@ return require('packer').startup(function()
   -- Packer can manage itself
   use 'wbthomason/packer.nvim'
 
-  -- lib
-  --use 'nvim-lua/popup.nvim'
-
   -- theme
   -- use 'shaunsingh/nord.nvim'
   -- use 'projekt0n/github-nvim-theme'
+  -- use 'EdenEast/nightfox.nvim'
   use({
     'rose-pine/neovim',
     as = 'rose-pine',
@@ -16,7 +14,6 @@ return require('packer').startup(function()
       vim.cmd('colorscheme rose-pine')
     end
   })
-  -- use 'EdenEast/nightfox.nvim'
 
   -- file
   use {
@@ -128,12 +125,9 @@ return require('packer').startup(function()
   }
   use 'dstein64/nvim-scrollview' -- scroll bar
   use 'google/vim-searchindex' -- search index
-  -- use 'editorconfig/editorconfig-vim' -- editorconfig support
   use 'Yggdroot/indentLine' -- indent line
   use({
     'nvim-lualine/lualine.nvim',
-    -- fix mismatch palette between variants
-    -- event = 'ColorScheme',
     config = function()
       require('lualine').setup({
         options = {
@@ -149,7 +143,6 @@ return require('packer').startup(function()
     requires = {
       'nvim-lua/plenary.nvim'
     },
-    -- tag = 'release' -- To use the latest release
   }
   --[[ ADD THESE BACK IN
   use 'f-person/git-blame.nvim' -- toggle git blame info
@@ -177,10 +170,13 @@ return require('packer').startup(function()
   ]]
 
   -- edit
-  --[[ ADD THESE BACK IN
   use 'tpope/vim-surround' -- toggle surround
-  use 'tpope/vim-commentary' -- toggle comment
-  ]]
+  use {
+    'numToStr/Comment.nvim',
+    config = function()
+        require('Comment').setup()
+    end
+    }
 
   -- language
   use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' } -- treesitter
