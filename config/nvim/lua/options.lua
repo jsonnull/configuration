@@ -2,13 +2,13 @@ local cmd = vim.cmd
 local opt = vim.opt
 local has = vim.fn.has
 
-cmd('filetype plugin indent on')
-cmd('syntax enable')
+cmd("filetype plugin indent on")
+cmd("syntax enable")
 
 -- systematic
-opt.encoding = 'utf-8'
-opt.fileencoding = 'utf-8'
-opt.fileencodings = { 'utf-8' }
+opt.encoding = "utf-8"
+opt.fileencoding = "utf-8"
+opt.fileencodings = { "utf-8" }
 opt.backup = false -- no .bak
 opt.swapfile = false -- no .swap
 opt.undofile = true -- use undo file
@@ -24,41 +24,41 @@ opt.shiftwidth = 4 -- auto indent shift width
 opt.number = true
 opt.relativenumber = true
 -- editing
-opt.whichwrap = 'b,s,<,>,[,]' -- cursor is able to move from end of line to next line
-opt.backspace = { 'indent', 'eol', 'start' } -- backspace behaviors
+opt.whichwrap = "b,s,<,>,[,]" -- cursor is able to move from end of line to next line
+opt.backspace = { "indent", "eol", "start" } -- backspace behaviors
 opt.list = false -- show tabs with listchars
 opt.ignorecase = false -- search with no ignore case
 opt.hlsearch = true -- highlight search
 opt.incsearch = false -- no incremental search
-opt.inccommand = 'nosplit' -- live substitute preview
-opt.completeopt = { 'menu', 'menuone', 'noselect' }
+opt.inccommand = "nosplit" -- live substitute preview
+opt.completeopt = { "menu", "menuone", "noselect" }
 opt.hidden = true
 opt.cursorline = true -- show cursor line
 opt.ruler = false -- show ruler line
 opt.colorcolumn = { 120 } -- display a color column when line is longer than 120 chars
-opt.signcolumn = 'yes' -- show sign column (column of the line number)
-opt.mouse = 'nv' -- enable mouse under normal and visual mode
-cmd('set mousehide') -- hide mouse when characters are typed
+opt.signcolumn = "yes" -- show sign column (column of the line number)
+opt.mouse = "nv" -- enable mouse under normal and visual mode
+cmd("set mousehide") -- hide mouse when characters are typed
 opt.showmatch = true -- show bracket match
 opt.cmdheight = 1 -- height of :command line
 opt.wildmenu = true -- wildmenu, auto complete for commands
-opt.wildmode = { 'longest', 'full' }
+opt.wildmode = { "longest", "full" }
 opt.splitright = true -- split to right
 opt.splitbelow = true -- split to below
-opt.shortmess:append('c') -- status line e.g. CTRL+G
-opt.clipboard = 'unnamedplus' -- share system clipboard
+opt.shortmess:append("c") -- status line e.g. CTRL+G
+opt.clipboard = "unnamedplus" -- share system clipboard
 
-vim.g.mapleader = ','
+vim.g.mapleader = ","
 
-cmd('let g:copilot_no_tab_map = v:true')
+cmd("let g:copilot_no_tab_map = v:true")
 cmd('imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\\<Tab>")')
 
-if not has('gui_running') then
-    opt.t_Co = 256
+if not has("gui_running") then
+	opt.t_Co = 256
 end
-opt.background = 'dark'
-if has('termguicolors') then
-    cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
-    cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
-    opt.termguicolors = true
+opt.background = "dark"
+if has("termguicolors") then
+	cmd('let &t_8f = "\\<Esc>[38;2;%lu;%lu;%lum"')
+	cmd('let &t_8b = "\\<Esc>[48;2;%lu;%lu;%lum"')
+	opt.termguicolors = true
 end

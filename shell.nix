@@ -1,6 +1,7 @@
 { pkgs ? import <nixpkgs> {} }:
 pkgs.mkShell {
   buildInputs = [
-    # pkgs.rcrc
+    pkgs.sumneko-lua-language-server
+    pkgs.stylua
   ];
 }
