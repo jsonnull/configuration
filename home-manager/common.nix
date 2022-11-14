@@ -60,23 +60,6 @@
     };
   };
 
-  programs.broot = {
-    enable = true;
-    modal = true;
-    skin = {
-      default = "none none";
-    };
-    verbs = [
-      {
-        invocation = "edit";
-        key = "enter";
-        external = "$EDITOR {file}";
-        leave_broot = false;
-        apply_to = "file";
-      }
-    ];
-  };
-
   programs.direnv = {
     enable = true;
     enableZshIntegration = true;
