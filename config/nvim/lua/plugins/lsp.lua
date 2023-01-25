@@ -176,6 +176,9 @@ function setup()
 				cargo = {
 					loadOutDirsFromCheck = true,
 				},
+				checkOnSave = {
+					command = "clippy",
+				},
 				procMacro = {
 					enable = true,
 				},

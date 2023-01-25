@@ -19,16 +19,19 @@
   manual.manpages.enable = false;
 
   # Add overlay which provides neovim-nightly
+  /*
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
     }))
   ];
+  */
 
   home.packages = [
     pkgs.efm-langserver
     # https://github.com/nix-community/home-manager/issues/1907#issuecomment-887573079
-    pkgs.neovim-nightly
+    # pkgs.neovim-nightly
+    pkgs.neovim
     pkgs.ripgrep
     pkgs.nodejs-16_x
     pkgs.nodePackages.eslint_d

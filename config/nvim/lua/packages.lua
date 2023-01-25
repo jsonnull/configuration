@@ -6,12 +6,20 @@ return require("packer").startup(function(use)
 	-- use 'shaunsingh/nord.nvim'
 	-- use 'projekt0n/github-nvim-theme'
 	-- use 'EdenEast/nightfox.nvim'
+	--[[
 	use({
 		"rose-pine/neovim",
 		as = "rose-pine",
 		tag = "v1.*",
 		config = function()
 			vim.cmd("colorscheme rose-pine")
+		end,
+	})
+    ]]
+	use({
+		"bluz71/vim-nightfly-colors",
+		config = function()
+			vim.cmd("colorscheme nightfly")
 		end,
 	})
 
@@ -93,7 +101,7 @@ return require("packer").startup(function(use)
 				open_on_setup = true,
 				ignore_ft_on_setup = { "startify" },
 				filters = {
-					custom = { ".direnv", ".git/", "node_modules", ".cache", "build", "built" },
+					custom = { ".direnv", ".git/", "node_modules", ".cache" },
 				},
 				view = {
 					width = 40,
