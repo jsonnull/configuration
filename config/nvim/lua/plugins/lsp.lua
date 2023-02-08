@@ -40,6 +40,25 @@ function setup()
 
 	vim.lsp.handlers["textDocument/formatting"] = format_async
 
+	local function filter(arr, fn)
+		if type(arr) ~= "table" then
+			return arr
+		end
+
+		local filtered = {}
+		for k, v in pairs(arr) do
+			if fn(v, k, arr) then
+				table.insert(filtered, v)
+			end
+		end
+
+		return filtered
+	end
+
+	local function filterReactDTS(value)
+		return string.match(value.targetUri, "react/index.d.ts") == nil
+	end
+
 	-- Use an on_attach function to only map the following keys
 	-- after the language server attaches to the current buffer
 	local on_attach = function(client, bufnr)
@@ -101,6 +120,17 @@ function setup()
 	lspconfig.tsserver.setup({
 		capabilities = capabilities,
 		filetypes = { "javascriptreact", "javascript", "typescript", "typescriptreact", "json" },
+		handlers = {
+            -- https://github.com/typescript-language-server/typescript-language-server/issues/216
+			["textDocument/definition"] = function(err, result, method, ...)
+				if vim.tbl_islist(result) and #result > 1 then
+					local filtered_result = filter(result, filterReactDTS)
+					return vim.lsp.handlers["textDocument/definition"](err, filtered_result, method, ...)
+				end
+
+				vim.lsp.handlers["textDocument/definition"](err, result, method, ...)
+			end,
+		},
 		init_options = {
 			documentFormatting = false,
 		},
