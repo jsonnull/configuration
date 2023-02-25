@@ -16,10 +16,18 @@ return require("packer").startup(function(use)
 		end,
 	})
     ]]
+	--[[
 	use({
 		"bluz71/vim-nightfly-colors",
 		config = function()
 			vim.cmd("colorscheme nightfly")
+		end,
+	})
+    ]]
+	use({
+		"rebelot/kanagawa.nvim",
+		config = function()
+			vim.cmd("colorscheme kanagawa")
 		end,
 	})
 

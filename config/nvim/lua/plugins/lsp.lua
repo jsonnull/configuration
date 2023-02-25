@@ -121,7 +121,7 @@ function setup()
 		capabilities = capabilities,
 		filetypes = { "javascriptreact", "javascript", "typescript", "typescriptreact", "json" },
 		handlers = {
-            -- https://github.com/typescript-language-server/typescript-language-server/issues/216
+			-- https://github.com/typescript-language-server/typescript-language-server/issues/216
 			["textDocument/definition"] = function(err, result, method, ...)
 				if vim.tbl_islist(result) and #result > 1 then
 					local filtered_result = filter(result, filterReactDTS)
