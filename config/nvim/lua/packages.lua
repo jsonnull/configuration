@@ -6,28 +6,21 @@ return require("packer").startup(function(use)
 	-- use 'shaunsingh/nord.nvim'
 	-- use 'projekt0n/github-nvim-theme'
 	-- use 'EdenEast/nightfox.nvim'
-	--[[
 	use({
+		--[[
 		"rose-pine/neovim",
 		as = "rose-pine",
 		tag = "v1.*",
+        ]]
+		-- "bluz71/vim-nightfly-colors",
+		-- "rebelot/kanagawa.nvim",
+		"sainnhe/everforest",
 		config = function()
-			vim.cmd("colorscheme rose-pine")
-		end,
-	})
-    ]]
-	--[[
-	use({
-		"bluz71/vim-nightfly-colors",
-		config = function()
-			vim.cmd("colorscheme nightfly")
-		end,
-	})
-    ]]
-	use({
-		"rebelot/kanagawa.nvim",
-		config = function()
-			vim.cmd("colorscheme kanagawa")
+			-- vim.cmd("colorscheme rose-pine")
+			-- vim.cmd("colorscheme nightfly")
+			-- vim.cmd("colorscheme kanagawa")
+			vim.g.everforest_background = "hard"
+			vim.cmd("colorscheme everforest")
 		end,
 	})
 
