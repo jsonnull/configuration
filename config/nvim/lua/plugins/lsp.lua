@@ -162,7 +162,7 @@ function setup()
 		},
 	})
 
-	lspconfig.sumneko_lua.setup({
+	lspconfig.lua_ls.setup({
 		capabilities = capabilities,
 		on_attach = on_attach,
 		commands = {
@@ -219,6 +219,12 @@ function setup()
 		},
 	})
 
+	vim.filetype.add({
+		extension = {
+			mdx = "mdx",
+		},
+	})
+
 	lspconfig.efm.setup({
 		on_attach = on_attach,
 		flags = {
@@ -231,33 +237,37 @@ function setup()
 			codeAction = true,
 			completion = true,
 		},
-		root_dir = lspconfig.util.root_pattern(".git"),
+		root_dir = lspconfig.util.root_pattern(".git/"),
 		filetypes = {
-			"javascriptreact",
+			"css",
+			"html",
 			"javascript",
+			"javascriptreact",
+			"json",
+			"markdown",
+			"mdx",
+			"prisma",
+			"sh",
 			"typescript",
 			"typescriptreact",
-			"json",
-			"sh",
-			"html",
-			"css",
-			"yaml",
-			"markdown",
 			"vue",
+			"yaml",
 		},
 		settings = {
 			rootMarkers = { ".git/", ".prettierrc" },
 			languages = {
+				css = { prettier },
+				html = { prettier },
 				javascript = efm_langserver_args,
 				javascriptreact = efm_langserver_args,
+				json = { prettier },
+				markdown = { prettier },
+				mdx = { prettier },
+				prisma = { prettier },
 				typescript = efm_langserver_args,
 				typescriptreact = efm_langserver_args,
 				vue = efm_langserver_args,
-				html = { prettier },
-				css = { prettier },
-				json = { prettier },
 				yaml = { prettier },
-				markdown = { prettier },
 			},
 		},
 	})
