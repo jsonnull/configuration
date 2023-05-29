@@ -134,6 +134,9 @@ function setup()
 		init_options = {
 			documentFormatting = false,
 		},
+		preferences = {
+			importModuleSpecifierPreference = "project-relative",
+		},
 		on_attach = function(client, bufnr)
 			client.server_capabilities.documentFormattingProvider = false
 			on_attach(client, bufnr)
