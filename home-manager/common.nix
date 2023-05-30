@@ -33,6 +33,7 @@
     pkgs.neovim
     pkgs.ripgrep
     pkgs.nodejs-18_x
+    pkgs.nodePackages.pm2
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
     pkgs.gh
