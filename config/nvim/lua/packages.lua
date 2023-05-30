@@ -14,13 +14,18 @@ return require("packer").startup(function(use)
         ]]
         -- "bluz71/vim-nightfly-colors",
         -- "rebelot/kanagawa.nvim",
-        "sainnhe/everforest",
+        -- "sainnhe/everforest",
+        "sainnhe/sonokai",
         config = function()
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
             -- vim.cmd("colorscheme kanagawa")
+            --[[
             vim.g.everforest_background = "hard"
             vim.cmd("colorscheme everforest")
+            ]]
+            --
+            vim.cmd("colorscheme sonokai")
         end,
     })
 
@@ -77,7 +82,7 @@ return require("packer").startup(function(use)
             })
         end,
     })
-    use("crispgm/telescope-heading.nvim")       -- markdown heading
+    use("crispgm/telescope-heading.nvim")          -- markdown heading
     use("nvim-telescope/telescope-ui-select.nvim") -- use telescope for vim.ui.select
     use({
         "rmagatti/session-lens",
@@ -131,8 +136,8 @@ return require("packer").startup(function(use)
         end,
     })
     use("dstein64/nvim-scrollview") -- scroll bar
-    use("google/vim-searchindex") -- search index
-    use("Yggdroot/indentLine")   -- indent line
+    use("google/vim-searchindex")   -- search index
+    use("Yggdroot/indentLine")      -- indent line
     use({
         "nvim-lualine/lualine.nvim",
         config = function()
@@ -152,29 +157,25 @@ return require("packer").startup(function(use)
         },
     })
     --[[ ADD THESE BACK IN
-  use 'f-person/git-blame.nvim' -- toggle git blame info
-  use 'rhysd/conflict-marker.vim' -- git conflict
-  use 'norcalli/nvim-colorizer.lua' -- color codes rendering
-  use 'tversteeg/registers.nvim' -- show registers
-  use 'winston0410/cmd-parser.nvim' -- dependency of range-highlight
-  use 'winston0410/range-highlight.nvim' -- highlight range lines
-  ]]
+    use 'f-person/git-blame.nvim' -- toggle git blame info
+    use 'rhysd/conflict-marker.vim' -- git conflict
+    use 'norcalli/nvim-colorizer.lua' -- color codes rendering
+    use 'tversteeg/registers.nvim' -- show registers
+    use 'winston0410/cmd-parser.nvim' -- dependency of range-highlight
+    use 'winston0410/range-highlight.nvim' -- highlight range lines
+    ]]
     -- use 'simrat39/symbols-outline.nvim' -- symbols outline
 
-    --[[
-  use {
-    'folke/trouble.nvim', -- LSP error list
-    config = function()
-      require("trouble").setup {
-        auto_open = true,
-        auto_close = true,
-        -- Workaround for `invalid buffer id` error
-        -- @see https://github.com/folke/trouble.nvim/issues/125
-        auto_preview = false,
-      }
-    end
-  }
-  ]]
+    use {
+        'folke/trouble.nvim', -- LSP error list
+        config = function()
+            require("trouble").setup {
+                auto_open = true,
+                auto_close = true,
+                auto_preview = false,
+            }
+        end
+    }
 
     -- edit
     use("tpope/vim-surround") -- toggle surround
@@ -187,9 +188,9 @@ return require("packer").startup(function(use)
 
     -- language
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- treesitter
-    use("nvim-treesitter/playground")                          -- treesitter playground
+    use("nvim-treesitter/playground")                             -- treesitter playground
     use({
-        "nvim-treesitter/nvim-treesitter-textobjects",         -- treesitter textobj e.g., class, function
+        "nvim-treesitter/nvim-treesitter-textobjects",            -- treesitter textobj e.g., class, function
         config = function()
             require("nvim-treesitter.configs").setup({
                 highlight = {
@@ -218,7 +219,7 @@ return require("packer").startup(function(use)
         end,
     })
     use({
-        "neovim/nvim-lspconfig",          -- lsp client config
+        "neovim/nvim-lspconfig",                -- lsp client config
         requires = { "RRethy/vim-illuminate" }, -- highlight hover word }
         config = function()
             require("plugins.lsp")()
@@ -226,7 +227,7 @@ return require("packer").startup(function(use)
     })
     use("lukas-reineke/lsp-format.nvim") -- format on save
     use({
-        "hrsh7th/nvim-cmp", -- completion
+        "hrsh7th/nvim-cmp",              -- completion
         requires = {
             "hrsh7th/cmp-nvim-lsp",
             "hrsh7th/cmp-nvim-lsp-signature-help",
@@ -284,9 +285,10 @@ return require("packer").startup(function(use)
             'jose-elias-alvarez/null-ls.nvim'
         },
     })
-    ]]--
-    use("rust-lang/rust.vim") -- rust language support
-    use("LnL7/vim-nix")     -- nix language support
+    ]]
+    --
+    use("rust-lang/rust.vim")  -- rust language support
+    use("LnL7/vim-nix")        -- nix language support
     use("ckipp01/stylua-nvim") -- stylua formatter
 
     use("github/copilot.vim")
