@@ -15,28 +15,43 @@
    git clone --recurse-submodules git@github.com:jsonnull/configuration.git ~/configuration
    ```
 
-2. Depending on which system is being managed, symlink the correct home-manager configuration:
+3. Copy the home-manager flake. Symlinking doesn't work here, and changes to this file need to be synced manually.
+   
+   ```sh
+   cp ~/configuration/home-manager/flake.nix ~/.config/home-manager/flake.nix
+   ```
 
+4. Depending on which system is being managed, install the configuration.
+   
    WSL:
   
    ```sh
-   ln -s ~/configuration/home-manager/jsonnull-wsl.nix ~/.config/nixpkgs/home.nix
+   nix run ~/.config/home-manager#homeConfigurations.wsl.activationPackage
    ```
 
    MacBook:
-  
-   ```sh
-   ln -s ~/configuration/macbook/jsonnull-macbook.nix ~/.config/nixpkgs/home.nix
-   ```
-
-3. Apply the configuration:
    
    ```sh
-   home-manager switch
+   nix run ~/.config/home-manager#homeConfigurations.macbook.activationPackage
    ```
 
-3. Install neovim plugins:
+5. Install neovim plugins:
    
    ```sh
    vim +PackerSync
    ```
+
+6. When making updates to configs, switch to the new system.
+   
+   WSL:
+  
+   ```sh
+   home-manager switch --impure --flake ~/.config/home-manager#wsl
+   ```
+   
+   MacBook:
+   
+   ```sh
+   home-manager switch --impure --flake ~/.config/home-manager#macbook
+   ```
+

@@ -12,7 +12,7 @@
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "22.05";
+  home.stateVersion = "23.05";
 
   # Workaround for issue:
   # https://github.com/nix-community/home-manager/issues/3342
@@ -28,16 +28,13 @@
   */
 
   home.packages = [
-    pkgs.efm-langserver
     # https://github.com/nix-community/home-manager/issues/1907#issuecomment-887573079
     # pkgs.neovim-nightly
     pkgs.neovim
     pkgs.ripgrep
-    pkgs.nodejs-16_x
-    pkgs.nodePackages.eslint_d
+    pkgs.nodejs-18_x
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
-    pkgs.nodePackages.vue-language-server
     pkgs.gh
     pkgs.rust-analyzer
   ];
