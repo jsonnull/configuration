@@ -58,6 +58,12 @@
     shellAliases = {
       gs = "git status -sb";
       vim = "nvim";
+      yarn = "corepack yarn";
+      yarnpkg = "corepack yarnpkg";
+      pnpm = "corepack pnpm";
+      pnpx = "corepack pnpx";
+      npm = "corepack npm";
+      npx = "corepack npx";
     };
   };
 
