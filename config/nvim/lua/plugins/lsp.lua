@@ -55,7 +55,7 @@ function setup()
         buf_set_keymap("n", "<leader>lR", "<cmd>lua vim.lsp.buf.rename()<cr>", opts)
         buf_set_keymap("n", "<leader>lA", "<cmd>lua vim.lsp.buf.code_action()<cr>", opts)
         buf_set_keymap("n", "<leader>lf", "<cmd>lua vim.lsp.buf.format()<cr>", opts)
-        buf_set_keymap("n", "<c-t>", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
+        --buf_set_keymap("n", "<c-t>", "<cmd>Telescope lsp_workspace_symbols<cr>", opts)
     end
 
     -- Use a loop to conveniently call 'setup' on multiple servers and
@@ -70,16 +70,6 @@ function setup()
             },
         })
     end
-
-    local null_ls = require("null-ls")
-    null_ls.setup({
-        sources = {
-            --null_ls.builtins.formatting.stylua,
-            null_ls.builtins.formatting.prettier,
-            null_ls.builtins.diagnostics.eslint,
-            null_ls.builtins.completion.spell,
-        },
-    })
 
     lspconfig.tsserver.setup({
         capabilities = capabilities,
@@ -179,6 +169,22 @@ function setup()
         flags = {
             debounce_text_changes = 150,
         },
+    })
+
+    lspconfig.yamlls.setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+        flags = {
+            debounce_text_changes = 150,
+        },
+        settings = {
+            yaml = {
+                keyOrdering = false,
+                schemas = {
+                    ["https://json.schemastore.org/github-workflow.json"] = "/.github/workflows/*"
+                },
+            },
+        }
     })
 
     vim.filetype.add({

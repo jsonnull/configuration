@@ -36,8 +36,10 @@
     pkgs.nodePackages.pm2
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
+    pkgs.nodePackages.yaml-language-server
     pkgs.gh
     pkgs.rust-analyzer
+    pkgs.smug
   ];
 
   home.sessionVariables = {

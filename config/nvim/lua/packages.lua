@@ -14,18 +14,17 @@ return require("packer").startup(function(use)
         ]]
         -- "bluz71/vim-nightfly-colors",
         -- "rebelot/kanagawa.nvim",
-        -- "sainnhe/everforest",
-        "sainnhe/sonokai",
+        "sainnhe/everforest",
+        -- "sainnhe/sonokai",
+        -- "nyoom-engineering/oxocarbon.nvim",
         config = function()
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
             -- vim.cmd("colorscheme kanagawa")
-            --[[
-            vim.g.everforest_background = "hard"
+            vim.g.everforest_background = "medium"
             vim.cmd("colorscheme everforest")
-            ]]
-            --
-            vim.cmd("colorscheme sonokai")
+            -- vim.cmd("colorscheme sonokai")
+            -- vim.cmd("colorscheme oxocarbon")
         end,
     })
 
@@ -113,6 +112,9 @@ return require("packer").startup(function(use)
                 git = {
                     ignore = false,
                 },
+                renderer = {
+                    group_empty = true,
+                },
             })
 
             local opts = {
@@ -126,9 +128,19 @@ return require("packer").startup(function(use)
         end,
     })
     use({
+        'akinsho/bufferline.nvim',
+        tag = "*",
+        requires = 'nvim-tree/nvim-web-devicons',
+        config = function()
+            require("bufferline").setup {}
+        end
+    })
+    --[[
+    use({
         "romgrk/barbar.nvim",
         requires = { "kyazdani42/nvim-web-devicons" },
     })
+    ]]
     use({
         "folke/which-key.nvim",
         config = function()
@@ -156,6 +168,10 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
         },
     })
+    use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
+        require('git-conflict').setup({})
+    end }
+
     --[[ ADD THESE BACK IN
     use 'f-person/git-blame.nvim' -- toggle git blame info
     use 'rhysd/conflict-marker.vim' -- git conflict
@@ -164,7 +180,12 @@ return require("packer").startup(function(use)
     use 'winston0410/cmd-parser.nvim' -- dependency of range-highlight
     use 'winston0410/range-highlight.nvim' -- highlight range lines
     ]]
-    -- use 'simrat39/symbols-outline.nvim' -- symbols outline
+    use {
+        'simrat39/symbols-outline.nvim',
+        config = function()
+            require("symbols-outline").setup()
+        end
+    }
 
     use {
         'folke/trouble.nvim', -- LSP error list
@@ -274,19 +295,6 @@ return require("packer").startup(function(use)
             require("luasnip.loaders.from_snipmate").lazy_load()
         end,
     })
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-    })
-    --[[
-    use({
-        'MunifTanjim/prettier.nvim',
-        requires = {
-            'jose-elias-alvarez/null-ls.nvim'
-        },
-    })
-    ]]
-    --
     use("rust-lang/rust.vim")  -- rust language support
     use("LnL7/vim-nix")        -- nix language support
     use("ckipp01/stylua-nvim") -- stylua formatter
