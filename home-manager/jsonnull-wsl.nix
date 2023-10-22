@@ -22,4 +22,12 @@ in
 
     PROMPT='jsonnull@local %F{blue}%2/%f $vcs_info_msg_0_ $ ' # jsonnull@local /tmp/repo (main) $
   '';
+
+  home.activation = {
+    copyAlacrittyConfig = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      APPDATA=$(/bin/wslpath "$(/mnt/c/Windows/system32/cmd.exe /c echo '%APPDATA%')" | tr -d '\r')
+      $DRY_RUN_CMD mkdir -p "$APPDATA/alacritty/"
+      $DRY_RUN_CMD cp -r ~/configuration/config/alacritty-windows/* "$APPDATA/alacritty/"
+    '';
+  };
 }
