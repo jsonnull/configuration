@@ -137,7 +137,21 @@ return require("packer").startup(function(use)
         tag = "*",
         requires = 'nvim-tree/nvim-web-devicons',
         config = function()
-            require("bufferline").setup {}
+            require("bufferline").setup {
+                options = {
+                    mode = "buffers",
+                    numbers = "none",
+                    close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+                    right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+                    offsets = {
+                        { filetype = "bufferlist", text = "Explorer", text_align = "center" },
+                        { filetype = "filetree",   text = "Explorer", text_align = "center" },
+                        { filetype = "NvimTree",   text = "Explorer", text_align = "center" },
+                    },
+                    always_show_bufferline = true,
+                    sort_by = "id",
+                },
+            }
         end
     })
     --[[
@@ -163,6 +177,7 @@ return require("packer").startup(function(use)
                     ---@usage 'rose-pine' | 'rose-pine-alt'
                     theme = "auto", -- 'rose-pine',
                     disabled_filetypes = { "NvimTree", "startify" },
+                    globalstatus = true,
                 },
             })
         end,
