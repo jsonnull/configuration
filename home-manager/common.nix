@@ -45,6 +45,7 @@
   home.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
     EDITOR = "nvim";
+    TMUX_OVERRIDE_TERM = "false";
   };
 
   programs.zsh = {
@@ -55,7 +56,7 @@
     };
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "z" "vi-mode" "tmux" ];
+      plugins = [ "git" "z" "vi-mode" ];
     };
     shellAliases = {
       gs = "git status -sb";
@@ -67,6 +68,9 @@
       npm = "corepack npm";
       npx = "corepack npx";
     };
+    #initExtra = ''
+    #  export TERM="xterm-256color"
+    #'';
   };
 
   programs.direnv = {
@@ -88,7 +92,14 @@
     keyMode = "vi";
     prefix = "C-a";
     shell = "${pkgs.zsh}/bin/zsh";
-    terminal = "screen-256color";
+    # set -g default-terminal 'screen-256color'
+    extraConfig = ''
+      set -g default-terminal 'xterm-256color'
+      set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+    '';
+    terminal = "xterm-256color";
+    # https://unix.stackexchange.com/a/678901
+    #terminal = "alacritty";
   };
 
   xdg.configFile.nvim = {
