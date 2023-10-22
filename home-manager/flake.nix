@@ -20,7 +20,7 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ~/configuration/macbook/jsonnull-macbook.nix ];
+        modules = [ ~/configuration/home-manager/jsonnull-macbook.nix ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix

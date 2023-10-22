@@ -104,6 +104,6 @@ in
   # Give copilot in neovim a handle to node 16 (node 18 is not yet supported)
   # https://github.com/orgs/community/discussions/16800
   xdg.configFile."nvim/lua/nix.lua".text = ''
-    vim.g.copilot_node_command = "${pkgs.nodejs-16_x}/bin/node"
+    vim.g.copilot_node_command = "${pkgs.nodejs_20}/bin/node"
   '';
 }
