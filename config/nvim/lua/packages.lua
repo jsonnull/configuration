@@ -13,8 +13,8 @@ return require("packer").startup(function(use)
 		tag = "v1.*",
         ]]
         -- "bluz71/vim-nightfly-colors",
-        -- "rebelot/kanagawa.nvim",
-        "sainnhe/everforest",
+        "rebelot/kanagawa.nvim",
+        -- "sainnhe/everforest",
         -- "sainnhe/sonokai",
         -- "nyoom-engineering/oxocarbon.nvim",
         --[[
@@ -25,9 +25,9 @@ return require("packer").startup(function(use)
             -- vim.cmd("colorscheme nullify")
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
-            -- vim.cmd("colorscheme kanagawa")
-            vim.g.everforest_background = "medium"
-            vim.cmd("colorscheme everforest")
+            vim.cmd("colorscheme kanagawa-dragon")
+            -- vim.g.everforest_background = "medium"
+            -- vim.cmd("colorscheme everforest")
             -- vim.cmd("colorscheme sonokai")
             -- vim.cmd("colorscheme oxocarbon")
         end,
