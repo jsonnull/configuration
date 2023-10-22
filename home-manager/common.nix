@@ -64,9 +64,6 @@ in
       npm = "corepack npm";
       npx = "corepack npx";
     };
-    #initExtra = ''
-    #  export TERM="xterm-256color"
-    #'';
   };
 
   programs.direnv = {
