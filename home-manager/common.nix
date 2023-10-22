@@ -92,14 +92,12 @@
     keyMode = "vi";
     prefix = "C-a";
     shell = "${pkgs.zsh}/bin/zsh";
-    # set -g default-terminal 'screen-256color'
     extraConfig = ''
       set -g default-terminal 'xterm-256color'
       set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
     '';
+    # TODO: Consolidate; I'm pretty sure this does the same thing as `set g default-terminal` above.
     terminal = "xterm-256color";
-    # https://unix.stackexchange.com/a/678901
-    #terminal = "alacritty";
   };
 
   xdg.configFile.nvim = {
