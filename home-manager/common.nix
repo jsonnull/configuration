@@ -97,6 +97,10 @@ in
     source = ~/configuration/config/nvim;
     recursive = true;
   };
+  xdg.configFile.alacritty = {
+    source = ~/configuration/config/alacritty;
+    recursive = true;
+  };
 
   # Give copilot in neovim a handle to node 16 (node 18 is not yet supported)
   # https://github.com/orgs/community/discussions/16800
