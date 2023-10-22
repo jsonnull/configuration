@@ -1,5 +1,11 @@
 { config, pkgs, ... }:
+let
+  pinnedNeovimPkgs = import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/976fa3369d722e76f37c77493d99829540d43845.tar.gz";
+  }) {};
 
+  neovim = pinnedNeovimPkgs.neovim;
+in
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -18,21 +24,11 @@
   # https://github.com/nix-community/home-manager/issues/3342
   manual.manpages.enable = false;
 
-  # Add overlay which provides neovim-nightly
-  /*
-  nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = https://github.com/nix-community/neovim-nightly-overlay/archive/master.tar.gz;
-    }))
-  ];
-  */
-
   home.packages = [
-    # https://github.com/nix-community/home-manager/issues/1907#issuecomment-887573079
-    # pkgs.neovim-nightly
-    pkgs.neovim
+    neovim
     pkgs.ripgrep
-    pkgs.nodejs-18_x
+    pkgs.nodejs_20
+    pkgs.nodePackages.pnpm
     pkgs.nodePackages.pm2
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
