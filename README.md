@@ -5,9 +5,28 @@
  - Install nix
     - [OS X](https://nixos.org/download.html)
     - [WSL](https://github.com/nix-community/NixOS-WSL)
+        - See additional pre-installition steps below
  - [Install home-manager](https://nix-community.github.io/home-manager/index.html#ch-installation)
  - [Install packer](https://github.com/wbthomason/packer.nvim#quickstart)
  - [Install Iosevka (patched)](https://www.nerdfonts.com/font-downloads)
+
+### Additional pre-installation steps for WSL:
+
+1. Run update as root to allow nixos-rebuild to work:
+   
+   ```sh
+   sudo nix-channel --update
+   ```
+
+2. Update configuration in `/etc/nixos/configuration.nix`
+   
+   ```nix
+   wsl.defaultUser = "jsonnull";
+
+   nix.extraOptions = ''
+     experimental-features = nix-command flakes
+   '';
+   ```
 
 ## Install
 
@@ -22,13 +41,13 @@
    WSL:
   
    ```sh
-   nix run ~/configuration/home-manager#homeConfigurations.wsl.activationPackage
+   nix run --impure ~/configuration/home-manager#homeConfigurations.wsl.activationPackage
    ```
 
    MacBook:
    
    ```sh
-   nix run ~/configuration/home-manager#homeConfigurations.macbook.activationPackage
+   nix run --impure ~/configuration/home-manager#homeConfigurations.macbook.activationPackage
    ```
 
 3. Install neovim plugins:

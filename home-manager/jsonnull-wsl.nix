@@ -1,8 +1,8 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 
 let
-  username = "nixos";
-  homeDir = "/home/nixos";
+  username = "jsonnull";
+  homeDir = "/home/jsonnull";
 in
 {
   imports = [
@@ -15,8 +15,6 @@ in
   home.homeDirectory = homeDir;
 
   programs.zsh.initExtraFirst = ''
-    . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-
     autoload -Uz vcs_info # enable vcs_info
     precmd () { vcs_info } # always load before displaying the prompt
 
