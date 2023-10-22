@@ -17,7 +17,12 @@ return require("packer").startup(function(use)
         "sainnhe/everforest",
         -- "sainnhe/sonokai",
         -- "nyoom-engineering/oxocarbon.nvim",
+        --[[
+        "~/.config/nvim/nullify-colorscheme",
+        requires = { "rktjmp/lush.nvim" },
+        ]]
         config = function()
+            -- vim.cmd("colorscheme nullify")
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
             -- vim.cmd("colorscheme kanagawa")
