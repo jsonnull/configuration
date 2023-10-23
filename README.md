@@ -42,6 +42,9 @@
   
    ```sh
    nix run --impure ~/configuration/home-manager#homeConfigurations.wsl.activationPackage
+
+   # Afterwards, update /etc/nixos/configuration.nix:
+   # users.defaultUserShell = "/home/jsonnull/.nix-profile/bin/zsh";
    ```
 
    MacBook:
