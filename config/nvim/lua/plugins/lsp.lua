@@ -193,55 +193,6 @@ function setup()
             mdx = "mdx",
         },
     })
-
-    --[[
-    lspconfig.efm.setup({
-        on_attach = on_attach,
-        flags = {
-            debounce_text_changes = 100,
-        },
-        init_options = {
-            documentFormatting = true,
-            hover = true,
-            documentSymbol = true,
-            codeAction = true,
-            completion = true,
-        },
-        root_dir = lspconfig.util.root_pattern(".git/"),
-        filetypes = {
-            "css",
-            "html",
-            "javascript",
-            "javascriptreact",
-            "json",
-            "markdown",
-            "mdx",
-            "prisma",
-            "sh",
-            "typescript",
-            "typescriptreact",
-            "vue",
-            "yaml",
-        },
-        settings = {
-            rootMarkers = { ".git/", ".prettierrc" },
-            languages = {
-                css = { prettier },
-                html = { prettier },
-                javascript = efm_langserver_args,
-                javascriptreact = efm_langserver_args,
-                json = { prettier },
-                markdown = { prettier },
-                mdx = { prettier },
-                prisma = { prettier },
-                typescript = efm_langserver_args,
-                typescriptreact = efm_langserver_args,
-                vue = efm_langserver_args,
-                yaml = { prettier },
-            },
-        },
-    })
-    ]]
 end
 
 return setup

@@ -315,6 +315,14 @@ return require("packer").startup(function(use)
             require("luasnip.loaders.from_snipmate").lazy_load()
         end,
     })
+    use({
+        "nvimtools/none-ls.nvim",
+        config = function()
+            require("null-ls").setup()
+            require("plugins.lsp")()
+        end,
+        requires = { "nvim-lua/plenary.nvim" },
+    })
     use("rust-lang/rust.vim")  -- rust language support
     use("LnL7/vim-nix")        -- nix language support
     use("ckipp01/stylua-nvim") -- stylua formatter
