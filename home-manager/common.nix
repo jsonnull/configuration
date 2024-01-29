@@ -28,7 +28,6 @@ in
     neovim
     pkgs.ripgrep
     pkgs.nodejs_20
-    pkgs.nodePackages.pnpm
     pkgs.nodePackages.pm2
     pkgs.nodePackages.typescript-language-server
     pkgs.nodePackages.vscode-json-languageserver
@@ -59,11 +58,15 @@ in
       vim = "nvim";
       yarn = "corepack yarn";
       yarnpkg = "corepack yarnpkg";
-      pnpm = "corepack pnpm";
-      pnpx = "corepack pnpx";
-      npm = "corepack npm";
-      npx = "corepack npx";
     };
+  };
+
+  programs.starship = {
+    enable = true;
+    enableZshIntegration = true;
+    #promptInit = ''
+    #  set -x STARSHIP_CONFIG "${config.home.homeDirectory}/configuration/config/starship.toml"
+    #'';
   };
 
   programs.direnv = {
