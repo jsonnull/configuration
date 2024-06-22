@@ -13,7 +13,7 @@ return require("packer").startup(function(use)
 		tag = "v1.*",
         ]]
         -- "bluz71/vim-nightfly-colors",
-        "rebelot/kanagawa.nvim",
+        -- "rebelot/kanagawa.nvim",
         -- "sainnhe/everforest",
         -- "sainnhe/sonokai",
         -- "nyoom-engineering/oxocarbon.nvim",
@@ -21,15 +21,21 @@ return require("packer").startup(function(use)
         "~/.config/nvim/nullify-colorscheme",
         requires = { "rktjmp/lush.nvim" },
         ]]
+        -- "joshdick/onedark.vim",
+        -- "cseelus/vim-colors-lucid",
+        'kepano/flexoki-neovim',
+        as = 'flexoki',
         config = function()
             -- vim.cmd("colorscheme nullify")
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
-            vim.cmd("colorscheme kanagawa-dragon")
+            -- vim.cmd("colorscheme kanagawa-dragon")
             -- vim.g.everforest_background = "medium"
             -- vim.cmd("colorscheme everforest")
             -- vim.cmd("colorscheme sonokai")
             -- vim.cmd("colorscheme oxocarbon")
+            -- vim.cmd("colorscheme onedark")
+            vim.cmd("colorscheme flexoki-dark")
         end,
     })
 
@@ -211,7 +217,7 @@ return require("packer").startup(function(use)
         'folke/trouble.nvim', -- LSP error list
         config = function()
             require("trouble").setup {
-                auto_open = true,
+                auto_open = false,
                 auto_close = true,
                 auto_preview = false,
             }
