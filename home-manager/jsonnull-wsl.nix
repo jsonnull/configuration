@@ -7,7 +7,8 @@ in
 {
   imports = [
     ./common.nix
-    # ../private-configs/private-repos.nix
+    ../private-configs/private-repos.nix
+    "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
@@ -21,4 +22,10 @@ in
       $DRY_RUN_CMD cp -r ~/configuration/config/alacritty-windows/* "$APPDATA/alacritty/"
     '';
   };
+
+  home.packages = [
+    pkgs.cryptsetup
+  ];
+
+  services.vscode-server.enable = true;
 }
