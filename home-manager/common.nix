@@ -35,6 +35,7 @@ in
     pkgs.gh
     pkgs.rust-analyzer
     pkgs.smug
+    pkgs.wget
   ];
 
   home.sessionVariables = {
