@@ -18,7 +18,7 @@ in
   # You can update Home Manager without changing this value. See
   # the Home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "23.05";
+  home.stateVersion = "24.05";
 
   # Workaround for issue:
   # https://github.com/nix-community/home-manager/issues/3342
@@ -46,10 +46,8 @@ in
 
   programs.zsh = {
     enable = true;
-    enableAutosuggestions = true;
-    history = {
-      size = 1000000;
-    };
+    autosuggestion.enable = true;
+    history.size = 1000000;
     oh-my-zsh = {
       enable = true;
       plugins = [ "git" "z" "vi-mode" ];
