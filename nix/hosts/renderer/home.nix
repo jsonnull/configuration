@@ -7,7 +7,7 @@ in
 {
   imports = [
     ../_shared/home-common.nix
-    #../../../private-configs/private-repos.nix
+    /home/json/configuration/private-configs/hosts/renderer.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.

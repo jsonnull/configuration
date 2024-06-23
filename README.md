@@ -45,7 +45,7 @@ When using NixOS, prerequisites are not
    ```sh
    sudo mv /etc/nixos /etc/nixos.bak
    sudo ln -s /home/json/configuration/nix/ /etc/nixos
-   sudo nixos-rebuild switch
+   sudo nixos-rebuild switch --impure # Impure required for private configs for now
    ```
    
    WSL:
