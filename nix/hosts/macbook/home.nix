@@ -6,8 +6,8 @@ let
 in
 {
   imports = [
-    ./common.nix
-    ../private-configs/private-repos.nix
+    ../_shared/home-common.nix
+    ../../../private-configs/private-repos.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.

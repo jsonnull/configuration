@@ -30,7 +30,7 @@
                 home-manager.backupFileExtension = "backup";
                 home-manager.useGlobalPkgs = true;
                 home-manager.useUserPackages = true;
-                home-manager.users.json = import ../home-manager/jsonnull-nixos.nix;
+                home-manager.users.json = import ./hosts/renderer/home.nix;
               }
             ];
           };

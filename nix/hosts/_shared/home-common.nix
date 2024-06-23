@@ -96,11 +96,11 @@ in
   };
 
   xdg.configFile.nvim = {
-    source = ../config/nvim;
+    source = ../../../config/nvim;
     recursive = true;
   };
   xdg.configFile.alacritty = {
-    source = ../config/alacritty;
+    source = ../../../config/alacritty;
     recursive = true;
   };
 

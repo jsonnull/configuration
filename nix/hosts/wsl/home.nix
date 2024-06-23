@@ -6,8 +6,8 @@ let
 in
 {
   imports = [
-    ./common.nix
-    ../private-configs/private-repos.nix
+    ../_shared/home-common.nix
+    ../../../private-configs/private-repos.nix
     "${fetchTarball "https://github.com/msteen/nixos-vscode-server/tarball/master"}/modules/vscode-server/home.nix"
   ];
 
