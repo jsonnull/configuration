@@ -1,17 +1,21 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, pkgs, ... }:
+{ config, outputs, pkgs, ... }:
 
-let
-  klassy = pkgs.callPackage ./klassy/package.nix { qtMajorVersion = "6"; };
-in
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       # <home-manager/nixos>
     ];
+
+  nixpkgs = {
+    overlays = [
+      outputs.overlays.additions
+    ];
+    config.allowUnfree = true;
+  };
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
   nix.nixPath = [ "nixos-config=/home/json/configuration/nixos/configuration.nix" ];
@@ -102,19 +106,15 @@ in
     #];
   };
 
-  # Install firefox.
   programs.firefox.enable = true;
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
   programs.steam.enable = true;
 
-  # Allow unfree packages
-  nixpkgs.config.allowUnfree = true;
-
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
      alacritty
-     klassy
+     klassyQt6
      nerdfonts
   ];
 

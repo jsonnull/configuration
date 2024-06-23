@@ -37,6 +37,14 @@
    ```
 
 2. Depending on which system is being managed, install the configuration.
+
+   NixOS:
+
+   ```sh
+   sudo mv /etc/nixos /etc/nixos.bak
+   sudo ln -s /home/json/configuration/nix/ /etc/nixos
+   sudo nixos-rebuild switch
+   ```
    
    WSL:
   
