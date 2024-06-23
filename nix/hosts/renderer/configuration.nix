@@ -112,7 +112,21 @@
   environment.systemPackages = with pkgs; [
      alacritty
      klassyQt6
+     slack
   ];
+
+  # Slack
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables.GTK_USE_PORTAL = "1";
+  xdg = {
+    portal = {
+      enable = true;
+      extraPortals = with pkgs; [
+        xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
+      ];
+    };
+  };
 
   fonts.packages = with pkgs; [
      (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" ]; })
