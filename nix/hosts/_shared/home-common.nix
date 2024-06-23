@@ -34,6 +34,8 @@ in
     pkgs.nodePackages.yaml-language-server
     pkgs.gh
     pkgs.rust-analyzer
+    pkgs.nixd
+    pkgs.nixpkgs-fmt
     pkgs.smug
     pkgs.wget
   ];
