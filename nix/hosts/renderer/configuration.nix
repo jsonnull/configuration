@@ -112,7 +112,10 @@
   environment.systemPackages = with pkgs; [
      alacritty
      klassyQt6
-     nerdfonts
+  ];
+
+  fonts.packages = with pkgs; [
+     (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" ]; })
   ];
 
   # Make the system work with nvidia card
