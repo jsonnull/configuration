@@ -1,0 +1,52 @@
+#[[colors.indexed_colors]]
+#color = "#b6927b"
+#index = 16
+
+#[[colors.indexed_colors]]
+#color = "#b98d7b"
+#index = 17
+
+[colors.bright]
+black = "#47686c"
+blue = "#60b6eb"
+cyan = "#60dbeb"
+green = "#60ebb1"
+magenta = "#e798b3"
+red = "#e97749"
+white = "#c1d4d7"
+yellow = "#e69533"
+
+[colors.normal]
+black = "#324a4d"
+blue = "#49ace9"
+cyan = "#49d6e9"
+green = "#49e9a6"
+magenta = "#df769b"
+red = "#e66533"
+white = "#b2cacd"
+yellow = "#e4b781"
+
+[colors.primary]
+background = "#052529"
+foreground = "#b2cacd"
+
+[colors.selection]
+background = "#85efff"
+foreground = "#052529"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12
+
+[font.normal]
+family = "Iosevka Nerd Font"
+style = "Regular"
+
+[shell]
+program = "/etc/profiles/per-user/json/bin/zsh"
+
+[window.padding]
+x = 10
+y = 10

@@ -1,10 +1,10 @@
 { config, pkgs, ... }:
 let
-  pinnedNeovimPkgs = import (builtins.fetchTarball {
-    url = "https://github.com/NixOS/nixpkgs/archive/976fa3369d722e76f37c77493d99829540d43845.tar.gz";
-  }) {};
+  #pinnedNeovimPkgs = import (builtins.fetchTarball {
+  #  url = "https://github.com/NixOS/nixpkgs/archive/976fa3369d722e76f37c77493d99829540d43845.tar.gz";
+  #}) {};
 
-  neovim = pinnedNeovimPkgs.neovim;
+  #neovim = pinnedNeovimPkgs.neovim;
 in
 {
   # Let Home Manager install and manage itself.
@@ -25,7 +25,7 @@ in
   manual.manpages.enable = false;
 
   home.packages = [
-    neovim
+    pkgs.neovim
     pkgs.ripgrep
     pkgs.nodejs_20
     pkgs.nodePackages.pm2
@@ -98,11 +98,11 @@ in
   };
 
   xdg.configFile.nvim = {
-    source = ~/configuration/config/nvim;
+    source = ../config/nvim;
     recursive = true;
   };
   xdg.configFile.alacritty = {
-    source = ~/configuration/config/alacritty;
+    source = ../config/alacritty;
     recursive = true;
   };
 
