@@ -36,6 +36,12 @@ in
         version = "10.43.3";
         sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
       }
+      {
+        name = "discord-vscode";
+        publisher = "icrawl";
+        version = "5.8.0";
+        sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
+      }
     ];
     userSettings = builtins.fromJSON ''{
       "editor.unicodeHighlight.nonBasicASCII": false,
@@ -65,7 +71,14 @@ in
       },
       "window.titleBarStyle": "custom",
       "nix.enableLanguageServer": true,
-      "nix.serverPath": "nixd"
+      "nix.serverPath": "nixd",
+      "discord.detailsDebugging": "Debugging",
+      "discord.detailsEditing": "Coding",
+      "discord.lowerDetailsDebugging": "Debugging",
+      "discord.lowerDetailsEditing": "Coding",
+      "discord.removeLowerDetails": true,
+      "discord.removeRemoteRepository": true,
+      "discord.removeTimestamp": true
     }'';
   };
 }
