@@ -7,7 +7,6 @@
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
-      # <home-manager/nixos>
     ];
 
   nixpkgs = {
@@ -17,20 +16,27 @@
     config.allowUnfree = true;
   };
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nix.nixPath = [ "nixos-config=/home/json/configuration/nixos/configuration.nix" ];
+  nix = {
+    #nixPath = [ "nixos-config=/home/json/configuration/nixos/configuration.nix" ];
+    settings = {
+      experimental-features = [ "nix-command" "flakes" ];
+      auto-optimise-store = true;
+    };
+    gc = {
+      automatic = true;
+      options = "--delete-older-than 5d";
+    };
+    optimise.automatic = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
   boot.initrd.luks.devices."luks-9f4a94c8-8b60-405b-bbe9-42c13c394de0".device = "/dev/disk/by-uuid/9f4a94c8-8b60-405b-bbe9-42c13c394de0";
-  networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
-  # Configure network proxy if necessary
-  # networking.proxy.default = "http://user:password@proxy:port/";
-  # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
+  networking.hostName = "renderer"; # Define your hostname.
+  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -40,7 +46,6 @@
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_US.UTF-8";
     LC_IDENTIFICATION = "en_US.UTF-8";
@@ -56,15 +61,10 @@
   # Enable the X11 windowing system.
   # You can disable this if you're only using the Wayland session.
   services.xserver.enable = true;
-  #services.displayManager.sddm.wayland.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
-
-  # Enable Gnome
-  #services.xserver.desktopManager.gnome.enable = true;
-  #services.xserver.displayManager.gdm.enable = true;
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -94,9 +94,6 @@
     #media-session.enable = true;
   };
 
-  # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
-
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.json = {
     isNormalUser = true;
@@ -118,6 +115,14 @@
      nerdfonts
   ];
 
+  # Make the system work with nvidia card
+  hardware.opengl.enable = true;
+  services.xserver.videoDrivers = ["nvidia"];
+  hardware.nvidia.nvidiaSettings = true;
+  hardware.nvidia.modesetting.enable = true;
+  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
@@ -125,11 +130,6 @@
   #   enable = true;
   #   enableSSHSupport = true;
   # };
-
-  # List services that you want to enable:
-
-  # Enable the OpenSSH daemon.
-  #services.openssh.enable = true;
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -144,10 +144,4 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "24.05"; # Did you read the comment?
-
-  hardware.opengl.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.nvidiaSettings = true;
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
 }
