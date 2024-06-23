@@ -1,11 +1,13 @@
 # dotfiles
 
-## Prerequisites
+## Prerequisites (non-NixOS)
+
+When using NixOS, prerequisites are not
 
  - Install nix
-    - [OS X](https://nixos.org/download.html)
+    - [OS X](https://nixos.org/download)
     - [WSL](https://github.com/nix-community/NixOS-WSL)
-        - See additional pre-installition steps below
+       - See additional pre-installition steps below
  - [Install home-manager](https://nix-community.github.io/home-manager/index.html#ch-installation)
  - [Install packer](https://github.com/wbthomason/packer.nvim#quickstart)
  - [Install Iosevka (patched)](https://www.nerdfonts.com/font-downloads)
@@ -18,7 +20,7 @@
    sudo nix-channel --update
    ```
 
-2. Update configuration in `/etc/nixos/configuration.nix`
+2. Update configuration in `/etc/nixos/configuration.nix`:
    
    ```nix
    wsl.defaultUser = "jsonnull";
