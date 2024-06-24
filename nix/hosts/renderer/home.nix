@@ -74,6 +74,7 @@ in
       "nix.serverPath": "nixd",
       "discord.detailsDebugging": "Debugging",
       "discord.detailsEditing": "Coding",
+      "discord.largeImage": "Editing a {lang} file",
       "discord.lowerDetailsDebugging": "Debugging",
       "discord.lowerDetailsEditing": "Coding",
       "discord.removeLowerDetails": true,
