@@ -13,7 +13,10 @@
     overlays = [
       outputs.overlays.additions
     ];
-    config.allowUnfree = true;
+    config = {
+      allowUnfree = true;
+      cudaSupport = true;
+    };
   };
 
   nix = {
@@ -57,10 +60,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  # Enable the X11 windowing system.
-  # You can disable this if you're only using the Wayland session.
-  services.xserver.enable = true;
 
   # Enable the KDE Plasma Desktop Environment.
   services.displayManager.sddm.enable = true;
@@ -113,6 +112,8 @@
      alacritty
      klassyQt6
      slack
+     cudatoolkit
+     linuxPackages.nvidia_x11
   ];
 
   # Slack
@@ -133,11 +134,43 @@
   ];
 
   # Make the system work with nvidia card
-  hardware.opengl.enable = true;
+  environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
+  hardware.opengl = {
+    enable = true;
+    driSupport = true;
+    # For 32 bit applications
+    driSupport32Bit = true;
+    extraPackages = with pkgs; [
+      rocm-opencl-icd
+      rocm-opencl-runtime
+    ];
+  };
+  services.xserver.enable = true;
   services.xserver.videoDrivers = ["nvidia"];
-  hardware.nvidia.nvidiaSettings = true;
-  hardware.nvidia.modesetting.enable = true;
-  hardware.nvidia.package = config.boot.kernelPackages.nvidiaPackages.stable;
+  hardware.nvidia = {
+    # Modesetting is required
+    modesetting.enable = true;
+    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
+    powerManagement.enable = false;
+    # Fine-grained power management. Turns off GPU when not in use.
+    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
+    powerManagement.finegrained = false;
+    # Use the NVidia open source kernel module (not to be confused with the
+    # independent third-party "nouveau" open source driver).
+    # Support is limited to the Turing and later architectures. Full list of
+    # supported GPUs is at:
+    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
+    # Only available from driver 515.43.04+
+    # Do not disable this unless your GPU is unsupported or if you have a good reason to.
+    open = true;
+    # Enable the Nvidia settings menu,
+	# accessible via `nvidia-settings`.
+    nvidiaSettings = true;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+  boot.initrd.kernelModules = [ "nvidia" ];
+  boot.blacklistedKernelModules = ["nouveau"];
+
 
 
   # Some programs need SUID wrappers, can be configured further or are
