@@ -82,5 +82,44 @@ in
       "discord.removeRemoteRepository": true,
       "discord.removeTimestamp": true
     }'';
+    keybindings = builtins.fromJSON ''[
+      {
+          "key": "ctrl+p",
+          "command": "-extension.vim_ctrl+p",
+          "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+      },
+      {
+          "key": "ctrl+e",
+          "command": "-extension.vim_ctrl+e",
+          "when": "editorTextFocus && vim.active && vim.use<C-e> && !inDebugRepl"
+      },
+      {
+          "key": "ctrl+e",
+          "command": "-workbench.action.quickOpen"
+      },
+      {
+          "key": "ctrl+e",
+          "command": "workbench.action.findInFiles"
+      },
+      {
+          "key": "ctrl+shift+f",
+          "command": "-workbench.action.findInFiles"
+      },
+      {
+          "key": "ctrl+l",
+          "command": "-extension.vim_navigateCtrlL",
+          "when": "editorTextFocus && vim.active && vim.use<C-l> && !inDebugRepl"
+      },
+      {
+          "key": "ctrl+l",
+          "command": "workbench.view.explorer",
+          "when": "viewContainer.workbench.view.explorer.enabled"
+      },
+      {
+          "key": "ctrl+shift+e",
+          "command": "-workbench.view.explorer",
+          "when": "viewContainer.workbench.view.explorer.enabled"
+      }
+    ]'';
   };
 }
