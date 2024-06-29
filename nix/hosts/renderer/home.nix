@@ -17,6 +17,7 @@ in
   home.packages = [
     pkgs.tidal-hifi
     pkgs.discord
+    pkgs.r2modman
   ];
 
   programs.vscode = {
