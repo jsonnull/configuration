@@ -1,38 +1,45 @@
-#[[colors.indexed_colors]]
-#color = "#b6927b"
-#index = 16
+# KDE Breeze (Ported from Konsole)
 
-#[[colors.indexed_colors]]
-#color = "#b98d7b"
-#index = 17
-
-[colors.bright]
-black = "#47686c"
-blue = "#60b6eb"
-cyan = "#60dbeb"
-green = "#60ebb1"
-magenta = "#e798b3"
-red = "#e97749"
-white = "#c1d4d7"
-yellow = "#e69533"
-
-[colors.normal]
-black = "#324a4d"
-blue = "#49ace9"
-cyan = "#49d6e9"
-green = "#49e9a6"
-magenta = "#df769b"
-red = "#e66533"
-white = "#b2cacd"
-yellow = "#e4b781"
-
+# Default colors
 [colors.primary]
-background = "#052529"
-foreground = "#b2cacd"
+background = '#232629'
+foreground = '#fcfcfc'
 
-[colors.selection]
-background = "#85efff"
-foreground = "#052529"
+dim_foreground = '#eff0f1'
+bright_foreground = '#ffffff'
+
+# Normal colors
+[colors.normal]
+black = '#232627'
+red = '#ed1515'
+green = '#11d116'
+yellow = '#f67400'
+blue = '#1d99f3'
+magenta = '#9b59b6'
+cyan = '#1abc9c'
+white = '#fcfcfc'
+
+# Bright colors
+[colors.bright]
+black = '#7f8c8d'
+red = '#c0392b'
+green = '#1cdc9a'
+yellow = '#fdbc4b'
+blue = '#3daee9'
+magenta = '#8e44ad'
+cyan = '#16a085'
+white = '#ffffff'
+
+# Dim colors
+[colors.dim]
+black = '#31363b'
+red = '#783228'
+green = '#17a262'
+yellow = '#b65619'
+blue = '#1b668f'
+magenta = '#614a73'
+cyan = '#186c60'
+white = '#63686d'
 
 [env]
 TERM = "xterm-256color"

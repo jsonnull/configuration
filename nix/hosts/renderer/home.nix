@@ -32,10 +32,10 @@ in
       bradlc.vscode-tailwindcss
     ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
-        name = "Noctis";
-        publisher = "liviuschera";
-        version = "10.43.3";
-        sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
+        name = "Breeze";
+        publisher = "kde";
+        version = "0.0.4";
+        sha256 = "sha256-3kFeBPBXhta8U9gollO6+anMmmE8OD3vDlVvsMbBtoU=";
       }
       {
         name = "discord-vscode";
@@ -47,7 +47,7 @@ in
     userSettings = builtins.fromJSON ''{
       "editor.unicodeHighlight.nonBasicASCII": false,
       "editor.largeFileOptimizations": false,
-      "workbench.colorTheme": "Noctis",
+      "workbench.colorTheme": "Breeze",
       "workbench.tree.renderIndentGuides": "none",
       "vim.textwidth": 100,
       "vim.useSystemClipboard": true,
