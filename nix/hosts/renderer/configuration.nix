@@ -135,6 +135,7 @@
 
   # Make the system work with nvidia card
   environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
+  environment.sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
   hardware.opengl = {
     enable = true;
     driSupport = true;
