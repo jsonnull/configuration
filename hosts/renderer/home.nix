@@ -6,14 +6,6 @@
 let
   username = "json";
   homeDir = "/home/json";
-
-  pinnedContinuePkgs = import
-    (builtins.fetchTarball {
-      url = "https://github.com/NixOS/nixpkgs/archive/0bf3a8e9889cd7b430d2416d606beda9d333b5d7.tar.gz";
-    })
-    { };
-
-  pinnedContinuePkg = pinnedContinuePkgs.vscode-extensions.continue.continue;
 in
 {
   imports = [
@@ -29,7 +21,7 @@ in
     discord
     graphite-cli
     kdePackages.kasts
-    #novelwriter
+    unstable.novelwriter
     obsidian
     r2modman
   ];
@@ -52,7 +44,7 @@ in
 
   programs.vscode = {
     enable = true;
-    extensions = [ pinnedContinuePkg ] ++ (with pkgs.vscode-extensions; [
+    extensions = [ pkgs.unstable.vscode-extensions.continue.continue ] ++ (with pkgs.vscode-extensions; [
       vscodevim.vim
       github.copilot
       github.vscode-pull-request-github

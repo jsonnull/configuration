@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -18,7 +19,7 @@
       inherit (self) outputs;
     in
     {
-      overlays = import ./overlays { inherit inputs; };
+      overlays = import ./overlays.nix { inherit inputs; };
 
       # hosts
       nixosConfigurations.renderer = nixpkgs.lib.nixosSystem {
@@ -43,7 +44,16 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./hosts/macbook/home.nix ];
+        modules = [
+          ./hosts/macbook/home.nix
+          {
+            nixpkgs.overlays = [
+              outputs.overlays.additions
+              outputs.overlays.modifications
+              outputs.overlays.unstable-packages
+            ];
+          }
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
@@ -54,7 +64,16 @@
 
         # Specify your home configuration modules here, for example,
         # the path to your home.nix.
-        modules = [ ./hosts/wsl/home.nix ];
+        modules = [
+          ./hosts/wsl/home.nix
+          {
+            nixpkgs.overlays = [
+              outputs.overlays.additions
+              outputs.overlays.modifications
+              outputs.overlays.unstable-packages
+            ];
+          }
+        ];
 
         # Optionally use extraSpecialArgs
         # to pass through arguments to home.nix
