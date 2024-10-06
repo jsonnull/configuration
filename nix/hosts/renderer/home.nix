@@ -29,7 +29,7 @@ in
     discord
     graphite-cli
     kdePackages.kasts
-    novelwriter
+    #novelwriter
     obsidian
     r2modman
   ];
