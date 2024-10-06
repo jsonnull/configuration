@@ -79,7 +79,7 @@ in
   programs.git = {
     enable = true;
     userName = "Jason Nall";
-    userEmail = "jsonnull@gmail.com";
+    userEmail = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
     extraConfig = { push.default = "current"; init.defaultBranch = "main"; };
     ignores = [ ".direnv" ];
   };
@@ -98,11 +98,11 @@ in
   };
 
   xdg.configFile.nvim = {
-    source = ../../../config/nvim;
+    source = ../../config/nvim;
     recursive = true;
   };
   xdg.configFile.alacritty = {
-    source = ../../../config/alacritty;
+    source = ../../config/alacritty;
     recursive = true;
   };
 

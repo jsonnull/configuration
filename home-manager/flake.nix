@@ -13,7 +13,7 @@
 
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
-      modules = [ ../nix/hosts/macbook/home.nix ];
+      modules = [ ../hosts/macbook/home.nix ];
 
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix
@@ -24,7 +24,7 @@
 
       # Specify your home configuration modules here, for example,
       # the path to your home.nix.
-      modules = [ ../nix/hosts/wsl/home.nix ];
+      modules = [ ../hosts/wsl/home.nix ];
 
       # Optionally use extraSpecialArgs
       # to pass through arguments to home.nix

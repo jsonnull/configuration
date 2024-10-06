@@ -8,13 +8,13 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{
-    self,
-    nixpkgs,
-    home-manager,
-    ...
-  }:
-    let 
+  outputs =
+    inputs@{ self
+    , nixpkgs
+    , home-manager
+    , ...
+    }:
+    let
       inherit (self) outputs;
     in
     {
