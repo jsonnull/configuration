@@ -1,8 +1,19 @@
-{ pkgs, ... }:
+{ pkgs
+  #, osConfig
+, ...
+}:
 
 let
   username = "json";
   homeDir = "/home/json";
+
+  pinnedContinuePkgs = import
+    (builtins.fetchTarball {
+      url = "https://github.com/NixOS/nixpkgs/archive/0bf3a8e9889cd7b430d2416d606beda9d333b5d7.tar.gz";
+    })
+    { };
+
+  pinnedContinuePkg = pinnedContinuePkgs.vscode-extensions.continue.continue;
 in
 {
   imports = [
@@ -14,22 +25,43 @@ in
   home.username = username;
   home.homeDirectory = homeDir;
 
-  home.packages = [
-    pkgs.tidal-hifi
-    pkgs.discord
-    pkgs.r2modman
+  home.packages = with pkgs; [
+    discord
+    graphite-cli
+    kdePackages.kasts
+    novelwriter
+    obsidian
+    r2modman
   ];
+
+  home.file.".ssh/allowed_signers".text =
+    "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
+
+  programs.git = {
+    enable = true;
+    userName = "Jason Nall";
+    userEmail = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
+
+    extraConfig = {
+      commit.gpgsign = true;
+      gpg.format = "ssh";
+      gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
+      user.signingkey = "~/.ssh/id_ed25519.pub";
+    };
+  };
 
   programs.vscode = {
     enable = true;
-    extensions = (with pkgs.vscode-extensions; [
+    extensions = [ pinnedContinuePkg ] ++ (with pkgs.vscode-extensions; [
       vscodevim.vim
       github.copilot
-      astro-build.astro-vscode
+      github.vscode-pull-request-github
+      #astro-build.astro-vscode
       jnoortheen.nix-ide
       dbaeumer.vscode-eslint
       esbenp.prettier-vscode
       bradlc.vscode-tailwindcss
+      ms-vsliveshare.vsliveshare
     ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
       {
         name = "Breeze";
@@ -38,16 +70,19 @@ in
         sha256 = "sha256-3kFeBPBXhta8U9gollO6+anMmmE8OD3vDlVvsMbBtoU=";
       }
       {
-        name = "discord-vscode";
-        publisher = "icrawl";
-        version = "5.8.0";
-        sha256 = "sha256-IU/looiu6tluAp8u6MeSNCd7B8SSMZ6CEZ64mMsTNmU=";
+        name = "noctis";
+        publisher = "liviuschera";
+        version = "10.43.3";
+        sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
       }
     ];
     userSettings = builtins.fromJSON ''{
       "editor.unicodeHighlight.nonBasicASCII": false,
       "editor.largeFileOptimizations": false,
-      "workbench.colorTheme": "Breeze",
+      "editor.formatOnSave": true,
+      "editor.fontFamily": "'IosevkaTerm Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
+      "editor.fontSize": 16,
+      "workbench.colorTheme": "Noctis",
       "workbench.tree.renderIndentGuides": "none",
       "vim.textwidth": 100,
       "vim.useSystemClipboard": true,
@@ -73,15 +108,11 @@ in
       "window.titleBarStyle": "custom",
       "nix.enableLanguageServer": true,
       "nix.serverPath": "nixd",
-      "discord.detailsDebugging": "Debugging",
-      "discord.detailsEditing": "Coding",
-      "discord.largeImage": "Editing a {lang} file",
-      "discord.lowerDetailsDebugging": "Debugging",
-      "discord.lowerDetailsEditing": "Coding",
-      "discord.removeLowerDetails": true,
-      "discord.removeRemoteRepository": true,
-      "discord.removeTimestamp": true
+      "extensions.autoUpdate": false
     }'';
+    # "[astro]": {
+    #     "editor.defaultFormatter": "astro-build.astro-vscode"
+    # },
     keybindings = builtins.fromJSON ''[
       {
           "key": "ctrl+p",
@@ -111,15 +142,30 @@ in
           "when": "editorTextFocus && vim.active && vim.use<C-l> && !inDebugRepl"
       },
       {
-          "key": "ctrl+l",
-          "command": "workbench.view.explorer",
-          "when": "viewContainer.workbench.view.explorer.enabled"
+          "key": "ctrl+i",
+          "command": "-extension.vim_ctrl+i",
+          "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"
       },
       {
           "key": "ctrl+shift+e",
           "command": "-workbench.view.explorer",
           "when": "viewContainer.workbench.view.explorer.enabled"
+      },
+      {
+          "key": "ctrl+b",
+          "command": "-extension.vim_ctrl+b",
+          "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
+      },
+      {
+          "key": "ctrl+t",
+          "command": "-extension.vim_ctrl+t",
+          "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
       }
     ]'';
+    #{
+    #    "key": "ctrl+l",
+    #    "command": "workbench.view.explorer",
+    #    "when": "viewContainer.workbench.view.explorer.enabled"
+    #},
   };
 }

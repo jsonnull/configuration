@@ -1,11 +1,16 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, outputs, pkgs, ... }:
+{ config
+, outputs
+, pkgs
+, ...
+}:
 
 {
   imports =
-    [ # Include the results of the hardware scan.
+    [
+      # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
 
@@ -109,12 +114,16 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-     alacritty
-     klassyQt6
-     slack
-     cudatoolkit
-     linuxPackages.nvidia_x11
+    alacritty
+    klassyQt6
+    kget
+    slack
+    cudatoolkit
   ];
+
+  # Virtualbox
+  virtualisation.virtualbox.host.enable = true;
+  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # Slack
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -123,22 +132,30 @@
     portal = {
       enable = true;
       extraPortals = with pkgs; [
+        xdg-desktop-portal-kde
         xdg-desktop-portal-wlr
-        xdg-desktop-portal-gtk
       ];
     };
   };
 
+  services.mullvad-vpn.enable = true;
+  services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  services.hardware.openrgb.enable = true;
+
   fonts.packages = with pkgs; [
-     (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" ]; })
+    (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" ]; })
   ];
 
   # Make the system work with nvidia card
   environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
+  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib";
+  #environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib";
   environment.sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+  environment.sessionVariables.PROTON_ENABLE_NVAPI = "1";
+  environment.sessionVariables.DXVK_ENABLE_NVAPI = "1";
   hardware.opengl = {
     enable = true;
-    driSupport = true;
     # For 32 bit applications
     driSupport32Bit = true;
     extraPackages = with pkgs; [
@@ -147,7 +164,7 @@
     ];
   };
   services.xserver.enable = true;
-  services.xserver.videoDrivers = ["nvidia"];
+  services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia = {
     # Modesetting is required
     modesetting.enable = true;
@@ -165,12 +182,12 @@
     # Do not disable this unless your GPU is unsupported or if you have a good reason to.
     open = true;
     # Enable the Nvidia settings menu,
-	# accessible via `nvidia-settings`.
+    # accessible via `nvidia-settings`.
     nvidiaSettings = true;
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.blacklistedKernelModules = ["nouveau"];
+  boot.blacklistedKernelModules = [ "nouveau" ];
 
 
 
