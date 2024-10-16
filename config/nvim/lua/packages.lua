@@ -18,7 +18,6 @@ return require("packer").startup(function(use)
         -- "sainnhe/sonokai",
         -- "nyoom-engineering/oxocarbon.nvim",
         --[[
-        "~/.config/nvim/nullify-colorscheme",
         requires = { "rktjmp/lush.nvim" },
         ]]
         -- "joshdick/onedark.vim",
@@ -26,7 +25,6 @@ return require("packer").startup(function(use)
         'kepano/flexoki-neovim',
         as = 'flexoki',
         config = function()
-            -- vim.cmd("colorscheme nullify")
             -- vim.cmd("colorscheme rose-pine")
             -- vim.cmd("colorscheme nightfly")
             -- vim.cmd("colorscheme kanagawa-dragon")

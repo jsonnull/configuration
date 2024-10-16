@@ -71,7 +71,6 @@ cmd("let g:copilot_no_tab_map = v:true")
 cmd('imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\\<Tab>")')
 
 opt.background = "dark"
--- vim.g.colors_name = 'nullify'
 
 opt.termguicolors = true
 
