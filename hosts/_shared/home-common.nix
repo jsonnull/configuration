@@ -97,10 +97,10 @@ in
     terminal = "xterm-256color";
   };
 
-  xdg.configFile.nvim = {
-    source = ../../config/nvim;
-    recursive = true;
-  };
+  #xdg.configFile.nvim = {
+  #  source = ../../config/nvim;
+  #  recursive = true;
+  #};
   xdg.configFile.alacritty = {
     source = ../../config/alacritty;
     recursive = true;
