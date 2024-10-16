@@ -49,7 +49,7 @@
    WSL:
 
    ```sh
-   nix run --impure ~/configuration/home-manager#homeConfigurations.wsl.activationPackage
+   nix run --impure ~/configuration/#homeConfigurations.wsl.activationPackage
 
    # Afterwards, update /etc/nixos/configuration.nix:
    # users.defaultUserShell = "/home/jsonnull/.nix-profile/bin/zsh";
@@ -58,7 +58,7 @@
    MacBook:
 
    ```sh
-   nix run --impure ~/configuration/home-manager#homeConfigurations.macbook.activationPackage
+   nix run --impure ~/configuration/#homeConfigurations.macbook.activationPackage
    ```
 
 3. Install neovim plugins:
@@ -72,11 +72,11 @@
    WSL:
 
    ```sh
-   home-manager switch --impure --flake ~/configuration/home-manager#wsl
+   home-manager switch --impure --flake ~/configuration#wsl
    ```
 
    MacBook:
 
    ```sh
-   home-manager switch --impure --flake ~/configuration/home-manager#macbook
+   home-manager switch --impure --flake ~/configuration#macbook
    ```
