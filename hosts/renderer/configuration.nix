@@ -116,7 +116,6 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    alacritty
     klassyQt6
     kget
     unstable.slack
