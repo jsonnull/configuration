@@ -119,7 +119,7 @@
     alacritty
     klassyQt6
     kget
-    slack
+    unstable.slack
     cudatoolkit
   ];
 
