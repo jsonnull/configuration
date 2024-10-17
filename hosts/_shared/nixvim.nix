@@ -12,6 +12,39 @@
       }
     ];
 
+    plugins.bufferline = {
+      enable = true;
+      #settings = {
+      #  options = {
+      #    offsets = [
+      #      {
+      #        filetype = "bufferlist";
+      #        text = "Explorer";
+      #        text_align = "center";
+      #      }
+      #      {
+      #        filetype = "filetree";
+      #        text = "Explorer";
+      #        text_align = "center";
+      #      }
+      #      {
+      #        filetype = "NvimTree";
+      #        text = "Explorer";
+      #        text_align = "center";
+      #      }
+      #    ];
+      #  };
+      #};
+    };
+
+    plugins.nvim-tree = {
+      enable = true;
+      filters.custom = [ ".direnv" ".git/" "node_modules" ".cache" ];
+      view.width = 40;
+      git.ignore = false;
+      renderer.groupEmpty = true;
+    };
+
     plugins.startify = {
       enable = true;
       settings = {
@@ -33,14 +66,6 @@
           }
         ];
       };
-    };
-
-    plugins.nvim-tree = {
-      enable = true;
-      filters.custom = [ ".direnv" ".git/" "node_modules" ".cache" ];
-      view.width = 40;
-      git.ignore = false;
-      renderer.groupEmpty = true;
     };
   };
 }
