@@ -5,6 +5,9 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
+    nixvim.url = "github:nix-community/nixvim/nixos-24.05";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
+
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
@@ -13,6 +16,7 @@
     inputs@{ self
     , nixpkgs
     , home-manager
+    , nixvim
     , ...
     }:
     let
@@ -34,6 +38,9 @@
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.sharedModules = [
+              nixvim.homeManagerModules.nixvim
+            ];
             home-manager.users.json = import ./hosts/renderer/home.nix;
           }
         ];
@@ -46,6 +53,7 @@
         # the path to your home.nix.
         modules = [
           ./hosts/macbook/home.nix
+          nixvim.homeManagerModules.nixvim
           {
             nixpkgs.overlays = [
               outputs.overlays.additions
@@ -66,6 +74,7 @@
         # the path to your home.nix.
         modules = [
           ./hosts/wsl/home.nix
+          nixvim.homeManagerModules.nixvim
           {
             nixpkgs.overlays = [
               outputs.overlays.additions

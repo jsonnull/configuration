@@ -1,5 +1,5 @@
 { pkgs
-  #, osConfig
+, inputs
 , ...
 }:
 
@@ -10,7 +10,7 @@ in
 {
   imports = [
     ../_shared/home-common.nix
-    /home/json/configuration/private-configs/hosts/renderer.nix
+    ../_shared/nixvim.nix
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
