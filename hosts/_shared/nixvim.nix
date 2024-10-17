@@ -14,27 +14,35 @@
 
     plugins.bufferline = {
       enable = true;
-      #settings = {
-      #  options = {
-      #    offsets = [
-      #      {
-      #        filetype = "bufferlist";
-      #        text = "Explorer";
-      #        text_align = "center";
-      #      }
-      #      {
-      #        filetype = "filetree";
-      #        text = "Explorer";
-      #        text_align = "center";
-      #      }
-      #      {
-      #        filetype = "NvimTree";
-      #        text = "Explorer";
-      #        text_align = "center";
-      #      }
-      #    ];
-      #  };
-      #};
+      settings = {
+        options = {
+          offsets = [
+            {
+              filetype = "bufferlist";
+              text = "Explorer";
+              text_align = "center";
+            }
+            {
+              filetype = "filetree";
+              text = "Explorer";
+              text_align = "center";
+            }
+            {
+              filetype = "NvimTree";
+              text = "Explorer";
+              text_align = "center";
+            }
+          ];
+        };
+      };
+    };
+
+    plugins.lualine = {
+      enable = true;
+      settings = {
+        disabled_filetypes = [ "NvimTree" "startify" ];
+        globalstatus = true;
+      };
     };
 
     plugins.nvim-tree = {
@@ -67,6 +75,8 @@
         ];
       };
     };
+
+    plugins.web-devicons.enable = true;
   };
 }
 

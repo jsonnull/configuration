@@ -93,19 +93,6 @@ return require("packer").startup(function(use)
     use("google/vim-searchindex")   -- search index
     use("Yggdroot/indentLine")      -- indent line
     use({
-        "nvim-lualine/lualine.nvim",
-        config = function()
-            require("lualine").setup({
-                options = {
-                    ---@usage 'rose-pine' | 'rose-pine-alt'
-                    theme = "auto", -- 'rose-pine',
-                    disabled_filetypes = { "NvimTree", "startify" },
-                    globalstatus = true,
-                },
-            })
-        end,
-    })
-    use({
         "lewis6991/gitsigns.nvim",
         requires = {
             "nvim-lua/plenary.nvim",
