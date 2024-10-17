@@ -39,28 +39,6 @@ return require("packer").startup(function(use)
 
     -- file
     use({
-        "mhinz/vim-startify", -- startup page
-        config = function()
-            vim.g.startify_custom_header = {
-                "",
-                "",
-                "      _                     _ _ ",
-                "     |_|___ ___ ___ ___ _ _| | |",
-                "     | |_ -| . |   |   | | | | |",
-                "    _| |___|___|_|_|_|_|___|_|_|",
-                "   |___|                        ",
-                "",
-                "",
-            }
-
-            vim.g.startify_lists = {
-                { type = "dir" },
-            }
-
-            vim.g.startify_change_to_dir = 0
-        end,
-    })
-    use({
         "nvim-telescope/telescope.nvim",
         requires = { "nvim-lua/plenary.nvim" },
         config = function()
@@ -105,37 +83,6 @@ return require("packer").startup(function(use)
     use("famiu/bufdelete.nvim") -- better buffer removal
 
     -- IDE
-    use({
-        "kyazdani42/nvim-tree.lua",
-        requires = {
-            "kyazdani42/nvim-web-devicons", -- optional, for file icon
-        },
-        config = function()
-            require("nvim-tree").setup({
-                filters = {
-                    custom = { ".direnv", ".git/", "node_modules", ".cache" },
-                },
-                view = {
-                    width = 40,
-                },
-                git = {
-                    ignore = false,
-                },
-                renderer = {
-                    group_empty = true,
-                },
-            })
-
-            local opts = {
-                noremap = true,
-                silent = false,
-                expr = false,
-            }
-
-            vim.api.nvim_set_keymap("n", "<c-n>", ":NvimTreeToggle<cr>", opts)
-            vim.api.nvim_set_keymap("n", "<c-l>", ":NvimTreeFindFile<cr>", opts)
-        end,
-    })
     use({
         'akinsho/bufferline.nvim',
         tag = "*",
