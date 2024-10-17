@@ -100,7 +100,8 @@ in
       "window.titleBarStyle": "custom",
       "nix.enableLanguageServer": true,
       "nix.serverPath": "nixd",
-      "extensions.autoUpdate": false
+      "extensions.autoUpdate": false,
+      "continue.enableContinueForTeamsBeta": true
     }'';
     # "[astro]": {
     #     "editor.defaultFormatter": "astro-build.astro-vscode"
