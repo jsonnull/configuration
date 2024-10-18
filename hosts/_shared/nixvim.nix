@@ -2,7 +2,7 @@
 
 {
   programs.nixvim = {
-    colorschemes.kanagawa.enable = true;
+    colorschemes.nightfox.enable = true;
     #colorschemes.everforest = {
     #  enable = true;
     #  settings.background = "hard";

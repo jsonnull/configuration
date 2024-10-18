@@ -17,7 +17,7 @@
         style = "Regular";
       };
 
-      import = [ pkgs.alacritty-theme.kanagawa_wave ];
+      import = [ pkgs.alacritty-theme.nightfox ];
 
       shell.program = "/etc/profiles/per-user/json/bin/zsh";
 
