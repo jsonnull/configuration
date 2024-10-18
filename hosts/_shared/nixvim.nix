@@ -2,11 +2,7 @@
 
 {
   programs.nixvim = {
-    colorschemes.nightfox.enable = true;
-    #colorschemes.everforest = {
-    #  enable = true;
-    #  settings.background = "hard";
-    #};
+    colorschemes.kanagawa.enable = true;
 
     # colorscheme-adjacent properties
     opts.background = "dark";
@@ -166,7 +162,7 @@
 
     plugins.illuminate.enable = true;
 
-    plugins.indent-blankline.enable = true;
+    plugins.indent-blankline.enable = false;
 
     plugins.lsp = {
       enable = true;
