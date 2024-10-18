@@ -52,7 +52,7 @@
         mode = "n";
       }
       {
-        action = "<cmd>:SymbolsOutline<cr>";
+        action = "<cmd>Telescope lsp_workspace_symbols<cr>";
         key = "<c-t>";
         mode = "n";
       }
@@ -170,20 +170,22 @@
 
     plugins.lsp = {
       enable = true;
-      keymaps.lspBuf = {
-        "<leader>ld" = "definition";
-        "<leader>lD" = "declaration";
-        "<leader>lt" = "type_definition";
-        "<leader>li" = "implementation";
-        "K" = "hover";
-        "U" = "signature_help";
-        "<leader>lr" = "references";
-        "<leader>ls" = "document_symbol";
-        "<leader>lS" = "workspace_symbol";
-        "<leader>lR" = "rename";
-        "<leader>lA" = "code_action";
-        "<leader>lf" = "format";
-        #"<c-t>" = "<cmd>Telescope lsp_workspace_symbols<cr>";
+      keymaps = {
+        lspBuf = {
+          "<leader>ld" = "definition";
+          "<leader>lD" = "declaration";
+          "<leader>lt" = "type_definition";
+          "<leader>li" = "implementation";
+          "K" = "hover";
+          "U" = "signature_help";
+          "<leader>lr" = "references";
+          "<leader>ls" = "document_symbol";
+          "<leader>lS" = "workspace_symbol";
+          "<leader>lR" = "rename";
+          "<leader>lA" = "code_action";
+          "<leader>lf" = "format";
+        };
+        silent = true;
       };
       servers = {
         bashls.enable = true;
