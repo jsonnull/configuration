@@ -130,12 +130,6 @@ return require("packer").startup(function(use)
 
     -- edit
     use("tpope/vim-surround") -- toggle surround
-    use({
-        "numToStr/Comment.nvim",
-        config = function()
-            require("Comment").setup()
-        end,
-    })
 
     -- language
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }) -- treesitter

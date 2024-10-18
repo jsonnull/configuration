@@ -37,6 +37,8 @@
       };
     };
 
+    plugins.comment.enable = true;
+
     plugins.lualine = {
       enable = true;
       settings = {
