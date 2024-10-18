@@ -1,7 +1,7 @@
 { pkgs, ... }:
 
 {
-  programs.nixvim= {
+  programs.nixvim = {
     colorschemes.kanagawa.enable = true;
     #colorschemes.everforest = {
     #  enable = true;
@@ -17,6 +17,8 @@
         mode = "n";
       }
     ];
+
+    nixpkgs.pkgs = pkgs.unstable;
 
     plugins.auto-session = {
       enable = true;
@@ -61,7 +63,44 @@
       ];
     };
 
+    plugins.lsp = {
+      enable = true;
+      keymaps.lspBuf = {
+        ld = "definition";
+        lD = "declaration";
+        lt = "type_definition";
+        li = "implementation";
+        K = "hover";
+        U = "signature_help";
+        lr = "references";
+        ls = "document_symbol";
+        lS = "workspace_symbol";
+        lR = "rename";
+        lA = "code_action";
+        lf = "format";
+        #"<c-t>" = "<cmd>Telescope lsp_workspace_symbols<cr>";
+      };
+      servers = {
+        bashls.enable = true;
+        cssls.enable = true;
+        html.enable = true;
+        jsonls.enable = true;
+        lua_ls = {
+          enable = true;
+          settings.runtime.version = "LuaJIT";
+        };
+        ts_ls.enable = true;
+        yamlls.enable = true;
+      };
+    };
+
+    plugins.lsp-format = {
+      enable = true;
+    };
+
     plugins.comment.enable = true;
+
+    plugins.illuminate.enable = true;
 
     plugins.lualine = {
       enable = true;
@@ -124,7 +163,7 @@
     plugins.treesitter = {
       enable = true;
 
-      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+      grammarPackages = with pkgs.unstable.vimPlugins.nvim-treesitter.builtGrammars; [
         bash
         json
         lua
