@@ -2,6 +2,12 @@
 
 {
   programs.nixvim= {
+    colorschemes.kanagawa.enable = true;
+    #colorschemes.everforest = {
+    #  enable = true;
+    #  settings.background = "hard";
+    #};
+
     enable = true;
 
     keymaps = [
