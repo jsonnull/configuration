@@ -39,38 +39,6 @@ return require("packer").startup(function(use)
 
     -- file
     use({
-        "nvim-telescope/telescope.nvim",
-        requires = { "nvim-lua/plenary.nvim" },
-        config = function()
-            local opts = {
-                noremap = true,
-                silent = false,
-                expr = false,
-            }
-
-            vim.api.nvim_set_keymap("n", "<c-p>", "<cmd>Telescope find_files<cr>", opts)
-            vim.api.nvim_set_keymap("n", "<c-e>", "<cmd>Telescope live_grep<cr>", opts)
-
-            local actions = require("telescope.actions")
-            require("telescope").setup({
-                ["ui-select"] = {
-                    require("telescope.themes").get_dropdown({
-                        --
-                    }),
-                },
-                defaults = {
-                    mappings = {
-                        i = {
-                            ["<esc>"] = actions.close,
-                        },
-                    },
-                },
-            })
-        end,
-    })
-    use("crispgm/telescope-heading.nvim")          -- markdown heading
-    use("nvim-telescope/telescope-ui-select.nvim") -- use telescope for vim.ui.select
-    use({
         "rmagatti/session-lens",
         requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
         config = function()
@@ -98,24 +66,6 @@ return require("packer").startup(function(use)
             "nvim-lua/plenary.nvim",
         },
     })
-    use { 'akinsho/git-conflict.nvim', tag = "*", config = function()
-        require('git-conflict').setup({})
-    end }
-
-    --[[ ADD THESE BACK IN
-    use 'f-person/git-blame.nvim' -- toggle git blame info
-    use 'rhysd/conflict-marker.vim' -- git conflict
-    use 'norcalli/nvim-colorizer.lua' -- color codes rendering
-    use 'tversteeg/registers.nvim' -- show registers
-    use 'winston0410/cmd-parser.nvim' -- dependency of range-highlight
-    use 'winston0410/range-highlight.nvim' -- highlight range lines
-    ]]
-    use {
-        'simrat39/symbols-outline.nvim',
-        config = function()
-            require("symbols-outline").setup()
-        end
-    }
 
     use {
         'folke/trouble.nvim', -- LSP error list
@@ -230,18 +180,4 @@ return require("packer").startup(function(use)
     use("rust-lang/rust.vim")  -- rust language support
     use("LnL7/vim-nix")        -- nix language support
     use("ckipp01/stylua-nvim") -- stylua formatter
-
-    use("github/copilot.vim")
-
-    use({
-        "pwntester/octo.nvim",
-        requires = {
-            "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope.nvim",
-            "kyazdani42/nvim-web-devicons",
-        },
-        config = function()
-            require("octo").setup()
-        end,
-    })
 end)

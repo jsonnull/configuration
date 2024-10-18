@@ -78,6 +78,25 @@
       };
     };
 
+    plugins.telescope = {
+      enable = true;
+      extensions = {
+        ui-select.enable = true;
+        fzf-native.enable = true;
+      };
+      keymaps = {
+        "<esc>" = {
+          action = "close";
+        };
+        "<c-p>" = {
+          action = "find_files";
+        };
+        "<c-e>" = {
+          action = "live_grep";
+        };
+      };
+    };
+
     plugins.web-devicons.enable = true;
   };
 }
