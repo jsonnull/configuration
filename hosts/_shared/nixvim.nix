@@ -63,6 +63,10 @@
       ];
     };
 
+    plugins.comment.enable = true;
+
+    plugins.illuminate.enable = true;
+
     plugins.lsp = {
       enable = true;
       keymaps.lspBuf = {
@@ -94,19 +98,25 @@
       };
     };
 
-    plugins.lsp-format = {
-      enable = true;
-    };
-
-    plugins.comment.enable = true;
-
-    plugins.illuminate.enable = true;
+    plugins.lsp-format.enable = true;
 
     plugins.lualine = {
       enable = true;
       settings = {
         disabled_filetypes = [ "NvimTree" "startify" ];
         globalstatus = true;
+      };
+    };
+
+    plugins.none-ls = {
+      enable = true;
+      sources = {
+        formatting.stylua.enable = true;
+        formatting.prettier = {
+          enable = true;
+          disableTsServerFormatter = true;
+        };
+        completion.spell.enable = true;
       };
     };
 

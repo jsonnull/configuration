@@ -12,31 +12,11 @@ return require("packer").startup(function(use)
 		},
 	})
 
-	use {
-		'folke/trouble.nvim', -- LSP error list
-		config = function()
-			require("trouble").setup {
-				auto_open = false,
-				auto_close = true,
-				auto_preview = false,
-			}
-		end
-	}
-
 	-- edit
 	use("tpope/vim-surround") -- toggle surround
 
 	-- language
-	use("lukas-reineke/lsp-format.nvim") -- format on save
-	use({
-		"nvimtools/none-ls.nvim",
-		config = function()
-			require("null-ls").setup()
-			require("plugins.lsp")()
-		end,
-		requires = { "nvim-lua/plenary.nvim" },
-	})
 	use("rust-lang/rust.vim") -- rust language support
-	use("LnL7/vim-nix")    -- nix language support
+	use("LnL7/vim-nix") -- nix language support
 	use("ckipp01/stylua-nvim") -- stylua formatter
 end)
