@@ -38,16 +38,6 @@ return require("packer").startup(function(use)
     })
 
     -- file
-    use({
-        "rmagatti/session-lens",
-        requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-        config = function()
-            require("session-lens").setup({
-                log_level = "info",
-                auto_session_suppress_dirs = { "~/", "~/Programming" },
-            })
-        end,
-    })
     use("famiu/bufdelete.nvim") -- better buffer removal
 
     -- IDE

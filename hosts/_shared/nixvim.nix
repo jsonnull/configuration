@@ -12,6 +12,11 @@
       }
     ];
 
+    plugins.auto-session = {
+      enable = true;
+      settings.suppressed_dirs = [ "~/" "~/Programming/" "~/code/" ];
+    };
+
     plugins.bufferline = {
       enable = true;
       settings = {
