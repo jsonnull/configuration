@@ -10,6 +10,8 @@
 
     home-manager.url = "github:nix-community/home-manager/release-24.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
   outputs =

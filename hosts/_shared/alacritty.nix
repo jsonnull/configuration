@@ -17,6 +17,8 @@
         style = "Regular";
       };
 
+      import = [ pkgs.alacritty-theme.kanagawa_wave ];
+
       shell.program = "/etc/profiles/per-user/json/bin/zsh";
 
       window.padding = {
