@@ -44,6 +44,17 @@
       };
     };
 
+    plugins.cmp = {
+      autoEnableSources = true;
+      enable = true;
+      settings.sources = [
+        { name = "nvim_lsp"; }
+        { name = "path"; }
+        { name = "buffer"; }
+        { name = "nvim_lsp_signature_help"; }
+      ];
+    };
+
     plugins.comment.enable = true;
 
     plugins.lualine = {

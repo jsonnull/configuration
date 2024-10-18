@@ -103,54 +103,6 @@ return require("packer").startup(function(use)
     })
     use("lukas-reineke/lsp-format.nvim") -- format on save
     use({
-        "hrsh7th/nvim-cmp",              -- completion
-        requires = {
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-nvim-lsp-signature-help",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            { "L3MON4D3/LuaSnip", tag = "v1.*" }, -- snippets
-            "saadparwaiz1/cmp_luasnip",
-        },
-        config = function()
-            local cmp = require("cmp")
-
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                mapping = cmp.mapping.preset.insert({
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<C-c>"] = cmp.mapping.close(),
-                    ["<tab>"] = cmp.mapping.confirm({ select = true }),
-                    ["<CR>"] = cmp.mapping.confirm({ select = false }),
-                    ["<C-g>"] = cmp.mapping(function()
-                        vim.api.nvim_feedkeys(
-                            vim.fn["copilot#Accept"](vim.api.nvim_replace_termcodes("<Tab>", true, true, true)),
-                            "n",
-                            true
-                        )
-                    end),
-                }),
-                experimental = {
-                    ghost_text = false, -- this feature conflict with copilot.vim's preview.
-                },
-                sources = cmp.config.sources({
-                    { name = "nvim_lsp" },
-                    { name = "nvim_lsp_signature_help" },
-                    { name = "luasnip" },
-                }, {
-                    { name = "buffer" },
-                }),
-            })
-
-            require("luasnip.loaders.from_snipmate").lazy_load()
-        end,
-    })
-    use({
         "nvimtools/none-ls.nvim",
         config = function()
             require("null-ls").setup()
