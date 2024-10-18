@@ -121,6 +121,34 @@
       };
     };
 
+    plugins.treesitter = {
+      enable = true;
+
+      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        bash
+        json
+        lua
+        make
+        markdown
+        nix
+        regex
+        toml
+        vim
+        vimdoc
+        xml
+        yaml
+      ];
+
+
+      settings = {
+        highlight.enable = true;
+        incremental_selection.enable = true;
+        indent.enable = true;
+        # Warning: remove if moving to auto-installed grammars
+        parser_install_dir = null;
+      };
+    };
+
     plugins.web-devicons.enable = true;
 
     plugins.which-key.enable = true;
