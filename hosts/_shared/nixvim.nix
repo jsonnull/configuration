@@ -65,7 +65,11 @@
 
     plugins.comment.enable = true;
 
+    plugins.gitsigns.enable = true;
+
     plugins.illuminate.enable = true;
+
+    plugins.indent-blankline.enable = true;
 
     plugins.lsp = {
       enable = true;
@@ -107,6 +111,8 @@
         globalstatus = true;
       };
     };
+
+    plugins.nix.enable = true;
 
     plugins.none-ls = {
       enable = true;
@@ -197,6 +203,8 @@
         parser_install_dir = null;
       };
     };
+
+    plugins.vim-surround.enable = true;
 
     plugins.web-devicons.enable = true;
 
