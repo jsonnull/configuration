@@ -2,43 +2,7 @@ return require("packer").startup(function(use)
     -- Packer can manage itself
     use("wbthomason/packer.nvim")
 
-    -- theme
-    -- use 'shaunsingh/nord.nvim'
-    -- use 'projekt0n/github-nvim-theme'
-    -- use 'EdenEast/nightfox.nvim'
-    use({
-        --[[
-		"rose-pine/neovim",
-		as = "rose-pine",
-		tag = "v1.*",
-        ]]
-        -- "bluz71/vim-nightfly-colors",
-        -- "rebelot/kanagawa.nvim",
-        -- "sainnhe/everforest",
-        -- "sainnhe/sonokai",
-        -- "nyoom-engineering/oxocarbon.nvim",
-        --[[
-        requires = { "rktjmp/lush.nvim" },
-        ]]
-        -- "joshdick/onedark.vim",
-        -- "cseelus/vim-colors-lucid",
-        'kepano/flexoki-neovim',
-        as = 'flexoki',
-        config = function()
-            -- vim.cmd("colorscheme rose-pine")
-            -- vim.cmd("colorscheme nightfly")
-            -- vim.cmd("colorscheme kanagawa-dragon")
-            -- vim.g.everforest_background = "medium"
-            -- vim.cmd("colorscheme everforest")
-            -- vim.cmd("colorscheme sonokai")
-            -- vim.cmd("colorscheme oxocarbon")
-            -- vim.cmd("colorscheme onedark")
-            vim.cmd("colorscheme flexoki-dark")
-        end,
-    })
-
     -- IDE
-    use("dstein64/nvim-scrollview") -- scroll bar
     use("google/vim-searchindex")   -- search index
     use("Yggdroot/indentLine")      -- indent line
     use({
