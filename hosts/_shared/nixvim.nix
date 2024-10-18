@@ -17,6 +17,8 @@
       settings.suppressed_dirs = [ "~/" "~/Programming/" "~/code/" ];
     };
 
+    plugins.bufdelete.enable = true;
+
     plugins.bufferline = {
       enable = true;
       settings = {
@@ -103,6 +105,8 @@
     };
 
     plugins.web-devicons.enable = true;
+
+    plugins.which-key.enable = true;
   };
 }
 

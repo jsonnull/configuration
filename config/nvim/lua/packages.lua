@@ -37,16 +37,7 @@ return require("packer").startup(function(use)
         end,
     })
 
-    -- file
-    use("famiu/bufdelete.nvim") -- better buffer removal
-
     -- IDE
-    use({
-        "folke/which-key.nvim",
-        config = function()
-            require("which-key").setup({})
-        end,
-    })
     use("dstein64/nvim-scrollview") -- scroll bar
     use("google/vim-searchindex")   -- search index
     use("Yggdroot/indentLine")      -- indent line
