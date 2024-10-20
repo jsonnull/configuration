@@ -10,13 +10,11 @@
 
     enable = true;
 
-    autoCmd = [
-      {
-        command = "set filetype=jsonc";
-        event = [ "BufNewFile" "BufRead" ];
-        pattern = [ "tsconfig.json" "devcontainer.json" ];
-      }
-    ];
+    autoCmd = [{
+      command = "set filetype=jsonc";
+      event = [ "BufNewFile" "BufRead" ];
+      pattern = [ "tsconfig.json" "devcontainer.json" ];
+    }];
 
     globals = {
       # Disabling netrw, recommended by nvim-tree  
@@ -77,36 +75,38 @@
       updatetime = 300; # time (in ms) to write to swap file
       timeoutlen = 300; # time (in ms) to write to swap file
       # buffer
-      expandtab = true  ;# expand tab
-      tabstop = 4       ;# tab stop
-      softtabstop = 4   ;# soft tab stop
-      autoindent = true ;# auto indent for new line
-      shiftwidth = 4    ;# auto indent shift width
+      expandtab = true; # expand tab
+      tabstop = 4; # tab stop
+      softtabstop = 4; # soft tab stop
+      autoindent = true; # auto indent for new line
+      shiftwidth = 4; # auto indent shift width
       # window
       number = true;
       #relativenumber = true;
       # editing
-      whichwrap = "b,s,<,>,[,]"                ;# cursor is able to move from end of line to next line
-      backspace = [ "indent" "eol" "start" ] ;# backspace behaviors
-      list = false                             ;# show tabs with listchars
-      ignorecase = false                       ;# search with no ignore case
-      hlsearch = true                          ;# highlight search
-      incsearch = false                        ;# no incremental search
-      inccommand = "nosplit"                   ;# live substitute preview
+      whichwrap =
+        "b,s,<,>,[,]"; # cursor is able to move from end of line to next line
+      backspace = [ "indent" "eol" "start" ]; # backspace behaviors
+      list = false; # show tabs with listchars
+      ignorecase = false; # search with no ignore case
+      hlsearch = true; # highlight search
+      incsearch = false; # no incremental search
+      inccommand = "nosplit"; # live substitute preview
       completeopt = [ "menu" "menuone" "noselect" ];
       hidden = true;
-      cursorline = true         ;# show cursor line
-      ruler = false             ;# show ruler line
-      colorcolumn = "120"    ;# display a color column when line is longer than 120 chars
-      signcolumn = "yes"        ;# show sign column (column of the line number)
-      mouse = "nv"              ;# enable mouse under normal and visual mode
-      showmatch = true          ;# show bracket match
-      cmdheight = 1             ;# height of :command line
-      wildmenu = true           ;# wildmenu, auto complete for commands
+      cursorline = true; # show cursor line
+      ruler = false; # show ruler line
+      colorcolumn =
+        "120"; # display a color column when line is longer than 120 chars
+      signcolumn = "yes"; # show sign column (column of the line number)
+      mouse = "nv"; # enable mouse under normal and visual mode
+      showmatch = true; # show bracket match
+      cmdheight = 1; # height of :command line
+      wildmenu = true; # wildmenu, auto complete for commands
       wildmode = [ "longest" "full" ];
-      splitright = true         ;# split to right
-      splitbelow = true         ;# split to below
-      clipboard = "unnamedplus" ;# share system clipboard
+      splitright = true; # split to right
+      splitbelow = true; # split to below
+      clipboard = "unnamedplus"; # share system clipboard
       # tree-sitter code folding
       foldmethod = "expr";
       foldexpr = "nvim_treesitter#foldexpr()";
@@ -148,12 +148,32 @@
     plugins.cmp = {
       autoEnableSources = true;
       enable = true;
-      settings.sources = [
-        { name = "nvim_lsp"; }
-        { name = "path"; }
-        { name = "buffer"; }
-        { name = "nvim_lsp_signature_help"; }
-      ];
+      settings = {
+        sources = [
+          { name = "nvim_lsp"; }
+          { name = "nvim_lsp_signature_help"; }
+          { name = "path"; }
+          { name = "buffer"; }
+        ];
+        mapping = {
+          "<c-space>" = "cmp.mapping.complete()";
+          "<c-e>" = "cmp.mapping.close()";
+          "<Tab>" = ''
+            cmp.mapping(function(fallback)
+              -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+              if cmp.visible() then
+                local entry = cmp.get_selected_entry()
+                if not entry then
+                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                end
+                cmp.confirm()
+              else
+                fallback()
+              end
+            end, {"i","s","c",})
+          '';
+        };
+      };
     };
 
     plugins.comment.enable = true;
@@ -192,12 +212,15 @@
           enable = true;
           settings.runtime.version = "LuaJIT";
         };
+        nixd.enable = true;
         ts_ls.enable = true;
         yamlls.enable = true;
       };
     };
 
     plugins.lsp-format.enable = true;
+
+    plugins.lspkind.enable = true;
 
     plugins.lualine = {
       enable = true;
@@ -213,6 +236,7 @@
       enable = true;
       sources = {
         formatting.stylua.enable = true;
+        formatting.nixfmt.enable = true;
         formatting.prettier = {
           enable = true;
           disableTsServerFormatter = true;
@@ -244,11 +268,7 @@
           ""
           ""
         ];
-        lists = [
-          {
-            type = "dir";
-          }
-        ];
+        lists = [{ type = "dir"; }];
       };
     };
 
@@ -259,36 +279,30 @@
         fzf-native.enable = true;
       };
       keymaps = {
-        "<esc>" = {
-          action = "close";
-        };
-        "<c-p>" = {
-          action = "find_files";
-        };
-        "<c-e>" = {
-          action = "live_grep";
-        };
+        "<esc>" = { action = "close"; };
+        "<c-p>" = { action = "find_files"; };
+        "<c-e>" = { action = "live_grep"; };
       };
     };
 
     plugins.treesitter = {
       enable = true;
 
-      grammarPackages = with pkgs.unstable.vimPlugins.nvim-treesitter.builtGrammars; [
-        bash
-        json
-        lua
-        make
-        markdown
-        nix
-        regex
-        toml
-        vim
-        vimdoc
-        xml
-        yaml
-      ];
-
+      grammarPackages =
+        with pkgs.unstable.vimPlugins.nvim-treesitter.builtGrammars; [
+          bash
+          json
+          lua
+          make
+          markdown
+          nix
+          regex
+          toml
+          vim
+          vimdoc
+          xml
+          yaml
+        ];
 
       settings = {
         highlight.enable = true;
@@ -306,4 +320,3 @@
     plugins.which-key.enable = true;
   };
 }
-
