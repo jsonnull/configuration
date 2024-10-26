@@ -1,13 +1,9 @@
-{ pkgs
-, inputs
-, ...
-}:
+{ pkgs, inputs, ... }:
 
 let
   username = "json";
   homeDir = "/home/json";
-in
-{
+in {
   imports = [
     ../_shared/home-common.nix
     ../_shared/nixvim.nix
@@ -21,6 +17,7 @@ in
   home.packages = with pkgs; [
     discord
     unstable.graphite-cli
+    unstable.prismlauncher
     kdePackages.kasts
     unstable.novelwriter
     obsidian
@@ -45,117 +42,120 @@ in
 
   programs.vscode = {
     enable = true;
-    extensions = [ pkgs.unstable.vscode-extensions.continue.continue ] ++ (with pkgs.vscode-extensions; [
-      vscodevim.vim
-      github.copilot
-      github.vscode-pull-request-github
-      #astro-build.astro-vscode
-      jnoortheen.nix-ide
-      dbaeumer.vscode-eslint
-      esbenp.prettier-vscode
-      bradlc.vscode-tailwindcss
-      ms-vsliveshare.vsliveshare
-    ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+    extensions = [ pkgs.unstable.vscode-extensions.continue.continue ]
+      ++ (with pkgs.vscode-extensions; [
+        vscodevim.vim
+        github.copilot
+        github.vscode-pull-request-github
+        #astro-build.astro-vscode
+        jnoortheen.nix-ide
+        dbaeumer.vscode-eslint
+        esbenp.prettier-vscode
+        bradlc.vscode-tailwindcss
+        ms-vsliveshare.vsliveshare
+      ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        {
+          name = "Breeze";
+          publisher = "kde";
+          version = "0.0.4";
+          sha256 = "sha256-3kFeBPBXhta8U9gollO6+anMmmE8OD3vDlVvsMbBtoU=";
+        }
+        {
+          name = "noctis";
+          publisher = "liviuschera";
+          version = "10.43.3";
+          sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
+        }
+      ];
+    userSettings = builtins.fromJSON ''
       {
-        name = "Breeze";
-        publisher = "kde";
-        version = "0.0.4";
-        sha256 = "sha256-3kFeBPBXhta8U9gollO6+anMmmE8OD3vDlVvsMbBtoU=";
-      }
-      {
-        name = "noctis";
-        publisher = "liviuschera";
-        version = "10.43.3";
-        sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
-      }
-    ];
-    userSettings = builtins.fromJSON ''{
-      "editor.unicodeHighlight.nonBasicASCII": false,
-      "editor.largeFileOptimizations": false,
-      "editor.formatOnSave": true,
-      "editor.fontFamily": "'IosevkaTerm Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
-      "editor.fontSize": 16,
-      "workbench.colorTheme": "Noctis",
-      "workbench.tree.renderIndentGuides": "none",
-      "vim.textwidth": 100,
-      "vim.useSystemClipboard": true,
-      "vim.leader": ",",
-      "telemetry.telemetryLevel": "off",
-      "workbench.editor.tabSizing": "fixed",
-      "workbench.activityBar.location": "top",
-      "[typescriptreact]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
-      "typescript.preferences.preferTypeOnlyAutoImports": true,
-      "[typescript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
-      "editor.minimap.enabled": false,
-      "github.copilot.editor.enableAutoCompletions": true,
-      "[jsonc]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
-      "[javascript]": {
-          "editor.defaultFormatter": "esbenp.prettier-vscode"
-      },
-      "window.titleBarStyle": "custom",
-      "nix.enableLanguageServer": true,
-      "nix.serverPath": "nixd",
-      "extensions.autoUpdate": false,
-      "continue.enableContinueForTeamsBeta": true
-    }'';
+            "editor.unicodeHighlight.nonBasicASCII": false,
+            "editor.largeFileOptimizations": false,
+            "editor.formatOnSave": true,
+            "editor.fontFamily": "'IosevkaTerm Nerd Font', 'Droid Sans Mono', 'monospace', monospace",
+            "editor.fontSize": 16,
+            "workbench.colorTheme": "Noctis",
+            "workbench.tree.renderIndentGuides": "none",
+            "vim.textwidth": 100,
+            "vim.useSystemClipboard": true,
+            "vim.leader": ",",
+            "telemetry.telemetryLevel": "off",
+            "workbench.editor.tabSizing": "fixed",
+            "workbench.activityBar.location": "top",
+            "[typescriptreact]": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "typescript.preferences.preferTypeOnlyAutoImports": true,
+            "[typescript]": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "editor.minimap.enabled": false,
+            "github.copilot.editor.enableAutoCompletions": true,
+            "[jsonc]": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "[javascript]": {
+                "editor.defaultFormatter": "esbenp.prettier-vscode"
+            },
+            "window.titleBarStyle": "custom",
+            "nix.enableLanguageServer": true,
+            "nix.serverPath": "nixd",
+            "extensions.autoUpdate": false,
+            "continue.enableContinueForTeamsBeta": true
+          }'';
     # "[astro]": {
     #     "editor.defaultFormatter": "astro-build.astro-vscode"
     # },
-    keybindings = builtins.fromJSON ''[
-      {
-          "key": "ctrl+p",
-          "command": "-extension.vim_ctrl+p",
-          "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
-      },
-      {
-          "key": "ctrl+e",
-          "command": "-extension.vim_ctrl+e",
-          "when": "editorTextFocus && vim.active && vim.use<C-e> && !inDebugRepl"
-      },
-      {
-          "key": "ctrl+e",
-          "command": "-workbench.action.quickOpen"
-      },
-      {
-          "key": "ctrl+e",
-          "command": "workbench.action.findInFiles"
-      },
-      {
-          "key": "ctrl+shift+f",
-          "command": "-workbench.action.findInFiles"
-      },
-      {
-          "key": "ctrl+l",
-          "command": "-extension.vim_navigateCtrlL",
-          "when": "editorTextFocus && vim.active && vim.use<C-l> && !inDebugRepl"
-      },
-      {
-          "key": "ctrl+i",
-          "command": "-extension.vim_ctrl+i",
-          "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"
-      },
-      {
-          "key": "ctrl+shift+e",
-          "command": "-workbench.view.explorer",
-          "when": "viewContainer.workbench.view.explorer.enabled"
-      },
-      {
-          "key": "ctrl+b",
-          "command": "-extension.vim_ctrl+b",
-          "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
-      },
-      {
-          "key": "ctrl+t",
-          "command": "-extension.vim_ctrl+t",
-          "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
-      }
-    ]'';
+    keybindings = builtins.fromJSON ''
+      [
+            {
+                "key": "ctrl+p",
+                "command": "-extension.vim_ctrl+p",
+                "when": "editorTextFocus && vim.active && vim.use<C-p> && !inDebugRepl || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'CommandlineInProgress' || vim.active && vim.use<C-p> && !inDebugRepl && vim.mode == 'SearchInProgressMode'"
+            },
+            {
+                "key": "ctrl+e",
+                "command": "-extension.vim_ctrl+e",
+                "when": "editorTextFocus && vim.active && vim.use<C-e> && !inDebugRepl"
+            },
+            {
+                "key": "ctrl+e",
+                "command": "-workbench.action.quickOpen"
+            },
+            {
+                "key": "ctrl+e",
+                "command": "workbench.action.findInFiles"
+            },
+            {
+                "key": "ctrl+shift+f",
+                "command": "-workbench.action.findInFiles"
+            },
+            {
+                "key": "ctrl+l",
+                "command": "-extension.vim_navigateCtrlL",
+                "when": "editorTextFocus && vim.active && vim.use<C-l> && !inDebugRepl"
+            },
+            {
+                "key": "ctrl+i",
+                "command": "-extension.vim_ctrl+i",
+                "when": "editorTextFocus && vim.active && vim.use<C-i> && !inDebugRepl"
+            },
+            {
+                "key": "ctrl+shift+e",
+                "command": "-workbench.view.explorer",
+                "when": "viewContainer.workbench.view.explorer.enabled"
+            },
+            {
+                "key": "ctrl+b",
+                "command": "-extension.vim_ctrl+b",
+                "when": "editorTextFocus && vim.active && vim.use<C-b> && !inDebugRepl && vim.mode != 'Insert'"
+            },
+            {
+                "key": "ctrl+t",
+                "command": "-extension.vim_ctrl+t",
+                "when": "editorTextFocus && vim.active && vim.use<C-t> && !inDebugRepl"
+            }
+          ]'';
     #{
     #    "key": "ctrl+l",
     #    "command": "workbench.view.explorer",
