@@ -2,36 +2,26 @@
   description = "We got here through trial and error";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs-unstable";
 
-    home-manager.url = "github:nix-community/home-manager/release-24.05";
+    home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
   };
 
-  outputs =
-    inputs@{ self
-    , nixpkgs
-    , home-manager
-    , nixvim
-    , ...
-    }:
-    let
-      inherit (self) outputs;
-    in
-    {
+  outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }:
+    let inherit (self) outputs;
+    in {
       overlays = import ./overlays.nix { inherit inputs; };
 
       # hosts
       nixosConfigurations.renderer = nixpkgs.lib.nixosSystem {
-        specialArgs = {
-          inherit inputs outputs;
-        };
+        specialArgs = { inherit inputs outputs; };
         system = "x86_64-linux";
         modules = [
           ./hosts/renderer/configuration.nix
@@ -40,9 +30,7 @@
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.sharedModules = [
-              nixvim.homeManagerModules.nixvim
-            ];
+            home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ];
             home-manager.users.json = import ./hosts/renderer/home.nix;
           }
         ];
