@@ -66,6 +66,12 @@ in {
           version = "10.43.3";
           sha256 = "sha256-RMYeW1J3VNiqYGj+2+WzC5X4Al9k5YWmwOyedFnOc1I=";
         }
+        {
+          name = "svelte-vscode";
+          publisher = "svelte";
+          version = "109.1.0";
+          sha256 = "sha256-ozD9k/zfklwBJtc1WdC52hgJckxBgVRmcZOwSYboACM=";
+        }
       ];
     userSettings = builtins.fromJSON ''
       {
@@ -101,7 +107,8 @@ in {
             "nix.enableLanguageServer": true,
             "nix.serverPath": "nixd",
             "extensions.autoUpdate": false,
-            "continue.enableContinueForTeamsBeta": true
+            "continue.enableContinueForTeamsBeta": true,
+            "svelte.enable-ts-plugin": true
           }'';
     # "[astro]": {
     #     "editor.defaultFormatter": "astro-build.astro-vscode"

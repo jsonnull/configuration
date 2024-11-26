@@ -192,6 +192,12 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
+  boot.kernelPackages = pkgs.linuxPackages_6_10;
+  # fix for nVidia wayland plasma 6
+  boot.kernelParams = [
+    "nvidia-drm.fbdev=1"
+    "nvidia-drm.modeset=1"
+  ];
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Some programs need SUID wrappers, can be configured further or are
