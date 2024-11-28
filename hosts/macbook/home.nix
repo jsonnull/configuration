@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   username = "jsonnull";
@@ -7,6 +7,7 @@ in
 {
   imports = [
     ../_shared/home-common.nix
+    ../_shared/nixvim.nix
     #../../private-configs/private-repos.nix
   ];
 

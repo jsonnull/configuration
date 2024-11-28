@@ -27,6 +27,7 @@
     pkgs.nodePackages.vscode-json-languageserver
     pkgs.nodePackages.yaml-language-server
     pkgs.gh
+    pkgs.graphite-cli
     pkgs.rust-analyzer
     pkgs.nixd
     pkgs.nixpkgs-fmt
@@ -82,6 +83,8 @@
     enable = true;
     keyMode = "vi";
     prefix = "C-a";
+    # https://github.com/nix-community/home-manager/issues/5952
+    sensibleOnTop = false;
     shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
       set -g default-terminal 'xterm-256color'
