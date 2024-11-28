@@ -20,7 +20,6 @@ in
 
   home.packages = with pkgs; [
     discord
-    unstable.graphite-cli
     kdePackages.kasts
     unstable.novelwriter
     obsidian
