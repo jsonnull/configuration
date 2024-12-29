@@ -24,6 +24,7 @@
         specialArgs = { inherit inputs outputs; };
         system = "x86_64-linux";
         modules = [
+          #./modules/sdm/default.nix
           ./hosts/renderer/configuration.nix
           home-manager.nixosModules.home-manager
           {

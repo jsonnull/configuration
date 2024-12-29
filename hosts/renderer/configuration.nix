@@ -101,7 +101,7 @@
   users.users.json = {
     isNormalUser = true;
     description = "jsonnull";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
     #packages = with pkgs; [
     #];
   };
@@ -110,6 +110,13 @@
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
   programs.steam.enable = true;
+
+  programs.adb.enable = true;
+  programs.alvr = {
+    enable = true;
+    package = pkgs.alvr-passthrough;
+    openFirewall = true;
+  };
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
@@ -129,6 +136,7 @@
   xdg = {
     portal = {
       enable = true;
+      xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
         xdg-desktop-portal-kde
         xdg-desktop-portal-wlr
@@ -194,10 +202,7 @@
   boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelPackages = pkgs.linuxPackages_6_10;
   # fix for nVidia wayland plasma 6
-  boot.kernelParams = [
-    "nvidia-drm.fbdev=1"
-    "nvidia-drm.modeset=1"
-  ];
+  boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Some programs need SUID wrappers, can be configured further or are

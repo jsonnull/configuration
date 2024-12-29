@@ -17,10 +17,14 @@ in {
   home.packages = with pkgs; [
     discord
     unstable.prismlauncher
+    aseprite-unfree
     kdePackages.kasts
     unstable.novelwriter
     obsidian
     r2modman
+    sidequest
+    #alvr
+    #android-tools
   ];
 
   home.file.".ssh/allowed_signers".text =
