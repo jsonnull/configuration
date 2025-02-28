@@ -2,7 +2,8 @@
 
 {
   programs.nixvim = {
-    colorschemes.kanagawa.enable = true;
+    #colorschemes.kanagawa.enable = true;
+    colorschemes.ayu.enable = true;
 
     # colorscheme-adjacent properties
     opts.background = "dark";
@@ -59,6 +60,11 @@
         action = ":noh<cr>";
         key = "<leader>h";
         mode = "n";
+      }
+      {
+        action = "<C-\\><C-n>";
+        key = "<Esc>";
+        mode = "t";
       }
     ];
 
@@ -149,14 +155,24 @@
       autoEnableSources = true;
       enable = true;
       settings = {
+        disallow_fuzzy_matching = true;
+        disallow_partial_matching = true;
+        performance.throttle = 200;
         sources = [
+          { name = "async_path"; }
+          { name = "git"; }
           { name = "nvim_lsp"; }
           { name = "nvim_lsp_signature_help"; }
-          { name = "path"; }
-          { name = "buffer"; }
+          { name = "treesitter"; }
+          {
+            name = "spell";
+          }
+          #{ name = "buffer"; }
         ];
         mapping = {
           "<c-space>" = "cmp.mapping.complete()";
+          "<c-p>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
+          "<c-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
           "<c-e>" = "cmp.mapping.close()";
           "<Tab>" = ''
             cmp.mapping(function(fallback)
@@ -186,6 +202,7 @@
 
     plugins.lsp = {
       enable = true;
+      inlayHints = true;
       keymaps = {
         lspBuf = {
           "<leader>ld" = "definition";
@@ -195,8 +212,8 @@
           "K" = "hover";
           "U" = "signature_help";
           "<leader>lr" = "references";
-          "<leader>ls" = "document_symbol";
-          "<leader>lS" = "workspace_symbol";
+          "<leader>ls" = "signature_help";
+          #"<leader>lS" = "workspace_symbol";
           "<leader>lR" = "rename";
           "<leader>lA" = "code_action";
           "<leader>lf" = "format";
@@ -206,6 +223,7 @@
       servers = {
         bashls.enable = true;
         cssls.enable = true;
+        eslint.enable = true;
         html.enable = true;
         jsonls.enable = true;
         lua_ls = {
@@ -213,7 +231,8 @@
           settings.runtime.version = "LuaJIT";
         };
         nixd.enable = true;
-        ts_ls.enable = true;
+        svelte.enable = true;
+        #ts_ls.enable = true;
         yamlls.enable = true;
       };
     };
@@ -241,7 +260,7 @@
           enable = true;
           disableTsServerFormatter = true;
         };
-        completion.spell.enable = true;
+        #completion.spell.enable = true;
       };
     };
 
@@ -275,7 +294,10 @@
     plugins.telescope = {
       enable = true;
       extensions = {
-        ui-select.enable = true;
+        ui-select = {
+          enable = true;
+          settings.specific_opts.codeactions = false;
+        };
         fzf-native.enable = true;
       };
       keymaps = {
@@ -291,13 +313,17 @@
       grammarPackages =
         with pkgs.unstable.vimPlugins.nvim-treesitter.builtGrammars; [
           bash
+          javascript
           json
           lua
           make
           markdown
           nix
           regex
+          svelte
           toml
+          tsx
+          typescript
           vim
           vimdoc
           xml
@@ -312,6 +338,8 @@
         parser_install_dir = null;
       };
     };
+
+    plugins.typescript-tools.enable = true;
 
     plugins.vim-surround.enable = true;
 
