@@ -118,9 +118,30 @@
     openFirewall = true;
   };
 
+  systemd.services.strongdm = {
+    enable = true;
+    description = "idk";
+    unitConfig = {
+      ConditionFileIsExecutable = "${pkgs.sdm}/bin/sdm";
+      Requires = "default.target";
+      After = "default.target";
+    };
+    serviceConfig = {
+      ExecStart = ''${pkgs.sdm}/bin/sdm "listen"'';
+      Restart = "always";
+      RestartSec = "3";
+      User = "json";
+      WorkingDirectory = "/home/json/.sdm";
+      AmbientCapabilities = "CAP_NET_ADMIN";
+    };
+    wantedBy = [ "default.target" ];
+    environment = { SDM_HOME = "/home/json/.sdm"; };
+  };
+
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     klassyQt6
+    sdm
     kget
     unstable.slack
     cudatoolkit
