@@ -118,6 +118,8 @@
     openFirewall = true;
   };
 
+  programs.kdeconnect.enable = true;
+
   systemd.services.strongdm = {
     enable = true;
     description = "idk";
@@ -167,6 +169,8 @@
 
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
+
+  hardware.bluetooth.enable = true;
 
   services.hardware.openrgb.enable = true;
 
