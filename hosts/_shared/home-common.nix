@@ -19,6 +19,7 @@
   manual.manpages.enable = false;
 
   home.packages = [
+    pkgs.aider-chat
     pkgs.ripgrep
     pkgs.nodejs_20
     pkgs.nodePackages.pm2
