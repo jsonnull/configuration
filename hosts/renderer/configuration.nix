@@ -19,6 +19,8 @@
     config = {
       allowUnfree = true;
       cudaSupport = true;
+      chromium.commandLineArgs =
+        "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     };
   };
 
@@ -142,11 +144,11 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    klassyQt6
     sdm
     kget
     unstable.slack
     cudatoolkit
+    ungoogled-chromium
   ];
 
   # Virtualbox
@@ -156,6 +158,7 @@
   # Slack
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables.GTK_USE_PORTAL = "1";
+  #environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
   xdg = {
     portal = {
       enable = true;
@@ -174,8 +177,11 @@
 
   services.hardware.openrgb.enable = true;
 
-  fonts.packages = with pkgs;
-    [ (nerdfonts.override { fonts = [ "Iosevka" "IosevkaTerm" ]; }) ];
+  fonts.packages = with pkgs; [
+    inter
+    nerd-fonts.iosevka
+    nerd-fonts.iosevka-term
+  ];
 
   # Make the system work with nvidia card
   environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
@@ -225,7 +231,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelPackages = pkgs.linuxPackages_6_10;
+  boot.kernelPackages = pkgs.linuxPackages_6_11;
   # fix for nVidia wayland plasma 6
   boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
   boot.blacklistedKernelModules = [ "nouveau" ];

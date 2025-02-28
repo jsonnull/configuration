@@ -1,6 +1,5 @@
 { pkgs, ... }:
 
-
 {
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
@@ -60,9 +59,12 @@
   programs.starship = {
     enable = true;
     enableZshIntegration = true;
-    #promptInit = ''
-    #  set -x STARSHIP_CONFIG "${config.home.homeDirectory}/configuration/config/starship.toml"
-    #'';
+    settings = {
+      nix_shell.format = "via [$symbol$name](bold blue)";
+      nix_shell.symbol = " ";
+      nodejs.symbol = " ";
+      git_branch.symbol = " ";
+    };
   };
 
   programs.direnv = {
@@ -75,7 +77,10 @@
     enable = true;
     userName = "Jason Nall";
     userEmail = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
-    extraConfig = { push.default = "current"; init.defaultBranch = "main"; };
+    extraConfig = {
+      push.default = "current";
+      init.defaultBranch = "main";
+    };
     ignores = [ ".direnv" ];
   };
 
@@ -92,5 +97,6 @@
     '';
     # TODO: Consolidate; I'm pretty sure this does the same thing as `set g default-terminal` above.
     terminal = "xterm-256color";
+    plugins = [ pkgs.tmux-ayu-theme ];
   };
 }

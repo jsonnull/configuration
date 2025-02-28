@@ -17,9 +17,9 @@
         style = "Regular";
       };
 
-      import = [ pkgs.alacritty-theme.kanagawa_wave ];
+      general.import = [ pkgs.alacritty-theme.ayu_dark ];
 
-      shell.program = "/etc/profiles/per-user/json/bin/zsh";
+      terminal.shell.program = "/etc/profiles/per-user/json/bin/zsh";
 
       window.padding = {
         x = 10;
@@ -28,4 +28,3 @@
     };
   };
 }
-
