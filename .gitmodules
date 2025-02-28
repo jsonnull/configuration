@@ -1,3 +1,0 @@
-[submodule "macbook"]
-	path = private-configs
-	url = git@github.com:jsonnull/private-configs.git
