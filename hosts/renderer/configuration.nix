@@ -84,7 +84,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -145,7 +145,7 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     sdm
-    kget
+    kdePackages.kget
     unstable.slack
     cudatoolkit
     ungoogled-chromium
@@ -164,7 +164,7 @@
       enable = true;
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        xdg-desktop-portal-kde
+        kdePackages.xdg-desktop-portal-kde
         xdg-desktop-portal-wlr
       ];
     };
