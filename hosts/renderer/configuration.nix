@@ -12,6 +12,7 @@
   nixpkgs = {
     overlays = [
       inputs.alacritty-theme.overlays.default
+      inputs.niri.overlays.niri
       outputs.overlays.additions
       outputs.overlays.modifications
       outputs.overlays.unstable-packages
@@ -67,9 +68,23 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the KDE Plasma Desktop Environment.
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  # Enable Niri Wayland compositor
+  services.displayManager.sddm = {
+    enable = true;
+    wayland = { enable = true; };
+    autoLogin = {
+      enable = true;
+      user = "json";
+    };
+  };
+  services.displayManager.defaultSession = "niri";
+  services.desktopManager.plasma6.enable = false;
+  services.udisks2.enable = true;
+
+  programs.niri = {
+    enable = true;
+    package = pkgs.niri;
+  };
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -145,10 +160,15 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     sdm
-    kdePackages.kget
     unstable.slack
     cudatoolkit
     ungoogled-chromium
+    xwayland-satellite
+
+    # KDE applications to keep
+    kdePackages.dolphin
+    kdePackages.elisa
+    kdePackages.okular
   ];
 
   # Virtualbox
@@ -164,8 +184,9 @@
       enable = true;
       xdgOpenUsePortal = true;
       extraPortals = with pkgs; [
-        kdePackages.xdg-desktop-portal-kde
+        xdg-desktop-portal-gnome
         xdg-desktop-portal-wlr
+        xdg-desktop-portal-gtk
       ];
     };
   };

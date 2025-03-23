@@ -12,6 +12,9 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
 
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
+
+    niri.url = "github:sodiboo/niri-flake";
+    niri.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }:
@@ -27,6 +30,7 @@
           #./modules/sdm/default.nix
           ./hosts/renderer/configuration.nix
           home-manager.nixosModules.home-manager
+          inputs.niri.nixosModules.niri
           {
             home-manager.backupFileExtension = "backup";
             home-manager.useGlobalPkgs = true;
