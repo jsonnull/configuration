@@ -2,11 +2,13 @@
 
 {
   programs.nixvim = {
-    #colorschemes.kanagawa.enable = true;
-    colorschemes.ayu.enable = true;
+    colorschemes.modus = {
+      enable = true;
+      settings.variant = "deuteranopia";
+    };
 
     # colorscheme-adjacent properties
-    opts.background = "dark";
+    opts.background = "light";
     opts.termguicolors = true;
 
     enable = true;
@@ -32,8 +34,18 @@
         mode = "n";
       }
       {
-        action = "<cmd>Telescope buffers<cr>";
+        action = "<cmd>lua Snacks.picker.buffers()<cr>";
         key = "<leader>b";
+        mode = "n";
+      }
+      {
+        action = "<cmd>lua Snacks.picker.git_files()<cr>";
+        key = "<c-p>";
+        mode = "n";
+      }
+      {
+        action = "<cmd>lua Snacks.picker.grep()<cr>";
+        key = "<c-e>";
         mode = "n";
       }
       {
@@ -65,6 +77,53 @@
         action = "<C-\\><C-n>";
         key = "<Esc>";
         mode = "t";
+      }
+      # Nvim Dap
+      {
+        key = "<leader>du";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dapui').toggle()<cr>";
+        options = { desc = "Dap UI"; };
+      }
+      {
+        key = "<F5>";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dap').continue()<cr>";
+        options = { desc = "Dap continue"; };
+      }
+      {
+        key = "<F10>";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dap').step_over()<cr>";
+        options = { desc = "Dap Step Over"; };
+      }
+      {
+        key = "<F11>";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dap').step_into()<cr>";
+        options = { desc = "Dap Step Into"; };
+      }
+      {
+        key = "<F12>";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dap').step_out()<cr>";
+        options = { desc = "Dap Step Out"; };
+      }
+      {
+        key = "<leader>db";
+        mode = [ "n" ];
+        action = "<cmd>lua require('dap').toggle_breakpoint()<cr>";
+        options = { desc = "Dap Toggle Breakpoint"; };
+      }
+      {
+        key = "<leader>dB";
+        mode = [ "n" ];
+        action.__raw = ''
+          function()
+            require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
+          end
+        '';
+        options = { desc = "Dap Conditional Breakpoint"; };
       }
     ];
 
@@ -174,25 +233,91 @@
           "<c-p>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
           "<c-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
           "<c-e>" = "cmp.mapping.close()";
-          "<Tab>" = ''
-            cmp.mapping(function(fallback)
-              -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-              if cmp.visible() then
-                local entry = cmp.get_selected_entry()
-                if not entry then
-                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                end
-                cmp.confirm()
-              else
-                fallback()
-              end
-            end, {"i","s","c",})
-          '';
+          /* "<Tab>" = ''
+               cmp.mapping(function(fallback)
+                 -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
+                 if cmp.visible() then
+                   local entry = cmp.get_selected_entry()
+                   if not entry then
+                     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                   end
+                   cmp.confirm()
+                 else
+                   fallback()
+                 end
+               end, {"i","s","c",})
+             '';
+          */
         };
       };
     };
 
     plugins.comment.enable = true;
+
+    plugins.dap = {
+      enable = true;
+      extensions = {
+        dap-ui.enable = true;
+        dap-virtual-text.enable = true;
+      };
+      adapters = {
+        executables.chrome = {
+          command = "${pkgs.vscode-js-debug}/bin/js-debug";
+        };
+        executables.firefox = {
+          command = "${pkgs.nodejs}/bin/node";
+          args = [
+            "${pkgs.vscode-extensions.firefox-devtools.vscode-firefox-debug}/share/vscode/extensions/firefox-devtools.vscode-firefox-debug/dist/adapter.bundle.js"
+          ];
+        };
+      };
+      luaConfig.post = ''
+        local js_based_languages = { "typescript", "javascript", "typescriptreact" }
+        for _, language in ipairs(js_based_languages) do
+          require("dap").configurations[language] = {
+            --[[
+            {
+              type = "pwa-node",
+              request = "launch",
+              name = "Launch file",
+              program = "''${file}",
+              cwd = "''${workspaceFolder}",
+            },
+            {
+             type = 'pwa-node',
+             request = 'attach',
+             name = 'Attach to Node app',
+             address = 'localhost',
+             port = 9229,
+             cwd = "''${workspaceFolder}",
+             restart = true,
+            },
+            ]]
+            {
+              name = 'Debug Stories with Firefox',
+              type = 'firefox',
+              request = 'attach',
+              reAttach = true,
+              url = 'http://localhost:6006',
+              webRoot = "''${workspaceFolder}",
+              firefoxExecutable = '${pkgs.firefox}/bin/firefox',
+            }
+          }
+        end
+
+        local dap, dapui = require("dap"), require("dapui")
+
+        dap.listeners.after.event_initialized["dapui_config"] = function()
+          dapui.open({})
+        end
+        dap.listeners.before.event_terminated["dapui_config"] = function()
+          dapui.close({})
+        end
+        dap.listeners.before.event_exited["dapui_config"] = function()
+          dapui.close({})
+        end
+      '';
+    };
 
     plugins.gitsigns.enable = true;
 
@@ -272,6 +397,16 @@
       renderer.groupEmpty = true;
     };
 
+    plugins.snacks = {
+      enable = true;
+      settings = {
+        bigfile.enabled = true;
+        quickfile.enable = true;
+        statuscolumn.enabled = true;
+        words.enabled = true;
+      };
+    };
+
     plugins.startify = {
       enable = true;
       settings = {
@@ -291,21 +426,23 @@
       };
     };
 
-    plugins.telescope = {
-      enable = true;
-      extensions = {
-        ui-select = {
-          enable = true;
-          settings.specific_opts.codeactions = false;
-        };
-        fzf-native.enable = true;
-      };
-      keymaps = {
-        "<esc>" = { action = "close"; };
-        "<c-p>" = { action = "find_files"; };
-        "<c-e>" = { action = "live_grep"; };
-      };
-    };
+    plugins.telescope.enable = false;
+    /* plugins.telescope = {
+         enable = true;
+         extensions = {
+           ui-select = {
+             enable = true;
+             settings.specific_opts.codeactions = false;
+           };
+           fzf-native.enable = true;
+         };
+         keymaps = {
+           "<esc>" = { action = "close"; };
+           "<c-p>" = { action = "find_files"; };
+           "<c-e>" = { action = "live_grep"; };
+         };
+       };
+    */
 
     plugins.treesitter = {
       enable = true;

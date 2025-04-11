@@ -44,7 +44,11 @@
 
   programs.zsh = {
     enable = true;
-    autosuggestion.enable = true;
+    autosuggestion = {
+      enable = true;
+      highlight = "fg=#006800";  # Using modus green for better visibility
+    };
+    syntaxHighlighting.enable = true;
     history.size = 1000000;
     oh-my-zsh = {
       enable = true;
@@ -99,6 +103,6 @@
     '';
     # TODO: Consolidate; I'm pretty sure this does the same thing as `set g default-terminal` above.
     terminal = "xterm-256color";
-    plugins = [ pkgs.tmux-ayu-theme ];
+    plugins = [ pkgs.tmux-terafox-theme ];
   };
 }

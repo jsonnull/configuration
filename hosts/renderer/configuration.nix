@@ -118,7 +118,7 @@
   users.users.json = {
     isNormalUser = true;
     description = "jsonnull";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" ];
+    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
     #packages = with pkgs; [
     #];
   };
@@ -135,7 +135,9 @@
     openFirewall = true;
   };
 
-  programs.kdeconnect.enable = true;
+  services.tailscale.enable = true;
+
+  virtualisation.docker.enable = true;
 
   systemd.services.strongdm = {
     enable = true;
@@ -168,7 +170,6 @@
     # KDE applications to keep
     kdePackages.dolphin
     kdePackages.elisa
-    kdePackages.okular
   ];
 
   # Virtualbox
@@ -252,7 +253,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.latest;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelPackages = pkgs.linuxPackages_6_11;
+  boot.kernelPackages = pkgs.linuxPackages_6_13;
   # fix for nVidia wayland plasma 6
   boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
   boot.blacklistedKernelModules = [ "nouveau" ];

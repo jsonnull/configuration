@@ -32,6 +32,13 @@ in {
   home.file.".ssh/allowed_signers".text =
     "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
 
+  home.pointerCursor = {
+    name = "phinger-cursors-light";
+    package = pkgs.phinger-cursors;
+    size = 32;
+    gtk.enable = true;
+  };
+
   programs.git = {
     enable = true;
     userName = "Jason Nall";
@@ -66,6 +73,16 @@ in {
     };
   };
 
+  services.gammastep = {
+    enable = true;
+    dawnTime = "07:00";
+    duskTime = "19:00";
+    temperature = {
+      day = 6500;
+      night = 6500;
+    };
+  };
+
   programs.niri = {
     settings = {
       input.keyboard.xkb = {
@@ -73,7 +90,10 @@ in {
         variant = "dvorak";
       };
 
-      layout = { gaps = 30; };
+      layout = {
+        gaps = 30;
+        focus-ring.active.color = "#cbd9d8";
+      };
 
       outputs = {
         "DP-5" = {
@@ -102,7 +122,10 @@ in {
       };
 
       spawn-at-startup = [
-        # Maybe also start waybar
+        {
+          command = [ "waybar" ];
+        }
+        # { command = [ "udiskie" ]; }
         { command = [ "xwayland-satellite" ":1" ]; }
         { command = [ "swww-daemon" ]; }
         { command = [ "waypaper --restore" ]; }
