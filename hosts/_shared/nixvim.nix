@@ -253,12 +253,10 @@
 
     plugins.comment.enable = true;
 
+    plugins.dap-ui.enable = true;
+    plugins.dap-virtual-text.enable = true;
     plugins.dap = {
       enable = true;
-      extensions = {
-        dap-ui.enable = true;
-        dap-virtual-text.enable = true;
-      };
       adapters = {
         executables.chrome = {
           command = "${pkgs.vscode-js-debug}/bin/js-debug";
@@ -358,7 +356,11 @@
         svelte.enable = true;
         #ts_ls.enable = true;
         yamlls.enable = true;
-        rust_analyzer.enable = true;
+        rust_analyzer = {
+          enable = true;
+          installRustc = false;
+          installCargo = false;
+        };
       };
     };
 

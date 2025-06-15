@@ -69,9 +69,11 @@
   };
 
   # Enable Niri Wayland compositor
-  services.displayManager.sddm = {
-    enable = true;
-    wayland = { enable = true; };
+  services.displayManager = {
+    sddm = {
+      enable = true;
+      wayland.enable = true;
+    };
     autoLogin = {
       enable = true;
       user = "json";
@@ -136,7 +138,7 @@
   programs.adb.enable = true;
   programs.alvr = {
     enable = true;
-    package = pkgs.alvr-passthrough;
+    #package = pkgs.alvr-passthrough;
     openFirewall = true;
   };
 
