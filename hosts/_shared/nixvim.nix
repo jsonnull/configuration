@@ -127,8 +127,6 @@
       }
     ];
 
-    nixpkgs.pkgs = pkgs.unstable;
-
     opts = {
       # systematic
       encoding = "utf-8";
@@ -449,25 +447,24 @@
     plugins.treesitter = {
       enable = true;
 
-      grammarPackages =
-        with pkgs.unstable.vimPlugins.nvim-treesitter.builtGrammars; [
-          bash
-          javascript
-          json
-          lua
-          make
-          markdown
-          nix
-          regex
-          svelte
-          toml
-          tsx
-          typescript
-          vim
-          vimdoc
-          xml
-          yaml
-        ];
+      grammarPackages = with pkgs.vimPlugins.nvim-treesitter.builtGrammars; [
+        bash
+        javascript
+        json
+        lua
+        make
+        markdown
+        nix
+        regex
+        svelte
+        toml
+        tsx
+        typescript
+        vim
+        vimdoc
+        xml
+        yaml
+      ];
 
       settings = {
         highlight.enable = true;

@@ -16,9 +16,9 @@ in {
 
   home.packages = with pkgs; [
     discord
-    unstable.prismlauncher
+    prismlauncher
     kdePackages.kasts
-    unstable.novelwriter
+    novelwriter
     obsidian
     photoqt
     r2modman
@@ -416,7 +416,7 @@ in {
   programs.vscode = {
     enable = true;
     profiles.default = {
-      extensions = [ pkgs.unstable.vscode-extensions.continue.continue ]
+      extensions = [ pkgs.vscode-extensions.continue.continue ]
         ++ (with pkgs.vscode-extensions; [
           vscodevim.vim
           github.copilot

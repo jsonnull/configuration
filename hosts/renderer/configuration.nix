@@ -15,7 +15,6 @@
       inputs.niri.overlays.niri
       outputs.overlays.additions
       outputs.overlays.modifications
-      outputs.overlays.unstable-packages
     ];
     config = {
       allowUnfree = true;
@@ -169,7 +168,7 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     sdm
-    unstable.slack
+    slack
     cudatoolkit
     ungoogled-chromium
     xwayland-satellite

@@ -3,7 +3,6 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     nixvim.url = "github:nix-community/nixvim";
     nixvim.inputs.nixpkgs.follows = "nixpkgs";
@@ -50,11 +49,8 @@
           ./hosts/macbook/home.nix
           nixvim.homeManagerModules.nixvim
           {
-            nixpkgs.overlays = [
-              outputs.overlays.additions
-              outputs.overlays.modifications
-              outputs.overlays.unstable-packages
-            ];
+            nixpkgs.overlays =
+              [ outputs.overlays.additions outputs.overlays.modifications ];
           }
         ];
 
@@ -71,11 +67,8 @@
           ./hosts/wsl/home.nix
           nixvim.homeManagerModules.nixvim
           {
-            nixpkgs.overlays = [
-              outputs.overlays.additions
-              outputs.overlays.modifications
-              outputs.overlays.unstable-packages
-            ];
+            nixpkgs.overlays =
+              [ outputs.overlays.additions outputs.overlays.modifications ];
           }
         ];
 
