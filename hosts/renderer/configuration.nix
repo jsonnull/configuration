@@ -126,7 +126,12 @@
   programs.firefox.enable = true;
   programs._1password.enable = true;
   programs._1password-gui.enable = true;
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true;
+    dedicatedServer.openFirewall = true;
+    localNetworkGameTransfers.openFirewall = true;
+  };
 
   programs.adb.enable = true;
   programs.alvr = {
@@ -166,10 +171,15 @@
     cudatoolkit
     ungoogled-chromium
     xwayland-satellite
+    _7zz
+    unar
+    unzip
 
     # KDE applications to keep
     kdePackages.dolphin
     kdePackages.elisa
+
+    nautilus
   ];
 
   # Virtualbox

@@ -27,6 +27,7 @@ in {
     k9s
     swww
     waypaper
+    gamescope
   ];
 
   home.file.".ssh/allowed_signers".text =
