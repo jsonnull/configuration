@@ -1,7 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{ config, inputs, outputs, pkgs, ... }:
+{
+  config,
+  inputs,
+  outputs,
+  pkgs,
+  ...
+}:
 
 {
   imports = [
@@ -19,15 +25,17 @@
     config = {
       allowUnfree = true;
       cudaSupport = true;
-      chromium.commandLineArgs =
-        "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+      chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
     };
   };
 
   nix = {
     #nixPath = [ "nixos-config=/home/json/configuration/nixos/configuration.nix" ];
     settings = {
-      experimental-features = [ "nix-command" "flakes" ];
+      experimental-features = [
+        "nix-command"
+        "flakes"
+      ];
       auto-optimise-store = true;
     };
     gc = {
@@ -119,7 +127,12 @@
   users.users.json = {
     isNormalUser = true;
     description = "jsonnull";
-    extraGroups = [ "networkmanager" "wheel" "adbusers" "docker" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "adbusers"
+      "docker"
+    ];
     #packages = with pkgs; [
     #];
   };
@@ -162,7 +175,9 @@
       AmbientCapabilities = "CAP_NET_ADMIN";
     };
     wantedBy = [ "default.target" ];
-    environment = { SDM_HOME = "/home/json/.sdm"; };
+    environment = {
+      SDM_HOME = "/home/json/.sdm";
+    };
   };
 
   # List packages installed in system profile. To search, run:
@@ -218,11 +233,9 @@
 
   # Make the system work with nvidia card
   environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
-  environment.sessionVariables.LD_LIBRARY_PATH =
-    "${pkgs.linuxPackages.nvidia_x11}/lib";
+  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib";
   #environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib";
-  environment.sessionVariables.VK_DRIVER_FILES =
-    "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
+  environment.sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
   environment.sessionVariables.PROTON_ENABLE_NVAPI = "1";
   environment.sessionVariables.DXVK_ENABLE_NVAPI = "1";
   hardware.graphics = {
@@ -239,7 +252,7 @@
 
     # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
     # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead 
+    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
     # of just the bare essentials.
     powerManagement.enable = false;
 
@@ -266,7 +279,10 @@
   boot.initrd.kernelModules = [ "nvidia" ];
   boot.kernelPackages = pkgs.linuxPackages_6_13;
   # fix for nVidia wayland plasma 6
-  boot.kernelParams = [ "nvidia-drm.fbdev=1" "nvidia-drm.modeset=1" ];
+  boot.kernelParams = [
+    "nvidia-drm.fbdev=1"
+    "nvidia-drm.modeset=1"
+  ];
   boot.blacklistedKernelModules = [ "nouveau" ];
 
   # Some programs need SUID wrappers, can be configured further or are

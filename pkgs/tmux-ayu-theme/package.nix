@@ -1,4 +1,9 @@
-{ lib, stdenv, fetchFromGitHub, pkgs, }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkgs,
+}:
 pkgs.tmuxPlugins.mkTmuxPlugin {
   pluginName = "tmux-ayu-theme";
   version = "unstable-2025-01-04";

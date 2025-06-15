@@ -118,7 +118,7 @@
         x = 8;
         y = 0;
       };
-      
+
       window.decorations_theme_variant = "Light";
     };
   };

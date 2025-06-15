@@ -16,9 +16,18 @@
     niri.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ self, nixpkgs, home-manager, nixvim, ... }:
-    let inherit (self) outputs;
-    in {
+  outputs =
+    inputs@{
+      self,
+      nixpkgs,
+      home-manager,
+      nixvim,
+      ...
+    }:
+    let
+      inherit (self) outputs;
+    in
+    {
       overlays = import ./overlays.nix { inherit inputs; };
 
       # hosts
@@ -49,8 +58,10 @@
           ./hosts/macbook/home.nix
           nixvim.homeManagerModules.nixvim
           {
-            nixpkgs.overlays =
-              [ outputs.overlays.additions outputs.overlays.modifications ];
+            nixpkgs.overlays = [
+              outputs.overlays.additions
+              outputs.overlays.modifications
+            ];
           }
         ];
 
@@ -67,8 +78,10 @@
           ./hosts/wsl/home.nix
           nixvim.homeManagerModules.nixvim
           {
-            nixpkgs.overlays =
-              [ outputs.overlays.additions outputs.overlays.modifications ];
+            nixpkgs.overlays = [
+              outputs.overlays.additions
+              outputs.overlays.modifications
+            ];
           }
         ];
 

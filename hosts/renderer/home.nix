@@ -3,7 +3,8 @@
 let
   username = "json";
   homeDir = "/home/json";
-in {
+in
+{
   imports = [
     ../_shared/home-common.nix
     ../_shared/nixvim.nix
@@ -30,8 +31,7 @@ in {
     gamescope
   ];
 
-  home.file.".ssh/allowed_signers".text =
-    "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
+  home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
 
   home.pointerCursor = {
     name = "phinger-cursors-light";
@@ -58,12 +58,17 @@ in {
     settings = {
       mainBar = {
         position = "top";
-        modules-left = [ "niri/workspaces" "niri/window" ];
+        modules-left = [
+          "niri/workspaces"
+          "niri/window"
+        ];
       };
     };
   };
 
-  programs.fuzzel = { enable = true; };
+  programs.fuzzel = {
+    enable = true;
+  };
 
   services.udiskie = {
     enable = true;
@@ -114,7 +119,9 @@ in {
             height = 1440;
             refresh = 75.002;
           };
-          transform = { rotation = 270; };
+          transform = {
+            rotation = 270;
+          };
           position = {
             x = 0;
             y = 0;
@@ -127,41 +134,48 @@ in {
           command = [ "waybar" ];
         }
         # { command = [ "udiskie" ]; }
-        { command = [ "xwayland-satellite" ":1" ]; }
+        {
+          command = [
+            "xwayland-satellite"
+            ":1"
+          ];
+        }
         { command = [ "swww-daemon" ]; }
         { command = [ "waypaper --restore" ]; }
       ];
 
-      environment = { DISPLAY = ":1"; };
+      environment = {
+        DISPLAY = ":1";
+      };
 
       window-rules = [
         {
-          matches = [{ app-id = "discord"; }];
+          matches = [ { app-id = "discord"; } ];
           block-out-from = "screencast";
         }
         {
-          matches = [{ app-id = "1Password"; }];
+          matches = [ { app-id = "1Password"; } ];
           block-out-from = "screencast";
         }
         {
-          matches = [{ app-id = "steam"; }];
+          matches = [ { app-id = "steam"; } ];
           block-out-from = "screencast";
         }
         {
-          matches = [{ app-id = "org.kde.dolphin"; }];
+          matches = [ { app-id = "org.kde.dolphin"; } ];
           block-out-from = "screencast";
         }
         {
-          matches = [{ app-id = "obsidian"; }];
+          matches = [ { app-id = "obsidian"; } ];
           block-out-from = "screencast";
         }
         {
-          matches = [{ app-id = "Alacritty"; }];
+          matches = [ { app-id = "Alacritty"; } ];
           opacity = 0.9;
           draw-border-with-background = false;
         }
         {
-          matches = [{ app-id = "vrmonitor"; }];
+          matches = [ { app-id = "vrmonitor"; } ];
           open-floating = false;
         }
       ];
@@ -194,20 +208,39 @@ in {
         # The allow-when-locked=true property makes them work even when the session is locked.
         "XF86AudioRaiseVolume" = {
           allow-when-locked = true;
-          action.spawn = [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1+" ];
+          action.spawn = [
+            "wpctl"
+            "set-volume"
+            "@DEFAULT_AUDIO_SINK@"
+            "0.1+"
+          ];
         };
         "XF86AudioLowerVolume" = {
           allow-when-locked = true;
-          action.spawn = [ "wpctl" "set-volume" "@DEFAULT_AUDIO_SINK@" "0.1-" ];
+          action.spawn = [
+            "wpctl"
+            "set-volume"
+            "@DEFAULT_AUDIO_SINK@"
+            "0.1-"
+          ];
         };
         "XF86AudioMute" = {
           allow-when-locked = true;
-          action.spawn = [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SINK@" "toggle" ];
+          action.spawn = [
+            "wpctl"
+            "set-mute"
+            "@DEFAULT_AUDIO_SINK@"
+            "toggle"
+          ];
         };
         "XF86AudioMicMute" = {
           allow-when-locked = true;
-          action.spawn =
-            [ "wpctl" "set-mute" "@DEFAULT_AUDIO_SOURCE@" "toggle" ];
+          action.spawn = [
+            "wpctl"
+            "set-mute"
+            "@DEFAULT_AUDIO_SOURCE@"
+            "toggle"
+          ];
         };
 
         "Mod+Q".action.close-window = { };
@@ -416,7 +449,8 @@ in {
   programs.vscode = {
     enable = true;
     profiles.default = {
-      extensions = [ pkgs.vscode-extensions.continue.continue ]
+      extensions =
+        [ pkgs.vscode-extensions.continue.continue ]
         ++ (with pkgs.vscode-extensions; [
           vscodevim.vim
           github.copilot
@@ -427,7 +461,8 @@ in {
           esbenp.prettier-vscode
           bradlc.vscode-tailwindcss
           ms-vsliveshare.vsliveshare
-        ]) ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
+        ])
+        ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
           {
             name = "Breeze";
             publisher = "kde";
@@ -479,7 +514,12 @@ in {
               },
               "window.titleBarStyle": "custom",
               "nix.enableLanguageServer": true,
-              "nix.serverPath": "nixd",
+              "nix.serverPath": "nil",
+              "nix.serverSettinsg": {
+                "nil": {
+                  "formatting": { "command": ["nixfmt"] }
+                }
+              },
               "extensions.autoUpdate": false,
               "continue.enableContinueForTeamsBeta": true,
               "svelte.enable-ts-plugin": true

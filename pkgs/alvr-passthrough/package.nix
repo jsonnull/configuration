@@ -1,8 +1,41 @@
-{ lib, rustPlatform, fetchFromGitHub, substituteAll, nix-update-script
-, pkg-config, autoAddDriverRunpath, alsa-lib, brotli, bzip2, celt, ffmpeg, jack2
-, lame, libX11, libXi, libXrandr, libXcursor, libdrm, libglvnd, libogg, libpng
-, libtheora, libunwind, libva, libvdpau, libxkbcommon, openssl, openvr, pipewire
-, rust-cbindgen, soxr, vulkan-headers, vulkan-loader, wayland, x264, xvidcore,
+{
+  lib,
+  rustPlatform,
+  fetchFromGitHub,
+  substituteAll,
+  nix-update-script,
+  pkg-config,
+  autoAddDriverRunpath,
+  alsa-lib,
+  brotli,
+  bzip2,
+  celt,
+  ffmpeg,
+  jack2,
+  lame,
+  libX11,
+  libXi,
+  libXrandr,
+  libXcursor,
+  libdrm,
+  libglvnd,
+  libogg,
+  libpng,
+  libtheora,
+  libunwind,
+  libva,
+  libvdpau,
+  libxkbcommon,
+  openssl,
+  openvr,
+  pipewire,
+  rust-cbindgen,
+  soxr,
+  vulkan-headers,
+  vulkan-loader,
+  wayland,
+  x264,
+  xvidcore,
 }:
 
 rustPlatform.buildRustPackage rec {
@@ -21,8 +54,7 @@ rustPlatform.buildRustPackage rec {
     lockFile = ./Cargo.lock;
     outputHashes = {
       "openxr-0.18.0" = "sha256-v8sY9PROrqzkpuq3laIn2hPaX+DY7Fbca6i/Xiacd1g=";
-      "settings-schema-0.2.0" =
-        "sha256-luEdAKDTq76dMeo5kA+QDTHpRMFUg3n0qvyQ7DkId0k=";
+      "settings-schema-0.2.0" = "sha256-luEdAKDTq76dMeo5kA+QDTHpRMFUg3n0qvyQ7DkId0k=";
     };
   };
 
@@ -35,8 +67,13 @@ rustPlatform.buildRustPackage rec {
   ];
 
   env = {
-    NIX_CFLAGS_COMPILE =
-      toString [ "-lbrotlicommon" "-lbrotlidec" "-lcrypto" "-lpng" "-lssl" ];
+    NIX_CFLAGS_COMPILE = toString [
+      "-lbrotlicommon"
+      "-lbrotlidec"
+      "-lcrypto"
+      "-lpng"
+      "-lssl"
+    ];
   };
 
   RUSTFLAGS = map (a: "-C link-arg=${a}") [
@@ -47,8 +84,12 @@ rustPlatform.buildRustPackage rec {
     "-Wl,--pop-state"
   ];
 
-  nativeBuildInputs =
-    [ rust-cbindgen pkg-config rustPlatform.bindgenHook autoAddDriverRunpath ];
+  nativeBuildInputs = [
+    rust-cbindgen
+    pkg-config
+    rustPlatform.bindgenHook
+    autoAddDriverRunpath
+  ];
 
   buildInputs = [
     alsa-lib

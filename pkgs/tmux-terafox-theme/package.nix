@@ -1,4 +1,9 @@
-{ lib, stdenv, fetchFromGitHub, pkgs, }:
+{
+  lib,
+  stdenv,
+  fetchFromGitHub,
+  pkgs,
+}:
 pkgs.tmuxPlugins.mkTmuxPlugin {
   pluginName = "tmux-terafox-theme";
   version = "unstable-2025-04-09";

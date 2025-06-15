@@ -30,8 +30,8 @@
     pkgs.gh
     pkgs.graphite-cli
     pkgs.rust-analyzer
-    pkgs.nixd
-    pkgs.nixpkgs-fmt
+    pkgs.nil
+    pkgs.nixfmt-rfc-style
     pkgs.smug
     pkgs.wget
   ];
@@ -46,13 +46,17 @@
     enable = true;
     autosuggestion = {
       enable = true;
-      highlight = "fg=#006800";  # Using modus green for better visibility
+      highlight = "fg=#006800"; # Using modus green for better visibility
     };
     syntaxHighlighting.enable = true;
     history.size = 1000000;
     oh-my-zsh = {
       enable = true;
-      plugins = [ "git" "z" "vi-mode" ];
+      plugins = [
+        "git"
+        "z"
+        "vi-mode"
+      ];
     };
     shellAliases = {
       gs = "git status -sb";

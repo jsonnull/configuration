@@ -13,14 +13,22 @@
 
     enable = true;
 
-    autoCmd = [{
-      command = "set filetype=jsonc";
-      event = [ "BufNewFile" "BufRead" ];
-      pattern = [ "tsconfig.json" "devcontainer.json" ];
-    }];
+    autoCmd = [
+      {
+        command = "set filetype=jsonc";
+        event = [
+          "BufNewFile"
+          "BufRead"
+        ];
+        pattern = [
+          "tsconfig.json"
+          "devcontainer.json"
+        ];
+      }
+    ];
 
     globals = {
-      # Disabling netrw, recommended by nvim-tree  
+      # Disabling netrw, recommended by nvim-tree
       loaded_netrw = 1;
       loaded_netrwPlugin = 1;
 
@@ -83,37 +91,49 @@
         key = "<leader>du";
         mode = [ "n" ];
         action = "<cmd>lua require('dapui').toggle()<cr>";
-        options = { desc = "Dap UI"; };
+        options = {
+          desc = "Dap UI";
+        };
       }
       {
         key = "<F5>";
         mode = [ "n" ];
         action = "<cmd>lua require('dap').continue()<cr>";
-        options = { desc = "Dap continue"; };
+        options = {
+          desc = "Dap continue";
+        };
       }
       {
         key = "<F10>";
         mode = [ "n" ];
         action = "<cmd>lua require('dap').step_over()<cr>";
-        options = { desc = "Dap Step Over"; };
+        options = {
+          desc = "Dap Step Over";
+        };
       }
       {
         key = "<F11>";
         mode = [ "n" ];
         action = "<cmd>lua require('dap').step_into()<cr>";
-        options = { desc = "Dap Step Into"; };
+        options = {
+          desc = "Dap Step Into";
+        };
       }
       {
         key = "<F12>";
         mode = [ "n" ];
         action = "<cmd>lua require('dap').step_out()<cr>";
-        options = { desc = "Dap Step Out"; };
+        options = {
+          desc = "Dap Step Out";
+        };
       }
       {
         key = "<leader>db";
         mode = [ "n" ];
         action = "<cmd>lua require('dap').toggle_breakpoint()<cr>";
-        options = { desc = "Dap Toggle Breakpoint"; };
+        options = {
+          desc = "Dap Toggle Breakpoint";
+        };
       }
       {
         key = "<leader>dB";
@@ -123,7 +143,9 @@
             require 'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))
           end
         '';
-        options = { desc = "Dap Conditional Breakpoint"; };
+        options = {
+          desc = "Dap Conditional Breakpoint";
+        };
       }
     ];
 
@@ -147,26 +169,35 @@
       number = true;
       #relativenumber = true;
       # editing
-      whichwrap =
-        "b,s,<,>,[,]"; # cursor is able to move from end of line to next line
-      backspace = [ "indent" "eol" "start" ]; # backspace behaviors
+      whichwrap = "b,s,<,>,[,]"; # cursor is able to move from end of line to next line
+      backspace = [
+        "indent"
+        "eol"
+        "start"
+      ]; # backspace behaviors
       list = false; # show tabs with listchars
       ignorecase = false; # search with no ignore case
       hlsearch = true; # highlight search
       incsearch = false; # no incremental search
       inccommand = "nosplit"; # live substitute preview
-      completeopt = [ "menu" "menuone" "noselect" ];
+      completeopt = [
+        "menu"
+        "menuone"
+        "noselect"
+      ];
       hidden = true;
       cursorline = true; # show cursor line
       ruler = false; # show ruler line
-      colorcolumn =
-        "120"; # display a color column when line is longer than 120 chars
+      colorcolumn = "120"; # display a color column when line is longer than 120 chars
       signcolumn = "yes"; # show sign column (column of the line number)
       mouse = "nv"; # enable mouse under normal and visual mode
       showmatch = true; # show bracket match
       cmdheight = 1; # height of :command line
       wildmenu = true; # wildmenu, auto complete for commands
-      wildmode = [ "longest" "full" ];
+      wildmode = [
+        "longest"
+        "full"
+      ];
       splitright = true; # split to right
       splitbelow = true; # split to below
       clipboard = "unnamedplus"; # share system clipboard
@@ -178,7 +209,11 @@
 
     plugins.auto-session = {
       enable = true;
-      settings.suppressed_dirs = [ "~/" "~/Programming/" "~/code/" ];
+      settings.suppressed_dirs = [
+        "~/"
+        "~/Programming/"
+        "~/code/"
+      ];
     };
 
     plugins.bufdelete.enable = true;
@@ -350,9 +385,13 @@
           enable = true;
           settings.runtime.version = "LuaJIT";
         };
-        nixd.enable = true;
+        nil_ls = {
+          enable = true;
+          settings = {
+            formatting.command = [ "nixfmt" ];
+          };
+        };
         svelte.enable = true;
-        #ts_ls.enable = true;
         yamlls.enable = true;
         rust_analyzer = {
           enable = true;
@@ -369,7 +408,10 @@
     plugins.lualine = {
       enable = true;
       settings = {
-        disabled_filetypes = [ "NvimTree" "startify" ];
+        disabled_filetypes = [
+          "NvimTree"
+          "startify"
+        ];
         globalstatus = true;
       };
     };
@@ -380,7 +422,7 @@
       enable = true;
       sources = {
         formatting.stylua.enable = true;
-        formatting.nixfmt.enable = true;
+        #formatting.nixfmt.enable = true;
         formatting.prettier = {
           enable = true;
           disableTsServerFormatter = true;
@@ -391,7 +433,12 @@
 
     plugins.nvim-tree = {
       enable = true;
-      filters.custom = [ ".direnv" ".git/" "node_modules" ".cache" ];
+      filters.custom = [
+        ".direnv"
+        ".git/"
+        "node_modules"
+        ".cache"
+      ];
       view.width = 40;
       git.ignore = false;
       renderer.groupEmpty = true;
@@ -422,26 +469,27 @@
           ""
           ""
         ];
-        lists = [{ type = "dir"; }];
+        lists = [ { type = "dir"; } ];
       };
     };
 
     plugins.telescope.enable = false;
-    /* plugins.telescope = {
-         enable = true;
-         extensions = {
-           ui-select = {
-             enable = true;
-             settings.specific_opts.codeactions = false;
-           };
-           fzf-native.enable = true;
-         };
-         keymaps = {
-           "<esc>" = { action = "close"; };
-           "<c-p>" = { action = "find_files"; };
-           "<c-e>" = { action = "live_grep"; };
-         };
-       };
+    /*
+      plugins.telescope = {
+        enable = true;
+        extensions = {
+          ui-select = {
+            enable = true;
+            settings.specific_opts.codeactions = false;
+          };
+          fzf-native.enable = true;
+        };
+        keymaps = {
+          "<esc>" = { action = "close"; };
+          "<c-p>" = { action = "find_files"; };
+          "<c-e>" = { action = "live_grep"; };
+        };
+      };
     */
 
     plugins.treesitter = {
