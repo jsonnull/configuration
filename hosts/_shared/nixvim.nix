@@ -233,21 +233,20 @@
           "<c-p>" = "cmp.mapping(cmp.mapping.select_prev_item(), {'i', 's'})";
           "<c-n>" = "cmp.mapping(cmp.mapping.select_next_item(), {'i', 's'})";
           "<c-e>" = "cmp.mapping.close()";
-          /* "<Tab>" = ''
-               cmp.mapping(function(fallback)
-                 -- This little snippet will confirm with tab, and if no entry is selected, will confirm the first item
-                 if cmp.visible() then
-                   local entry = cmp.get_selected_entry()
-                   if not entry then
-                     cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
-                   end
-                   cmp.confirm()
-                 else
-                   fallback()
-                 end
-               end, {"i","s","c",})
-             '';
-          */
+          "<c-y>" = ''
+            cmp.mapping(function(fallback)
+              -- This little snippet will confirm with ~~tab~~ -> ctrl-y, and if no entry is selected, will confirm the first item
+              if cmp.visible() then
+                local entry = cmp.get_selected_entry()
+                if not entry then
+                  cmp.select_next_item({ behavior = cmp.SelectBehavior.Select })
+                end
+                cmp.confirm()
+              else
+                fallback()
+              end
+            end, {"i","s","c",})
+          '';
         };
       };
     };
@@ -359,6 +358,7 @@
         svelte.enable = true;
         #ts_ls.enable = true;
         yamlls.enable = true;
+        rust_analyzer.enable = true;
       };
     };
 
