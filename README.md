@@ -42,8 +42,7 @@
 
    ```sh
    sudo mv /etc/nixos /etc/nixos.bak
-   sudo ln -s /home/json/configuration/ /etc/nixos
-   sudo nixos-rebuild switch --impure # Impure required for private configs for now
+   sudo nixos-rebuild switch --flake .#renderer --impure --show-trace
    ```
 
    WSL:
@@ -61,13 +60,7 @@
    nix run --impure ~/configuration/#homeConfigurations.macbook.activationPackage
    ```
 
-3. Install neovim plugins:
-
-   ```sh
-   vim +PackerSync
-   ```
-
-4. When making updates to configs, switch to the new system.
+3. When making updates to configs, switch to the new system.
 
    WSL:
 
