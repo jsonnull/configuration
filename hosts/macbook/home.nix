@@ -20,7 +20,7 @@ in
   home.username = username;
   home.homeDirectory = homeDir;
 
-  xdg.configFile.alacritty.source = lib.mkForce (../../config/alacritty-macbook);
+  #xdg.configFile.alacritty.source = lib.mkForce (../../config/alacritty-macbook);
 
   programs.zsh.initExtraFirst = ''
     . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
