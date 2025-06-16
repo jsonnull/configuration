@@ -1,42 +1,13 @@
 {
-  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
-  # as well as the libraries available from your flake's inputs.
-  lib,
-  # An instance of `pkgs` with your overlays and packages applied is also available.
   pkgs,
-  # You also have access to your flake's inputs.
-  inputs,
-
-  # Additional metadata is provided by Snowfall Lib.
-  namespace, # The namespace used for your flake, defaulting to "internal" if not set.
-  system, # The system architecture for this host (eg. `x86_64-linux`).
-  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
-  format, # A normalized name for the system target (eg. `iso`).
-  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
-  systems, # An attribute map of your defined hosts.
-
-  # All other arguments come from the system system.
-  config,
   ...
 }:
 {
   imports = [
     ./hardware.nix
+    ./niri.nix
+    ./nvidia.nix
   ];
-
-  /*
-    nixpkgs = {
-      overlays = [
-        inputs.alacritty-theme.overlays.default
-        inputs.niri.overlays.niri
-      ];
-      config = {
-        allowUnfree = true;
-        cudaSupport = true;
-        chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
-      };
-    };
-  */
 
   nix = {
     settings = {
@@ -83,25 +54,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable Niri Wayland compositor
-  services.displayManager = {
-    sddm = {
-      enable = true;
-      wayland.enable = true;
-    };
-    autoLogin = {
-      enable = true;
-      user = "json";
-    };
-  };
-  services.displayManager.defaultSession = "niri";
-  services.udisks2.enable = true;
-
-  programs.niri = {
-    enable = true;
-    package = pkgs.niri;
-  };
-
   # Configure keymap in X11
   services.xserver.xkb = {
     layout = "us";
@@ -140,8 +92,6 @@
       "adbusers"
       "docker"
     ];
-    #packages = with pkgs; [
-    #];
   };
 
   # Enable home-manager for the user
@@ -150,7 +100,7 @@
     useUserPackages = true;
     backupFileExtension = "backup";
   };
-  
+
   # This enables the Snowfall home configuration for this user
   snowfallorg.users.json.home.enable = true;
 
@@ -162,13 +112,6 @@
     remotePlay.openFirewall = true;
     dedicatedServer.openFirewall = true;
     localNetworkGameTransfers.openFirewall = true;
-  };
-
-  programs.adb.enable = true;
-  programs.alvr = {
-    enable = true;
-    #package = pkgs.alvr-passthrough;
-    openFirewall = true;
   };
 
   services.tailscale.enable = true;
@@ -202,10 +145,6 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     #strongdm
-    slack
-    cudatoolkit
-    ungoogled-chromium
-    xwayland-satellite
     _7zz
     unar
     unzip
@@ -249,74 +188,6 @@
     nerd-fonts.iosevka
     nerd-fonts.iosevka-term
   ];
-
-  # Make the system work with nvidia card
-  environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
-  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib";
-  #environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib";
-  environment.sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
-  environment.sessionVariables.PROTON_ENABLE_NVAPI = "1";
-  environment.sessionVariables.DXVK_ENABLE_NVAPI = "1";
-  hardware.graphics = {
-    enable = true;
-    # For 32 bit applications
-    enable32Bit = true;
-    # extraPackages = with pkgs; [ rocm-opencl-icd rocm-opencl-runtime ];
-  };
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  hardware.nvidia = {
-    # Modesetting is required
-    modesetting.enable = true;
-
-    # Nvidia power management. Experimental, and can cause sleep/suspend to fail.
-    # Enable this if you have graphical corruption issues or application crashes after waking
-    # up from sleep. This fixes it by saving the entire VRAM memory to /tmp/ instead
-    # of just the bare essentials.
-    powerManagement.enable = false;
-
-    # Fine-grained power management. Turns off GPU when not in use.
-    # Experimental and only works on modern Nvidia GPUs (Turing or newer).
-    powerManagement.finegrained = false;
-
-    # Use the NVidia open source kernel module (not to be confused with the
-    # independent third-party "nouveau" open source driver).
-    # Support is limited to the Turing and later architectures. Full list of
-    # supported GPUs is at:
-    # https://github.com/NVIDIA/open-gpu-kernel-modules#compatible-gpus
-    # Only available from driver 515.43.04+
-    # Do not disable this unless your GPU is unsupported or if you have a good reason to.
-    open = true;
-
-    # Enable the Nvidia settings menu,
-    # accessible via `nvidia-settings`.
-    nvidiaSettings = true;
-
-    # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
-  };
-  boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelPackages = pkgs.linuxPackages_6_13;
-  # fix for nVidia wayland plasma 6
-  boot.kernelParams = [
-    "nvidia-drm.fbdev=1"
-    "nvidia-drm.modeset=1"
-  ];
-  boot.blacklistedKernelModules = [ "nouveau" ];
-
-  # Some programs need SUID wrappers, can be configured further or are
-  # started in user sessions.
-  # programs.mtr.enable = true;
-  # programs.gnupg.agent = {
-  #   enable = true;
-  #   enableSSHSupport = true;
-  # };
-
-  # Open ports in the firewall.
-  # networking.firewall.allowedTCPPorts = [ ... ];
-  # networking.firewall.allowedUDPPorts = [ ... ];
-  # Or disable the firewall altogether.
-  # networking.firewall.enable = false;
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

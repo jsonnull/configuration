@@ -93,7 +93,7 @@
       ];
 
       systems.hosts.renderer.modules = with inputs; [
-	home-manager.nixosModules.home-manager
+        home-manager.nixosModules.home-manager
         niri.nixosModules.niri
       ];
 
