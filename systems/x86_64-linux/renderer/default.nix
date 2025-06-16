@@ -1,36 +1,44 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
 {
-  config,
-  inputs,
-  outputs,
+  # Snowfall Lib provides a customized `lib` instance with access to your flake's library
+  # as well as the libraries available from your flake's inputs.
+  lib,
+  # An instance of `pkgs` with your overlays and packages applied is also available.
   pkgs,
+  # You also have access to your flake's inputs.
+  inputs,
+
+  # Additional metadata is provided by Snowfall Lib.
+  namespace, # The namespace used for your flake, defaulting to "internal" if not set.
+  system, # The system architecture for this host (eg. `x86_64-linux`).
+  target, # The Snowfall Lib target for this system (eg. `x86_64-iso`).
+  format, # A normalized name for the system target (eg. `iso`).
+  virtual, # A boolean to determine whether this system is a virtual target using nixos-generators.
+  systems, # An attribute map of your defined hosts.
+
+  # All other arguments come from the system system.
+  config,
   ...
 }:
-
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
+    ./hardware.nix
   ];
 
-  nixpkgs = {
-    overlays = [
-      inputs.alacritty-theme.overlays.default
-      inputs.niri.overlays.niri
-      outputs.overlays.additions
-      outputs.overlays.modifications
-    ];
-    config = {
-      allowUnfree = true;
-      cudaSupport = true;
-      chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+  /*
+    nixpkgs = {
+      overlays = [
+        inputs.alacritty-theme.overlays.default
+        inputs.niri.overlays.niri
+      ];
+      config = {
+        allowUnfree = true;
+        cudaSupport = true;
+        chromium.commandLineArgs = "--enable-features=UseOzonePlatform --ozone-platform=wayland";
+      };
     };
-  };
+  */
 
   nix = {
-    #nixPath = [ "nixos-config=/home/json/configuration/nixos/configuration.nix" ];
     settings = {
       experimental-features = [
         "nix-command"
@@ -87,7 +95,6 @@
     };
   };
   services.displayManager.defaultSession = "niri";
-  services.desktopManager.plasma6.enable = false;
   services.udisks2.enable = true;
 
   programs.niri = {
@@ -123,7 +130,7 @@
     #media-session.enable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.json = {
     isNormalUser = true;
     description = "jsonnull";
@@ -136,6 +143,16 @@
     #packages = with pkgs; [
     #];
   };
+
+  # Enable home-manager for the user
+  home-manager = {
+    useGlobalPkgs = true;
+    useUserPackages = true;
+    backupFileExtension = "backup";
+  };
+  
+  # This enables the Snowfall home configuration for this user
+  snowfallorg.users.json.home.enable = true;
 
   programs.firefox.enable = true;
   programs._1password.enable = true;
@@ -158,31 +175,33 @@
 
   virtualisation.docker.enable = true;
 
-  systemd.services.strongdm = {
-    enable = true;
-    description = "idk";
-    unitConfig = {
-      ConditionFileIsExecutable = "${pkgs.sdm}/bin/sdm";
-      Requires = "default.target";
-      After = "default.target";
+  /*
+    systemd.services.strongdm = {
+      enable = true;
+      description = "idk";
+      unitConfig = {
+        ConditionFileIsExecutable = "${pkgs.strongdm}/bin/sdm";
+        Requires = "default.target";
+        After = "default.target";
+      };
+      serviceConfig = {
+        ExecStart = ''${pkgs.strongdm}/bin/sdm "listen"'';
+        Restart = "always";
+        RestartSec = "3";
+        User = "json";
+        WorkingDirectory = "/home/json/.sdm";
+        AmbientCapabilities = "CAP_NET_ADMIN";
+      };
+      wantedBy = [ "default.target" ];
+      environment = {
+        SDM_HOME = "/home/json/.sdm";
+      };
     };
-    serviceConfig = {
-      ExecStart = ''${pkgs.sdm}/bin/sdm "listen"'';
-      Restart = "always";
-      RestartSec = "3";
-      User = "json";
-      WorkingDirectory = "/home/json/.sdm";
-      AmbientCapabilities = "CAP_NET_ADMIN";
-    };
-    wantedBy = [ "default.target" ];
-    environment = {
-      SDM_HOME = "/home/json/.sdm";
-    };
-  };
+  */
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-    sdm
+    #strongdm
     slack
     cudatoolkit
     ungoogled-chromium
@@ -301,7 +320,7 @@
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions
-  # on your system were taken. It‘s perfectly fine and recommended to leave
+  # on your system were taken. It's perfectly fine and recommended to leave
   # this value at the release version of the first install of this system.
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
