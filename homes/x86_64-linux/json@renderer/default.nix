@@ -66,9 +66,6 @@
   tools.obsidian.enable = true;
   tools.vscode.enable = true;
 
-  # Enable Niri for desktop
-  desktop.niri.enable = true;
-
   programs.git = {
     enable = true;
     userName = "Jason Nall";
