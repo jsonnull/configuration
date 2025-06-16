@@ -102,71 +102,8 @@
         # my-input.homeModules.my-module
       ];
 
-      homes.users."json@renderer".modules = with inputs; [
-        nixvim.homeManagerModules.nixvim
-        # self.homeModules.common
-        # self.homeModules.nixvim
-        # self.homeModules.alacritty
-      ];
+      homes.users."json@renderer".modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
+
+      homes.users."jsonnull@macbook".modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
     };
-
-  /*
-    overlays = import ./overlays.nix { inherit inputs; };
-
-      # hosts
-      nixosConfigurations.renderer = nixpkgs.lib.nixosSystem {
-        specialArgs = { inherit inputs outputs; };
-        system = "x86_64-linux";
-        modules = [
-          #./modules/sdm/default.nix
-          ./hosts/renderer/configuration.nix
-          home-manager.nixosModules.home-manager
-          inputs.niri.nixosModules.niri
-          {
-            home-manager.backupFileExtension = "backup";
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
-            home-manager.sharedModules = [ nixvim.homeManagerModules.nixvim ];
-            home-manager.users.json = import ./hosts/renderer/home.nix;
-          }
-        ];
-      };
-
-      homeConfigurations.macbook = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.aarch64-darwin;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [
-          ./hosts/macbook/home.nix
-          nixvim.homeManagerModules.nixvim
-          {
-            nixpkgs.overlays =
-              [ outputs.overlays.additions outputs.overlays.modifications ];
-          }
-        ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
-
-      homeConfigurations.wsl = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-
-        # Specify your home configuration modules here, for example,
-        # the path to your home.nix.
-        modules = [
-          ./hosts/wsl/home.nix
-          nixvim.homeManagerModules.nixvim
-          {
-            nixpkgs.overlays =
-              [ outputs.overlays.additions outputs.overlays.modifications ];
-          }
-        ];
-
-        # Optionally use extraSpecialArgs
-        # to pass through arguments to home.nix
-      };
-    };
-  */
 }
