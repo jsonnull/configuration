@@ -55,12 +55,19 @@
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
 
+  sops.defaultSopsFile = ../../../secrets.yaml;
+  sops.age.keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
+  sops.secrets.jira-access-token = { };
+
+  home.sessionVariables.JIRA_ACCESS_TOKEN = builtins.readFile config.sops.secrets.jira-access-token.path;
+
   # Enable app modules
   apps.chrome.enable = true;
   apps.discord.enable = true;
   apps.slack.enable = true;
 
   # Enable tool modules
+  tools.dev-general.enable = true;
   tools.alacritty.enable = true;
   tools.nixvim.enable = true;
   tools.obsidian.enable = true;

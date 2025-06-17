@@ -19,6 +19,11 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
 
     niri = {
@@ -43,6 +48,9 @@
       };
     in
     lib.mkFlake {
+      alias = {
+        shells.default = "configuration";
+      };
 
       channels-config = {
         allowUnfreePredicate =
@@ -93,13 +101,14 @@
       ];
 
       systems.hosts.renderer.modules = with inputs; [
+        sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         niri.nixosModules.niri
       ];
 
       # Add modules to all homes.
       homes.modules = with inputs; [
-        # my-input.homeModules.my-module
+        sops-nix.homeManagerModules.sops
       ];
 
       homes.users."json@renderer".modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
