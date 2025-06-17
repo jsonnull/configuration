@@ -59,7 +59,7 @@
   sops.age.keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
   sops.secrets.jira-access-token = { };
 
-  home.sessionVariables.JIRA_ACCESS_TOKEN = builtins.readFile config.sops.secrets.jira-access-token.path;
+  home.sessionVariables.JIRA_API_TOKEN = builtins.readFile config.sops.secrets.jira-access-token.path;
 
   # Enable app modules
   apps.chrome.enable = true;
