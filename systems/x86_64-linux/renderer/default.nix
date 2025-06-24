@@ -104,6 +104,12 @@
   # This enables the Snowfall home configuration for this user
   snowfallorg.users.json.home.enable = true;
 
+  # Enable theme configuration
+  theme = {
+    enable = true;
+    theme = "default-dark";
+  };
+
   programs.firefox.enable = true;
   programs._1password.enable = true;
   programs._1password-gui.enable = true;

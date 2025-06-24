@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  osConfig,
   ...
 }:
 let
@@ -18,7 +19,7 @@ in
       };
 
       # colorscheme-adjacent properties
-      opts.background = "light";
+      opts.background = if osConfig.theme.theme == "default-dark" then "dark" else "light";
       opts.termguicolors = true;
 
       enable = true;
