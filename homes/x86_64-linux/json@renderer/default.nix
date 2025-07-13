@@ -51,6 +51,8 @@
     kubernetes
     k9s
     gamescope
+    jmtpfs
+    android-file-transfer
   ];
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";

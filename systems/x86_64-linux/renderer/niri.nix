@@ -69,12 +69,14 @@
       enable = true;
       dawnTime = "07:00";
       duskTime = "19:00";
-      temperature = let
-        temp = if config.theme.theme == "default-dark" then 6500 else 5500;
-      in {
-        day = temp;
-        night = temp;
-      };
+      temperature =
+        let
+          temp = if config.theme.theme == "default-dark" then 6500 else 5500;
+        in
+        {
+          day = temp;
+          night = temp;
+        };
     };
 
     programs.niri = {

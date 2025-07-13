@@ -51,10 +51,10 @@
     nvidiaSettings = true;
 
     # Optionally, you may need to select the appropriate driver version for your specific GPU.
-    package = config.boot.kernelPackages.nvidiaPackages.latest;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelPackages = pkgs.linuxPackages_6_13;
+  boot.kernelPackages = pkgs.linuxPackages_6_15;
   # fix for nVidia wayland plasma 6
   boot.kernelParams = [
     "nvidia-drm.fbdev=1"
