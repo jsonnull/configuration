@@ -74,6 +74,7 @@
   tools.nixvim.enable = true;
   tools.obsidian.enable = true;
   tools.vscode.enable = true;
+  tools.zed.enable = true;
 
   programs.git = {
     enable = true;
