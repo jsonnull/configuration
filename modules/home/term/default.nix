@@ -6,8 +6,8 @@
 }:
 {
   home.packages = [
-    pkgs.aider-chat
     pkgs.claude-code
+    pkgs.repomix
     pkgs.ripgrep
     pkgs.nodejs_20
     pkgs.nodePackages.typescript-language-server
