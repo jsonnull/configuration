@@ -141,28 +141,21 @@
 
         window-rules = [
           {
-            matches = [ { app-id = "discord"; } ];
+            matches = [
+              { app-id = "discord"; }
+              { app-id = "1Password"; }
+              { app-id = "steam"; }
+              { app-id = "org.kde.dolphin"; }
+              { app-id = "obsidian"; }
+            ];
             block-out-from = "screencast";
           }
           {
-            matches = [ { app-id = "1Password"; } ];
-            block-out-from = "screencast";
-          }
-          {
-            matches = [ { app-id = "steam"; } ];
-            block-out-from = "screencast";
-          }
-          {
-            matches = [ { app-id = "org.kde.dolphin"; } ];
-            block-out-from = "screencast";
-          }
-          {
-            matches = [ { app-id = "obsidian"; } ];
-            block-out-from = "screencast";
-          }
-          {
-            matches = [ { app-id = "Alacritty"; } ];
-            opacity = 0.9;
+            matches = [
+              { app-id = "Alacritty"; }
+              { app-id = "code"; }
+            ];
+            opacity = 0.92;
             draw-border-with-background = false;
           }
           {

@@ -182,7 +182,7 @@
     };
   };
 
-  services.gnome3.gnome-keyring.enable = true;
+  #services.gnome3.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
 
   services.mullvad-vpn.enable = true;
