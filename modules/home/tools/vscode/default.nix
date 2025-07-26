@@ -89,6 +89,9 @@ in
           };
           "extensions.autoUpdate" = false;
           "svelte.enable-ts-plugin" = true;
+          "search.exclude" = {
+            "**/.direnv" = true;
+          };
           # "[astro]" = {
           #     "editor.defaultFormatter" = "astro-build.astro-vscode"
           # }

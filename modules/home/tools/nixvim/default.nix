@@ -13,10 +13,12 @@ in
 
   config = lib.mkIf cfg.enable {
     programs.nixvim = {
-      colorschemes.modus = {
-        enable = true;
-        settings.variant = "deuteranopia";
-      };
+      colorschemes.github-theme.enable = true;
+      colorscheme =
+        if osConfig.theme.theme == "default-dark" then
+          "github_dark_colorblind"
+        else
+          "github_light_colorblind";
 
       # colorscheme-adjacent properties
       opts.background = if osConfig.theme.theme == "default-dark" then "dark" else "light";
