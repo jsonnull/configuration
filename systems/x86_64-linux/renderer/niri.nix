@@ -27,6 +27,7 @@
     home.packages = with pkgs; [
       swww
       waypaper
+      ulauncher
       xwayland-satellite
     ];
 
@@ -165,6 +166,11 @@
             draw-border-with-background = false;
           }
           {
+            matches = [ { app-id = "ulauncher"; } ];
+            draw-border-with-background = false;
+            focus-ring.enable = false;
+          }
+          {
             matches = [ { app-id = "vrmonitor"; } ];
             open-floating = false;
           }
@@ -187,7 +193,8 @@
 
           # Suggested binds for running programs: terminal, app launcher, screen locker.
           "Mod+T".action.spawn = "alacritty";
-          "Mod+D".action.spawn = "fuzzel";
+          "Mod+D".action.spawn = "ulauncher";
+          "Mod+Shift+D".action.spawn = "fuzzel";
           "Super+Alt+L".action.spawn = "swaylock";
 
           # You can also use a shell. Do this if you need pipes, multiple commands, etc.
