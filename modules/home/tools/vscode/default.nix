@@ -36,6 +36,12 @@ in
               sha256 = "sha256-is+JPO/qb2OxtCebtKadQPLUHZop+Xzch00RY72F7J0=";
             }
             {
+              name = "gti-vscode";
+              publisher = "Graphite";
+              version = "0.6.1";
+              sha256 = "sha256-gGpWj1iVz6nYgMk7RuYgvIf9E8Yq0lt9PZnhLLDO7So=";
+            }
+            {
               name = "svelte-vscode";
               publisher = "svelte";
               version = "109.1.0";
