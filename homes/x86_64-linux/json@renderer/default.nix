@@ -53,6 +53,7 @@
     gamescope
     jmtpfs
     android-file-transfer
+    localsend
   ];
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
