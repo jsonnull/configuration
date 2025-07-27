@@ -50,7 +50,7 @@
     */
 
     programs.waybar = {
-      enable = true;
+      #enable = true;
       settings = {
         mainBar = {
           position = "top";
@@ -89,7 +89,7 @@
 
         layout = {
           gaps = 30;
-          focus-ring.active.color = "#cbd9d8";
+          focus-ring.active.color = "#58a6ff";
         };
 
         outputs = {
@@ -121,9 +121,7 @@
         };
 
         spawn-at-startup = [
-          {
-            command = [ "waybar" ];
-          }
+          # { command = [ "waybar" ]; }
           # { command = [ "udiskie" ]; }
           {
             command = [
@@ -135,11 +133,17 @@
           { command = [ "waypaper --restore" ]; }
         ];
 
+        debug = {
+          # Fix for PipeWire screencasting flickering on NVIDIA.
+          wait-for-frame-completion-in-pipewire = [ ];
+        };
+
         environment = {
           DISPLAY = ":1";
         };
 
         window-rules = [
+          # Don't screencast these applications.
           {
             matches = [
               { app-id = "discord"; }
@@ -150,6 +154,7 @@
             ];
             block-out-from = "screencast";
           }
+          # Make these applications pretty
           {
             matches = [
               { app-id = "Alacritty"; }
@@ -157,6 +162,24 @@
             ];
             opacity = 0.92;
             draw-border-with-background = false;
+          }
+          # Set 1/3 width for these applications
+          {
+            matches = [
+              { app-id = "firefox"; }
+              { app-id = "Alacritty"; }
+              { app-id = "org.kde.dolphin"; }
+              { app-id = "obsidian"; }
+            ];
+            default-column-width.proportion = 1. / 3.;
+          }
+          # Set 2/3 width for these applications
+          {
+            matches = [
+              { app-id = "org.kde.dolphin"; }
+              { app-id = "code"; }
+            ];
+            default-column-width.proportion = 2. / 3.;
           }
           {
             matches = [ { app-id = "ulauncher"; } ];
