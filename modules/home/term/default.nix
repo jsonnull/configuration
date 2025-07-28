@@ -80,7 +80,10 @@
       push.default = "current";
       init.defaultBranch = "main";
     };
-    ignores = [ ".direnv" ];
+    ignores = [
+      ".direnv"
+      ".claude/settings.local.json"
+    ];
   };
 
   programs.tmux = {
