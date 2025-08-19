@@ -43,6 +43,11 @@
     ];
   };
 
+  fileSystems."/home/json/3d-mount" = {
+    device = "/dev/disk/by-uuid/CEE65294E6527D21";
+    fsType = "ntfs";
+  };
+
   swapDevices = [
     { device = "/dev/disk/by-uuid/6f111701-209a-41f8-b399-50aecfec91c9"; }
   ];
