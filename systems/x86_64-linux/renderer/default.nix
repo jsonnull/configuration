@@ -112,6 +112,9 @@
   # This enables the Snowfall home configuration for this user
   snowfallorg.users.json.home.enable = true;
 
+  # Enable home printing
+  printing.enable = true;
+
   # Enable theme configuration
   theme = {
     enable = true;
