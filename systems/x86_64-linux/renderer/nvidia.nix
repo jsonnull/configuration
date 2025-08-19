@@ -10,7 +10,7 @@
 
   # Make the system work with nvidia card
   environment.sessionVariables.CUDA_PATH = "${pkgs.cudatoolkit}";
-  environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib";
+  #environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.linuxPackages.nvidia_x11}/lib";
   #environment.sessionVariables.LD_LIBRARY_PATH = "${pkgs.cudatoolkit}/lib";
   environment.sessionVariables.VK_DRIVER_FILES = "/run/opengl-driver/share/vulkan/icd.d/nvidia_icd.x86_64.json";
   environment.sessionVariables.PROTON_ENABLE_NVAPI = "1";
