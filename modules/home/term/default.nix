@@ -86,6 +86,14 @@
     ];
   };
 
+  programs.eza = {
+    enable = true;
+    enableZshIntegration = true;
+    extraOptions = [
+      "--group-directories-first"
+    ];
+  };
+
   programs.tmux = {
     enable = true;
     keyMode = "vi";
@@ -94,6 +102,8 @@
     sensibleOnTop = false;
     shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
+      set -g status-style bg=blue,fg=black
+
       set -g default-terminal 'xterm-256color'
       set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
     '';
