@@ -15,18 +15,23 @@ in
     programs.vscode = {
       enable = true;
       profiles.default = {
+        enableUpdateCheck = false;
+        enableExtensionUpdateCheck = false;
         extensions =
           (with pkgs.vscode-extensions; [
             vscodevim.vim
             github.copilot
             github.vscode-pull-request-github
             github.github-vscode-theme
+            github.vscode-github-actions
             #astro-build.astro-vscode
             jnoortheen.nix-ide
             dbaeumer.vscode-eslint
             esbenp.prettier-vscode
             bradlc.vscode-tailwindcss
             ms-vsliveshare.vsliveshare
+            rust-lang.rust-analyzer
+            firefox-devtools.vscode-firefox-debug
           ])
           ++ pkgs.vscode-utils.extensionsFromVscodeMarketplace [
             {
@@ -55,8 +60,10 @@ in
           "editor.fontFamily" = "'IosevkaTerm Nerd Font', 'Droid Sans Mono', 'monospace', monospace";
           "terminal.integrated.fontFamily" =
             "'IosevkaTerm Nerd Font', 'Droid Sans Mono', 'monospace', monospace";
+          "terminal.integrated.fontLigatures" = 14;
           "terminal.integrated.customGlyphs" = true;
           "editor.fontSize" = 14;
+          "editor.fontLigatures" = true;
           "workbench.colorTheme" = "GitHub Dark Colorblind (Beta)";
           "workbench.tree.renderIndentGuides" = "none";
           "vim.textwidth" = 100;
@@ -64,26 +71,42 @@ in
           "vim.leader" = ",";
           "telemetry.telemetryLevel" = "off";
           "workbench.editor.tabSizing" = "fixed";
+          "workbench.editor.autoLockGroups" = {
+            "terminalEditor" = false;
+            "workbench.editor.chatSession" = false;
+            "workbench.editor.processExplorer" = false;
+            "mainThreadWebview-simpleBrowser.view" = false;
+            "mainThreadWebview-browserPreview" = false;
+          };
           "workbench.activityBar.location" = "top";
-          "[typescriptreact]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "typescript.preferences.preferTypeOnlyAutoImports" = true;
-          "[typescript]" = {
-            "editor.defaultFormatter" = "esbenp.prettier-vscode";
-          };
-          "editor.minimap.enabled" = false;
-          "github.copilot.enable" = {
-            "*" = true;
-          };
-          "[jsonc]" = {
+          "workbench.statusBar.visible" = false;
+          "[css]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
           };
           "[javascript]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";
           };
+          "[jsonc]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[svelte]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[typescript]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "[typescriptreact]" = {
+            "editor.defaultFormatter" = "esbenp.prettier-vscode";
+          };
+          "typescript.preferences.preferTypeOnlyAutoImports" = true;
+          "editor.minimap.enabled" = false;
+          "github.copilot.enable" = {
+            "*" = true;
+          };
           "window.titleBarStyle" = "custom";
+          "window.menuBarVisibility" = "toggle";
           "window.zoomLevel" = 1;
+          "window.commandCenter" = false;
           "nix.enableLanguageServer" = true;
           "nix.serverPath" = "nil";
           "nix.serverSettinsg" = {
