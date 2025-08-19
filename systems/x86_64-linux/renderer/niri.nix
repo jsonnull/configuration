@@ -29,6 +29,7 @@
       waypaper
       ulauncher
       xwayland-satellite
+      wl-clipboard
     ];
 
     home.pointerCursor = {
@@ -160,7 +161,7 @@
               { app-id = "Alacritty"; }
               { app-id = "code"; }
             ];
-            opacity = 0.92;
+            opacity = 0.95;
             draw-border-with-background = false;
           }
           # Set 1/3 width for these applications
