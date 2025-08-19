@@ -27,6 +27,10 @@
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 
+  home.activation.expireGenerations = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    ${pkgs.home-manager}/bin/home-manager expire-generations -5days
+  '';
+
   # This value determines the Home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new Home Manager release introduces backwards
