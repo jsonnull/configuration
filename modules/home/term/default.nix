@@ -23,6 +23,7 @@
     pkgs._7zz
     pkgs.unzip
     pkgs.unar
+    pkgs.yazi
   ];
 
   home.sessionVariables = {
@@ -48,10 +49,8 @@
       ];
     };
     shellAliases = {
-      gs = "git status -sb";
       vim = "nvim";
-      yarn = "corepack yarn";
-      yarnpkg = "corepack yarnpkg";
+      y = "yazi";
     };
   };
 
@@ -106,6 +105,10 @@
 
       set -g default-terminal 'xterm-256color'
       set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
+
+      #set -g status-left-length 100
+      #set -g status-right-length 100
+      set -g status-left "[#S] "
     '';
     # TODO: Consolidate; I'm pretty sure this does the same thing as `set g default-terminal` above.
     terminal = "xterm-256color";
