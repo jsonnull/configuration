@@ -299,69 +299,6 @@ in
 
       plugins.comment.enable = true;
 
-      plugins.dap-ui.enable = true;
-      plugins.dap-virtual-text.enable = true;
-      plugins.dap = {
-        enable = true;
-        adapters = {
-          executables.chrome = {
-            command = "${pkgs.vscode-js-debug}/bin/js-debug";
-          };
-          executables.firefox = {
-            command = "${pkgs.nodejs}/bin/node";
-            args = [
-              "${pkgs.vscode-extensions.firefox-devtools.vscode-firefox-debug}/share/vscode/extensions/firefox-devtools.vscode-firefox-debug/dist/adapter.bundle.js"
-            ];
-          };
-        };
-        luaConfig.post = ''
-          local js_based_languages = { "typescript", "javascript", "typescriptreact" }
-          for _, language in ipairs(js_based_languages) do
-            require("dap").configurations[language] = {
-              --[[
-              {
-                type = "pwa-node",
-                request = "launch",
-                name = "Launch file",
-                program = "''${file}",
-                cwd = "''${workspaceFolder}",
-              },
-              {
-               type = 'pwa-node',
-               request = 'attach',
-               name = 'Attach to Node app',
-               address = 'localhost',
-               port = 9229,
-               cwd = "''${workspaceFolder}",
-               restart = true,
-              },
-              ]]
-              {
-                name = 'Debug Stories with Firefox',
-                type = 'firefox',
-                request = 'attach',
-                reAttach = true,
-                url = 'http://localhost:6006',
-                webRoot = "''${workspaceFolder}",
-                firefoxExecutable = '${pkgs.firefox}/bin/firefox',
-              }
-            }
-          end
-
-          local dap, dapui = require("dap"), require("dapui")
-
-          dap.listeners.after.event_initialized["dapui_config"] = function()
-            dapui.open({})
-          end
-          dap.listeners.before.event_terminated["dapui_config"] = function()
-            dapui.close({})
-          end
-          dap.listeners.before.event_exited["dapui_config"] = function()
-            dapui.close({})
-          end
-        '';
-      };
-
       plugins.gitsigns.enable = true;
 
       plugins.illuminate.enable = true;
