@@ -25,9 +25,9 @@
 
   snowfallorg.users.json.home.config = {
     home.packages = with pkgs; [
+      ashell
       swww
       waypaper
-      ulauncher
       xwayland-satellite
       wl-clipboard
     ];
@@ -37,30 +37,6 @@
       package = pkgs.phinger-cursors;
       size = 32;
       gtk.enable = true;
-    };
-
-    /*
-      services.udiskie = {
-        enable = true;
-        settings = {
-          program_options = {
-            file_manager = "${pkgs.kdePackages.dolphin}/bin/dolphin";
-          };
-        };
-      };
-    */
-
-    programs.waybar = {
-      #enable = true;
-      settings = {
-        mainBar = {
-          position = "top";
-          modules-left = [
-            "niri/workspaces"
-            "niri/window"
-          ];
-        };
-      };
     };
 
     programs.fuzzel = {
@@ -81,6 +57,12 @@
         };
     };
 
+    xdg.configFile."ashell/config.toml".text = ''
+      [modules]
+      left = [ "SystemInfo" ]
+      right = [ "Clock", "Tray", "Settings" ]
+    '';
+
     programs.niri = {
       settings = {
         input.keyboard.xkb = {
@@ -93,37 +75,43 @@
           focus-ring.active.color = "#58a6ff";
         };
 
-        outputs = {
-          "DP-5" = {
-            mode = {
-              width = 3440;
-              height = 1440;
-              refresh = 144.0;
+        outputs =
+          let
+            dpConfig = {
+              mode = {
+                width = 3440;
+                height = 1440;
+                refresh = 144.0;
+              };
+              position = {
+                x = 1440;
+                y = 699;
+              };
             };
-            position = {
-              x = 1440;
-              y = 699;
+            hdmiConfig = {
+              mode = {
+                width = 2560;
+                height = 1440;
+                refresh = 75.002;
+              };
+              transform = {
+                rotation = 270;
+              };
+              position = {
+                x = 0;
+                y = 0;
+              };
             };
+          in
+          {
+            "DP-3" = dpConfig;
+            "DP-5" = dpConfig;
+            "HDMI-A-1" = hdmiConfig;
+            "HDMI-A-2" = hdmiConfig;
           };
-          "HDMI-A-2" = {
-            mode = {
-              width = 2560;
-              height = 1440;
-              refresh = 75.002;
-            };
-            transform = {
-              rotation = 270;
-            };
-            position = {
-              x = 0;
-              y = 0;
-            };
-          };
-        };
 
         spawn-at-startup = [
-          # { command = [ "waybar" ]; }
-          # { command = [ "udiskie" ]; }
+          # { command = [ "ashell" ]; }
           {
             command = [
               "xwayland-satellite"
@@ -133,11 +121,6 @@
           { command = [ "swww-daemon" ]; }
           { command = [ "waypaper --restore" ]; }
         ];
-
-        debug = {
-          # Fix for PipeWire screencasting flickering on NVIDIA.
-          wait-for-frame-completion-in-pipewire = [ ];
-        };
 
         environment = {
           DISPLAY = ":1";
@@ -149,7 +132,7 @@
             matches = [
               { app-id = "discord"; }
               { app-id = "1Password"; }
-              { app-id = "steam"; }
+              #{ app-id = "steam"; }
               { app-id = "org.kde.dolphin"; }
               { app-id = "obsidian"; }
             ];
@@ -160,6 +143,7 @@
             matches = [
               { app-id = "Alacritty"; }
               { app-id = "code"; }
+              { app-id = "tauonmb"; }
             ];
             opacity = 0.95;
             draw-border-with-background = false;
@@ -182,15 +166,6 @@
             ];
             default-column-width.proportion = 2. / 3.;
           }
-          {
-            matches = [ { app-id = "ulauncher"; } ];
-            draw-border-with-background = false;
-            focus-ring.enable = false;
-          }
-          {
-            matches = [ { app-id = "vrmonitor"; } ];
-            open-floating = false;
-          }
         ];
 
         binds = {
@@ -210,8 +185,7 @@
 
           # Suggested binds for running programs: terminal, app launcher, screen locker.
           "Mod+T".action.spawn = "alacritty";
-          "Mod+D".action.spawn = "ulauncher";
-          "Mod+Shift+D".action.spawn = "fuzzel";
+          "Mod+D".action.spawn = "fuzzel";
           "Super+Alt+L".action.spawn = "swaylock";
 
           # You can also use a shell. Do this if you need pipes, multiple commands, etc.

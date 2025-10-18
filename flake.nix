@@ -4,6 +4,8 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
+    nixpkgs-master.url = "github:NixOS/nixpkgs/master";
+
     nixvim = {
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -28,6 +30,11 @@
 
     niri = {
       url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    stable-diffusion-webui-nix = {
+      url = "github:Janrupf/stable-diffusion-webui-nix/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -98,6 +105,7 @@
       overlays = [
         inputs.alacritty-theme.overlays.default
         inputs.niri.overlays.niri
+        inputs.stable-diffusion-webui-nix.overlays.default
       ];
 
       systems.hosts.renderer.modules = with inputs; [
@@ -111,8 +119,10 @@
         sops-nix.homeManagerModules.sops
       ];
 
-      homes.users."json@renderer".modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
+      homes.users."json@renderer".modules = with inputs; [
+        nixvim.homeModules.nixvim
+      ];
 
-      homes.users."jsonnull@macbook".modules = with inputs; [ nixvim.homeManagerModules.nixvim ];
+      homes.users."jsonnull@macbook".modules = with inputs; [ nixvim.homeModules.nixvim ];
     };
 }

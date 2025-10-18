@@ -25,6 +25,11 @@
     optimise.automatic = true;
   };
 
+  nixpkgs.config.permittedInsecurePackages = [
+    "libsoup-2.74.3"
+    "olm-3.2.16"
+  ];
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
@@ -45,6 +50,12 @@
     # localsend
     53317
   ];
+
+  services.openvpn.servers = {
+    thinkalpha = {
+      config = ''config /root/nixos/openvpn/thinkalpha.conf '';
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "America/New_York";
@@ -169,14 +180,12 @@
 
     # KDE applications to keep
     kdePackages.dolphin
-    kdePackages.elisa
+    tauon
+
+    nheko
 
     nautilus
   ];
-
-  # Virtualbox
-  virtualisation.virtualbox.host.enable = true;
-  users.extraGroups.vboxusers.members = [ "user-with-access-to-virtualbox" ];
 
   # Slack
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
@@ -201,6 +210,7 @@
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
   hardware.bluetooth.enable = true;
+  services.blueman.enable = true;
 
   services.hardware.openrgb.enable = true;
 
@@ -208,7 +218,23 @@
     inter
     nerd-fonts.iosevka
     nerd-fonts.iosevka-term
+    noto-fonts-emoji
   ];
+
+  fonts.fontconfig = {
+    enable = true;
+    defaultFonts = {
+      emoji = [ "Noto Color Emoji" ];
+      sansSerif = [
+        "Inter"
+        "Noto Color Emoji"
+      ];
+      monospace = [
+        "Iosevka Nerd Font Mono"
+        "Noto Color Emoji"
+      ];
+    };
+  };
 
   # This value determines the NixOS release from which the default
   # settings for stateful data, like file locations and database versions

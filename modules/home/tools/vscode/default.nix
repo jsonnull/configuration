@@ -37,8 +37,8 @@ in
             {
               name = "claude-code";
               publisher = "anthropic";
-              version = "1.0.61";
-              sha256 = "sha256-is+JPO/qb2OxtCebtKadQPLUHZop+Xzch00RY72F7J0=";
+              version = "2.0.14";
+              sha256 = "sha256-+3GkCBfAAIaORU+qKGv6OmN2w9aXt3QKMgWtyLMJUS0=";
             }
             {
               name = "gti-vscode";
@@ -103,6 +103,7 @@ in
           "github.copilot.enable" = {
             "*" = true;
           };
+          "githubPullRequests.pullBranch" = "never";
           "window.titleBarStyle" = "custom";
           "window.menuBarVisibility" = "toggle";
           "window.zoomLevel" = 1;
