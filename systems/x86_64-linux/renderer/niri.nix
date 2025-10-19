@@ -41,6 +41,18 @@
 
     programs.fuzzel = {
       enable = true;
+      settings = {
+        colors = {
+          background = "#000000ee";
+          text = "#ccccccff";
+          prompt = "#666666ff";
+          placeholder = "#808080ff";
+          selection = "111111ff";
+          selection-text = "ccccccff";
+          selection-match = "ffffffff";
+          border = "#00000000";
+        };
+      };
     };
 
     services.gammastep = {
