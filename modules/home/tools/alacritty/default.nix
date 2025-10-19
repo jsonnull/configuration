@@ -36,6 +36,8 @@ in
 
         terminal.shell.program = "/etc/profiles/per-user/json/bin/zsh";
 
+        colors.primary.background = "#111111";
+
         window.padding = {
           x = 8;
           y = 0;

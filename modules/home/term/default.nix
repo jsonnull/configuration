@@ -101,7 +101,7 @@
     sensibleOnTop = false;
     shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
-      set -g status-style bg=blue,fg=black
+      set -g status-style bg=white,fg=black
 
       set -g default-terminal 'xterm-256color'
       set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
@@ -112,6 +112,5 @@
     '';
     # TODO: Consolidate; I'm pretty sure this does the same thing as `set g default-terminal` above.
     terminal = "xterm-256color";
-    #plugins = [ pkgs.tmux-terafox-theme ];
   };
 }

@@ -37,6 +37,11 @@
       url = "github:Janrupf/stable-diffusion-webui-nix/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    "monochrome-vscode-theme" = {
+      url = "github:jsonnull/github-vscode-theme-monochrome/main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =

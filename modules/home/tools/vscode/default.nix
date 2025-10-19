@@ -2,6 +2,7 @@
   config,
   lib,
   pkgs,
+  inputs,
   ...
 }:
 
@@ -22,8 +23,10 @@ in
             vscodevim.vim
             github.copilot
             github.vscode-pull-request-github
-            github.github-vscode-theme
             github.vscode-github-actions
+
+            inputs.monochrome-vscode-theme.packages.${pkgs.system}.default
+
             #astro-build.astro-vscode
             jnoortheen.nix-ide
             dbaeumer.vscode-eslint
@@ -64,7 +67,7 @@ in
           "terminal.integrated.customGlyphs" = true;
           "editor.fontSize" = 14;
           "editor.fontLigatures" = true;
-          "workbench.colorTheme" = "GitHub Dark Colorblind (Beta)";
+          "workbench.colorTheme" = "Monochrome GitHub Dark Default";
           "workbench.tree.renderIndentGuides" = "none";
           "vim.textwidth" = 100;
           "vim.useSystemClipboard" = true;

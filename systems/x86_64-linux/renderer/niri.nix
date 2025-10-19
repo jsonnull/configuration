@@ -72,7 +72,7 @@
 
         layout = {
           gaps = 30;
-          focus-ring.active.color = "#58a6ff";
+          focus-ring.active.color = "#cccccc";
         };
 
         outputs =
