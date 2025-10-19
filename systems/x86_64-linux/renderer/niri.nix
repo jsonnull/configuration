@@ -84,8 +84,8 @@
                 refresh = 144.0;
               };
               position = {
-                x = 1440;
-                y = 699;
+                x = 2560;
+                y = 0;
               };
             };
             hdmiConfig = {
@@ -93,9 +93,6 @@
                 width = 2560;
                 height = 1440;
                 refresh = 75.002;
-              };
-              transform = {
-                rotation = 270;
               };
               position = {
                 x = 0;
