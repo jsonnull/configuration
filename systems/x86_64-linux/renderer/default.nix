@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   ...
 }:
@@ -29,6 +30,7 @@
     "libsoup-2.74.3"
     "olm-3.2.16"
   ];
+  nixpkgs.config.cudaSupport = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -111,6 +113,7 @@
       "wheel"
       "adbusers"
       "docker"
+      "video"
     ];
   };
 
@@ -146,6 +149,14 @@
   services.tailscale.enable = true;
 
   virtualisation.docker.enable = true;
+
+  # Load kernel module
+  boot.supportedFilesystems = [ "zfs" ];
+  boot.zfs.extraPools = [ "storage" ];
+  networking.hostId = "ad463218";
+  boot.extraModulePackages = [
+    config.boot.kernelPackages.${pkgs.zfs.kernelModuleAttribute}
+  ];
 
   /*
     systemd.services.strongdm = {
@@ -185,6 +196,7 @@
     nheko
 
     nautilus
+    v4l-utils
   ];
 
   # Slack
@@ -218,7 +230,7 @@
     inter
     nerd-fonts.iosevka
     nerd-fonts.iosevka-term
-    noto-fonts-emoji
+    noto-fonts-color-emoji
   ];
 
   fonts.fontconfig = {

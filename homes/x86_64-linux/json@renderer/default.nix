@@ -58,15 +58,17 @@
     jmtpfs
     android-file-transfer
     localsend
+    mullvad-browser
+    tor-browser
   ];
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
 
-  sops.defaultSopsFile = ../../../secrets.yaml;
-  sops.age.keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
-  sops.secrets.jira-access-token = { };
+  #sops.defaultSopsFile = ../../../secrets.yaml;
+  #sops.age.keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
+  #sops.secrets.jira-access-token = { };
 
-  home.sessionVariables.JIRA_API_TOKEN = builtins.readFile config.sops.secrets.jira-access-token.path;
+  #home.sessionVariables.JIRA_API_TOKEN = builtins.readFile config.sops.secrets.jira-access-token.path;
 
   # Enable app modules
   apps.chrome.enable = true;
@@ -94,4 +96,6 @@
       user.signingkey = "~/.ssh/id_ed25519.pub";
     };
   };
+
+  programs.obs-studio.enable = true;
 }

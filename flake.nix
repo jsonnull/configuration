@@ -86,6 +86,7 @@
             "cuda_nvtx"
             "cuda_profiler_api"
             "cuda_sanitizer_api"
+            "cudnn"
             "discord"
             "graphite-cli"
             "libcublas"

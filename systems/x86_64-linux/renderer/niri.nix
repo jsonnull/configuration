@@ -69,6 +69,8 @@
         };
     };
 
+    services.mako.enable = true;
+
     xdg.configFile."ashell/config.toml".text = ''
       [modules]
       left = [ "SystemInfo" ]
@@ -395,6 +397,7 @@
 
           "Mod+Comma".action.consume-window-into-column = { };
           "Mod+Period".action.expel-window-from-column = { };
+          "Mod+W".action.toggle-column-tabbed-display = { };
 
           # There are also commands that consume or expel a single window to the side.
           # Mod+BracketLeft  { consume-or-expel-window-left; }

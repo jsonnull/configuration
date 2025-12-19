@@ -82,6 +82,7 @@ in
             "mainThreadWebview-browserPreview" = false;
           };
           "workbench.activityBar.location" = "top";
+          "workbench.sideBar.location" = "right";
           "workbench.statusBar.visible" = false;
           "[css]" = {
             "editor.defaultFormatter" = "esbenp.prettier-vscode";

@@ -54,7 +54,7 @@
     package = config.boot.kernelPackages.nvidiaPackages.production;
   };
   boot.initrd.kernelModules = [ "nvidia" ];
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_6_12;
   # fix for nVidia wayland plasma 6
   boot.kernelParams = [
     "nvidia-drm.fbdev=1"
