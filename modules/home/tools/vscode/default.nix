@@ -40,8 +40,8 @@ in
             {
               name = "claude-code";
               publisher = "anthropic";
-              version = "2.0.14";
-              sha256 = "sha256-+3GkCBfAAIaORU+qKGv6OmN2w9aXt3QKMgWtyLMJUS0=";
+              version = "2.0.74";
+              sha256 = "sha256-2GhutC0n56fd3+GwLJQFYKuhUOiYWW6S5M3GlsYOEMM=";
             }
             {
               name = "gti-vscode";
@@ -126,9 +126,8 @@ in
           "search.exclude" = {
             "**/.direnv" = true;
           };
-          # "[astro]" = {
-          #     "editor.defaultFormatter" = "astro-build.astro-vscode"
-          # }
+          "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+          "claudeCode.preferredLocation" = "panel";
         };
         keybindings = [
           {

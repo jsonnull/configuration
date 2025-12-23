@@ -69,7 +69,18 @@
         };
     };
 
-    services.mako.enable = true;
+    services.mako = {
+      enable = true;
+      backgroundColor = "#000000";
+      textColor = "#cccccc";
+      borderColor = "#666666";
+      borderSize = 2;
+      defaultTimeout = 5000;
+      extraConfig = ''
+        [urgency=high]
+        border-color=#ffffff
+      '';
+    };
 
     xdg.configFile."ashell/config.toml".text = ''
       [modules]
