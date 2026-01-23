@@ -43,11 +43,6 @@
     ];
   };
 
-  #fileSystems."/storage" = {
-  #  device = "storage";
-  #  fsType = "zfs";
-  #};
-
   swapDevices = [
     { device = "/dev/disk/by-uuid/6f111701-209a-41f8-b399-50aecfec91c9"; }
   ];
