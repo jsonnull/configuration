@@ -23,7 +23,7 @@
     package = pkgs.niri;
   };
 
-  snowfallorg.users.json.home.config = {
+  home-manager.users.json = {
     home.packages = with pkgs; [
       ashell
       swww

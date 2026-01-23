@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  osConfig,
   ...
 }:
 let
@@ -15,13 +14,13 @@ in
     programs.nixvim = {
       colorschemes.github-theme.enable = true;
       colorscheme =
-        if osConfig.theme.theme == "default-dark" then
+        if config.homeTheme.theme == "default-dark" then
           "github_dark_colorblind"
         else
           "github_light_colorblind";
 
       # colorscheme-adjacent properties
-      opts.background = if osConfig.theme.theme == "default-dark" then "dark" else "light";
+      opts.background = if config.homeTheme.theme == "default-dark" then "dark" else "light";
       opts.termguicolors = true;
 
       enable = true;

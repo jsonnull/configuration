@@ -19,7 +19,7 @@
     opencomposite
   ];
 
-  snowfallorg.users.json.home.config = {
+  home-manager.users.json = {
     xdg.configFile."openvr/openvrpaths.vrpath".text = ''
       {
         "version": 1,

@@ -25,9 +25,9 @@ in
   };
 
   config = mkIf cfg.enable {
-    # Theme configuration will be implemented here
+    home-manager.users.json = {
+      homeTheme.theme = cfg.theme;
 
-    snowfallorg.users.json.home.config = {
       dconf.settings = {
         "org/gnome/desktop/interface" = {
           color-scheme = if cfg.theme == "default-dark" then "prefer-dark" else "prefer-light";

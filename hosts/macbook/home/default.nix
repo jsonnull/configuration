@@ -10,6 +10,15 @@ let
   homeDir = "/Users/jsonnull";
 in
 {
+  imports = [
+    # Home modules (explicit)
+    ../../../modules/home/theme
+    ../../../modules/home/tools/nixvim
+    ../../../modules/home/tools/obsidian
+    ../../../modules/home/tools/vscode
+    ../../../modules/home/term
+  ];
+
   # Home Manager needs a bit of information about you and the paths it should manage.
   home.username = username;
   home.homeDirectory = homeDir;
@@ -26,6 +35,9 @@ in
   # the Home Manager release notes for a list of state version
   # changes in each release.
   home.stateVersion = "24.05";
+
+  # Set theme directly (no NixOS to inherit from)
+  homeTheme.theme = "default-dark";
 
   # Enable app modules
   #apps.chrome.enable = true;

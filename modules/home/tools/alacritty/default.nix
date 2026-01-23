@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  osConfig,
   ...
 }:
 let
@@ -29,7 +28,7 @@ in
         };
 
         general.import =
-          if osConfig.theme.theme == "default-dark" then
+          if config.homeTheme.theme == "default-dark" then
             [ pkgs.alacritty-theme.github_dark_colorblind ]
           else
             [ pkgs.alacritty-theme.github_light_colorblind ];
@@ -44,7 +43,7 @@ in
         };
 
         window.decorations_theme_variant =
-          if osConfig.theme.theme == "default-dark" then "Dark" else "Light";
+          if config.homeTheme.theme == "default-dark" then "Dark" else "Light";
       };
     };
   };

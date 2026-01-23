@@ -16,11 +16,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    snowfall-lib = {
-      url = "github:snowfallorg/lib";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
     sops-nix = {
       url = "github:Mic92/sops-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -49,68 +44,48 @@
   };
 
   outputs =
-    inputs:
+    { self, nixpkgs, ... }@inputs:
     let
-      lib = inputs.snowfall-lib.mkLib {
-        inherit inputs;
-        src = ./.;
-        snowfall = {
-          namespace = "jsonnull";
-          meta = {
-            name = "jsonnull";
-            title = "jsonnull";
-          };
-        };
-      };
-    in
-    lib.mkFlake {
-      alias = {
-        shells.default = "configuration";
-      };
-
-      channels-config = {
-        allowUnfreePredicate =
-          pkg:
-          builtins.elem (lib.getName pkg) [
-            "1password"
-            "1password-cli"
-            "claude-code"
-            "cuda-merged"
-            "cuda_cccl"
-            "cuda_cudart"
-            "cuda_cuobjdump"
-            "cuda_cupti"
-            "cuda_cuxxfilt"
-            "cuda_gdb"
-            "cuda_nvcc"
-            "cuda_nvdisasm"
-            "cuda_nvml_dev"
-            "cuda_nvprune"
-            "cuda_nvrtc"
-            "cuda_nvtx"
-            "cuda_profiler_api"
-            "cuda_sanitizer_api"
-            "cudnn"
-            "discord"
-            "graphite-cli"
-            "libcublas"
-            "libcufft"
-            "libcurand"
-            "libcusolver"
-            "libcusparse"
-            "libnpp"
-            "libnvjitlink"
-            "nvidia-settings"
-            "nvidia-x11"
-            "obsidian"
-            "slack"
-            "steam"
-            "steam-unwrapped"
-            "vscode"
-            "vscode-extension-github-copilot"
-            "vscode-extension-ms-vsliveshare-vsliveshare"
-          ];
-      };
+      allowedUnfree = [
+        "1password"
+        "1password-cli"
+        "blender"
+        "claude-code"
+        "cuda-merged"
+        "cuda_cccl"
+        "cuda_cudart"
+        "cuda_cuobjdump"
+        "cuda_cupti"
+        "cuda_cuxxfilt"
+        "cuda_gdb"
+        "cuda_nvcc"
+        "cuda_nvdisasm"
+        "cuda_nvml_dev"
+        "cuda_nvprune"
+        "cuda_nvrtc"
+        "cuda_nvtx"
+        "cuda_profiler_api"
+        "cuda_sanitizer_api"
+        "cudnn"
+        "discord"
+        "graphite-cli"
+        "libcublas"
+        "libcufft"
+        "libcurand"
+        "libcusolver"
+        "libcusparse"
+        "libnpp"
+        "libnvjitlink"
+        "nvidia-settings"
+        "nvidia-x11"
+        "obsidian"
+        "slack"
+        "steam"
+        "steam-unwrapped"
+        "vscode"
+        "vscode-extension-github-copilot"
+        "vscode-extension-ms-vsliveshare-vsliveshare"
+      ];
 
       overlays = [
         inputs.alacritty-theme.overlays.default
@@ -118,21 +93,85 @@
         inputs.stable-diffusion-webui-nix.overlays.default
       ];
 
-      systems.hosts.renderer.modules = with inputs; [
-        sops-nix.nixosModules.sops
-        home-manager.nixosModules.home-manager
-        niri.nixosModules.niri
-      ];
+      nixpkgsConfig = {
+        allowUnfreePredicate = pkg: builtins.elem (nixpkgs.lib.getName pkg) allowedUnfree;
+      };
+    in
+    {
+      nixosConfigurations.renderer = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          # External modules
+          inputs.sops-nix.nixosModules.sops
+          inputs.home-manager.nixosModules.home-manager
+          inputs.niri.nixosModules.niri
 
-      # Add modules to all homes.
-      homes.modules = with inputs; [
-        sops-nix.homeManagerModules.sops
-      ];
+          # Custom NixOS modules (explicit)
+          ./modules/nixos/theme
+          ./modules/nixos/printing
+          ./modules/nixos/ai
+          ./modules/nixos/vr
 
-      homes.users."json@renderer".modules = with inputs; [
-        nixvim.homeModules.nixvim
-      ];
+          # Host configuration
+          ./hosts/renderer/nixos
 
-      homes.users."jsonnull@macbook".modules = with inputs; [ nixvim.homeModules.nixvim ];
+          # Home-manager integration
+          {
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              extraSpecialArgs = { inherit inputs; };
+              users.json = import ./hosts/renderer/home;
+            };
+          }
+
+          # Nixpkgs config
+          {
+            nixpkgs = {
+              inherit overlays;
+              config = nixpkgsConfig;
+            };
+          }
+        ];
+      };
+
+      homeConfigurations."jsonnull@macbook" = inputs.home-manager.lib.homeManagerConfiguration {
+        pkgs = import nixpkgs {
+          system = "aarch64-darwin";
+          inherit overlays;
+          config = nixpkgsConfig;
+        };
+        extraSpecialArgs = { inherit inputs; };
+        modules = [
+          inputs.sops-nix.homeManagerModules.sops
+          inputs.nixvim.homeModules.nixvim
+          ./hosts/macbook/home
+        ];
+      };
+
+      devShells =
+        let
+          forAllSystems = nixpkgs.lib.genAttrs [
+            "x86_64-linux"
+            "aarch64-darwin"
+          ];
+        in
+        forAllSystems (system: {
+          default =
+            let
+              pkgs = import nixpkgs {
+                inherit system overlays;
+                config = nixpkgsConfig;
+              };
+            in
+            pkgs.mkShell {
+              name = "configuration";
+              packages = with pkgs; [
+                nil
+                nixfmt-rfc-style
+              ];
+            };
+        });
     };
 }
