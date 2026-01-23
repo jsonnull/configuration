@@ -147,6 +147,18 @@
   };
 
   services.tailscale.enable = true;
+  services.tailscale.extraDaemonFlags = [ "--no-logs-no-support" ];
+
+  services.openssh = {
+    enable = true;
+    ports = [ 5432 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      PermitRootLogin = "no";
+      AllowUsers = [ "json" ];
+    };
+  };
 
   virtualisation.docker.enable = true;
 
