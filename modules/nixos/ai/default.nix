@@ -8,6 +8,7 @@ let
     system = pkgs.system;
     #config.allowUnfree = true;
   };
+  llm-agents = inputs.llm-agents.packages.${pkgs.system};
 in
 {
   services.ollama = {
@@ -35,7 +36,10 @@ in
     (pkgs.koboldcpp.override {
       config.cudaSupport = true;
       cudaArches = [ "sm_89" ];
+      koboldLiteSupport = true;
     })
     pkgs.stable-diffusion-webui.forge.cuda
+    llm-agents.claude-code
+    llm-agents.qwen-code
   ];
 }

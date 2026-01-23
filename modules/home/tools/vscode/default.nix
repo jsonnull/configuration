@@ -126,7 +126,7 @@ in
           "search.exclude" = {
             "**/.direnv" = true;
           };
-          "claudeCode.claudeProcessWrapper" = "${pkgs.claude-code}/bin/claude";
+          "claudeCode.claudeProcessWrapper" = "${inputs.llm-agents.packages.${pkgs.system}.claude-code}/bin/claude";
           "claudeCode.preferredLocation" = "panel";
         };
         keybindings = [

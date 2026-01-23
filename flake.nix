@@ -42,6 +42,10 @@
       url = "github:jsonnull/github-vscode-theme-monochrome/main";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+    };
   };
 
   outputs =

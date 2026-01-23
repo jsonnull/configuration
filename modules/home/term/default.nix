@@ -6,7 +6,6 @@
 }:
 {
   home.packages = [
-    pkgs.claude-code
     pkgs.repomix
     pkgs.ripgrep
     pkgs.nodejs_20
