@@ -30,10 +30,13 @@ in
             vscode-langservers-extracted # cssls, html, jsonls, eslint
             lua-language-server
             nil # Nix LSP
-            nixfmt-rfc-style # nil_ls formatting
             svelte-language-server
             yaml-language-server
             rust-analyzer
+            # Formatters
+            nixfmt-rfc-style
+            stylua
+            prettierd
           ];
         };
 
@@ -100,6 +103,9 @@ in
             # LSP
             nvim-lspconfig
             typescript-tools-nvim
+
+            # Formatting
+            conform-nvim
           ];
         };
       };
