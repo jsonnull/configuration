@@ -59,6 +59,9 @@ in
             # File explorer
             nvim-tree-lua
 
+            # Editing
+            mini-nvim
+
             # Utilities
             which-key-nvim
             bufdelete-nvim

@@ -118,6 +118,7 @@ require("plugins.auto-session")
 require("plugins.nvim-tree")
 require("plugins.which-key")
 require("plugins.bufdelete")
+require("plugins.mini")
 
 --------------------------------------------------------------------------------
 -- nixCats integration

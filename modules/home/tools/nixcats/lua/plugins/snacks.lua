@@ -8,5 +8,5 @@ require("snacks").setup({
 
 -- Keymaps
 vim.keymap.set("n", "<leader>b", function() Snacks.picker.buffers() end, { desc = "Buffers" })
-vim.keymap.set("n", "<c-p>", function() Snacks.picker.git_files() end, { desc = "Git Files" })
-vim.keymap.set("n", "<c-e>", function() Snacks.picker.grep() end, { desc = "Grep" })
+vim.keymap.set("n", "<leader>p", function() Snacks.picker.git_files() end, { desc = "Git Files" })
+vim.keymap.set("n", "<leader>g", function() Snacks.picker.grep() end, { desc = "Grep" })

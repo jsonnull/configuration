@@ -4,7 +4,8 @@ require("lze").load({
     "nvim-tree.lua",
     cmd = { "NvimTreeToggle", "NvimTreeOpen", "NvimTreeFocus" },
     keys = {
-      { "<c-n>", desc = "Toggle NvimTree" },
+      { "<leader>n", desc = "Toggle NvimTree" },
+      { "<leader>e", desc = "Find file in NvimTree" },
     },
     after = function()
       require("nvim-tree").setup({
@@ -26,7 +27,8 @@ require("lze").load({
           group_empty = true,
         },
       })
-      vim.keymap.set("n", "<c-n>", ":NvimTreeToggle<cr>", { silent = true, desc = "Toggle NvimTree" })
+      vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<cr>", { silent = true, desc = "Toggle NvimTree" })
+      vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>", { silent = true, desc = "Find file in NvimTree" })
     end,
   },
 })
