@@ -37,6 +37,9 @@ in
             nixfmt-rfc-style
             stylua
             prettierd
+            # Linters
+            shellcheck
+            statix
           ];
         };
 
@@ -106,6 +109,9 @@ in
 
             # Formatting
             conform-nvim
+
+            # Linting
+            nvim-lint
           ];
         };
       };

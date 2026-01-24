@@ -78,11 +78,29 @@ vim.opt.foldlevelstart = 99
 vim.opt.background = "dark"
 
 --------------------------------------------------------------------------------
+-- Diagnostics
+--------------------------------------------------------------------------------
+
+vim.diagnostic.config({
+  virtual_text = false,
+  signs = true,
+  underline = true,
+  update_in_insert = false,
+  severity_sort = true,
+  float = { border = "rounded" },
+})
+
+--------------------------------------------------------------------------------
 -- Keymaps (non-plugin)
 --------------------------------------------------------------------------------
 
 -- Yank entire line with Y
 vim.keymap.set("n", "Y", "yy", { desc = "Yank line" })
+
+-- Diagnostics
+vim.keymap.set("n", "gl", vim.diagnostic.open_float, { desc = "Line diagnostics" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next diagnostic" })
 
 -- Clear search highlight
 vim.keymap.set("n", "<leader>h", ":noh<cr>", { silent = true, desc = "Clear search highlight" })
@@ -122,3 +140,4 @@ require("plugins.bufdelete")
 require("plugins.mini")
 require("plugins.lsp")
 require("plugins.conform")
+require("plugins.lint")
