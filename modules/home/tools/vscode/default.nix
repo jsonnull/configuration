@@ -25,7 +25,7 @@ in
             github.vscode-pull-request-github
             github.vscode-github-actions
 
-            inputs.monochrome-vscode-theme.packages.${pkgs.system}.default
+            inputs.monochrome-vscode-theme.packages.${pkgs.stdenv.hostPlatform.system}.default
 
             #astro-build.astro-vscode
             jnoortheen.nix-ide
@@ -126,7 +126,7 @@ in
           "search.exclude" = {
             "**/.direnv" = true;
           };
-          "claudeCode.claudeProcessWrapper" = "${inputs.llm-agents.packages.${pkgs.system}.claude-code}/bin/claude";
+          "claudeCode.claudeProcessWrapper" = "${inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.claude-code}/bin/claude";
           "claudeCode.preferredLocation" = "panel";
         };
         keybindings = [

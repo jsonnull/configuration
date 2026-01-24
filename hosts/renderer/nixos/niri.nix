@@ -71,15 +71,16 @@
 
     services.mako = {
       enable = true;
-      backgroundColor = "#000000";
-      textColor = "#cccccc";
-      borderColor = "#666666";
-      borderSize = 2;
-      defaultTimeout = 5000;
-      extraConfig = ''
-        [urgency=high]
-        border-color=#ffffff
-      '';
+      settings = {
+        background-color = "#000000";
+        text-color = "#cccccc";
+        border-color = "#666666";
+        border-size = 2;
+        default-timeout = 5000;
+        "urgency=high" = {
+          border-color = "#ffffff";
+        };
+      };
     };
 
     xdg.configFile."ashell/config.toml".text = ''

@@ -72,16 +72,16 @@
 
   programs.git = {
     enable = true;
-    userName = "Jason Nall";
-    userEmail = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
-    extraConfig = {
-      push.default = "current";
-      init.defaultBranch = "main";
-    };
     ignores = [
       ".direnv"
       ".claude/settings.local.json"
     ];
+    settings = {
+      user.name = "Jason Nall";
+      user.email = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
+      push.default = "current";
+      init.defaultBranch = "main";
+    };
   };
 
   programs.eza = {

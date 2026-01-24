@@ -5,10 +5,10 @@
 }:
 let
   pkgsMaster = import inputs.nixpkgs-master {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     #config.allowUnfree = true;
   };
-  llm-agents = inputs.llm-agents.packages.${pkgs.system};
+  llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
   services.ollama = {

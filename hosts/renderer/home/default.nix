@@ -87,10 +87,9 @@
 
   programs.git = {
     enable = true;
-    userName = "Jason Nall";
-    userEmail = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
-
-    extraConfig = {
+    settings = {
+      user.name = "Jason Nall";
+      user.email = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
       commit.gpgsign = true;
       gpg.format = "ssh";
       gpg.ssh.allowedSignersFile = "~/.ssh/allowed_signers";
