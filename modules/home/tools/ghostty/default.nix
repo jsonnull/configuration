@@ -20,11 +20,13 @@ in
 
         # Font
         font-family = "IosevkaTerm Nerd Font";
-        font-size = 12;
+        font-size = 13;
+        adjust-cell-height = "5%";
+        adjust-cell-width = "-10%";
 
         # Window
-        window-padding-x = 8;
-        window-padding-y = 0;
+        window-padding-x = 4;
+        window-padding-y = 4;
         window-theme = "ghostty";
         window-show-tab-bar = "never";
 
