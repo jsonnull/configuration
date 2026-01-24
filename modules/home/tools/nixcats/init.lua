@@ -125,6 +125,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 --------------------------------------------------------------------------------
 
 -- Startup plugins (loaded immediately)
+require("plugins.colorscheme")
 require("plugins.lualine")
 require("plugins.bufferline")
 require("plugins.startify")

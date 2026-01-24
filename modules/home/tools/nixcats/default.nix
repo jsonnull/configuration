@@ -58,6 +58,9 @@ in
             bufferline-nvim
             vim-startify
 
+            # Colorscheme
+            kanso-nvim
+
             # Git (signs in gutter)
             gitsigns-nvim
 
