@@ -25,6 +25,16 @@ in
             ripgrep
             fd
           ];
+          lsp = with pkgs; [
+            bash-language-server
+            vscode-langservers-extracted # cssls, html, jsonls, eslint
+            lua-language-server
+            nil # Nix LSP
+            nixfmt-rfc-style # nil_ls formatting
+            svelte-language-server
+            yaml-language-server
+            rust-analyzer
+          ];
         };
 
         # Plugins that load immediately at startup
@@ -50,6 +60,26 @@ in
 
             # Session management (needs early load)
             auto-session
+
+            # Treesitter (startup for folding/highlighting)
+            (nvim-treesitter.withPlugins (p: [
+              p.bash
+              p.javascript
+              p.json
+              p.lua
+              p.make
+              p.markdown
+              p.nix
+              p.regex
+              p.svelte
+              p.toml
+              p.tsx
+              p.typescript
+              p.vim
+              p.vimdoc
+              p.xml
+              p.yaml
+            ]))
           ];
         };
 
@@ -65,6 +95,10 @@ in
             # Utilities
             which-key-nvim
             bufdelete-nvim
+
+            # LSP
+            nvim-lspconfig
+            typescript-tools-nvim
           ];
         };
       };
@@ -77,6 +111,7 @@ in
           };
           categories = {
             general = true;
+            lsp = true;
           };
         };
       };

@@ -113,16 +113,11 @@ require("plugins.startify")
 require("plugins.gitsigns")
 require("plugins.snacks")
 require("plugins.auto-session")
+require("plugins.treesitter")
 
 -- Lazy-loaded plugins (via lze)
 require("plugins.nvim-tree")
 require("plugins.which-key")
 require("plugins.bufdelete")
 require("plugins.mini")
-
---------------------------------------------------------------------------------
--- nixCats integration
---------------------------------------------------------------------------------
-if nixCats then
-  vim.notify("nixCats loaded successfully!", vim.log.levels.INFO)
-end
+require("plugins.lsp")
