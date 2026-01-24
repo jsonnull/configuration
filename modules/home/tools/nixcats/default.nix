@@ -21,12 +21,47 @@ in
 
       categoryDefinitions.replace = { pkgs, ... }: {
         lspsAndRuntimeDeps = {
-          general = with pkgs; [ ripgrep fd ];
+          general = with pkgs; [
+            ripgrep
+            fd
+          ];
         };
+
+        # Plugins that load immediately at startup
         startupPlugins = {
           general = with pkgs.vimPlugins; [
+            # Core dependencies
             plenary-nvim
+            nvim-web-devicons
+
+            # Lazy loader
+            lze
+
+            # UI (always visible)
+            lualine-nvim
+            bufferline-nvim
+
+            # Snacks (has startup features)
+            snacks-nvim
+
+            # Session management (needs early load)
+            auto-session
+          ];
+        };
+
+        # Plugins that load on-demand
+        optionalPlugins = {
+          general = with pkgs.vimPlugins; [
+            # File explorer
+            nvim-tree-lua
+
+            # Pickers
+            telescope-nvim
+            telescope-fzf-native-nvim
+
+            # Utilities
             which-key-nvim
+            bufdelete-nvim
           ];
         };
       };
