@@ -40,6 +40,10 @@ in
             # UI (always visible)
             lualine-nvim
             bufferline-nvim
+            vim-startify
+
+            # Git (signs in gutter)
+            gitsigns-nvim
 
             # Snacks (has startup features)
             snacks-nvim
@@ -54,10 +58,6 @@ in
           general = with pkgs.vimPlugins; [
             # File explorer
             nvim-tree-lua
-
-            # Pickers
-            telescope-nvim
-            telescope-fzf-native-nvim
 
             # Utilities
             which-key-nvim

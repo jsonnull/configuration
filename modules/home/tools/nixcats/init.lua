@@ -109,12 +109,13 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
 -- Startup plugins (loaded immediately)
 require("plugins.lualine")
 require("plugins.bufferline")
+require("plugins.startify")
+require("plugins.gitsigns")
 require("plugins.snacks")
 require("plugins.auto-session")
 
 -- Lazy-loaded plugins (via lze)
 require("plugins.nvim-tree")
-require("plugins.telescope")
 require("plugins.which-key")
 require("plugins.bufdelete")
 
