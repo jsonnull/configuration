@@ -9,7 +9,6 @@
   imports = [
     # External modules
     inputs.sops-nix.homeManagerModules.sops
-    inputs.nixvim.homeModules.nixvim
 
     # Home modules (explicit)
     ../../../modules/home/theme
@@ -18,7 +17,6 @@
     ../../../modules/home/apps/discord
     ../../../modules/home/tools/vscode
     ../../../modules/home/tools/alacritty
-    ../../../modules/home/tools/nixvim
     ../../../modules/home/tools/nixcats
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/zed
@@ -81,7 +79,6 @@
   # Enable tool modules
   tools.dev-general.enable = true;
   tools.alacritty.enable = true;
-  tools.nixvim.enable = true;
   tools.nixcats.enable = true;
   tools.obsidian.enable = true;
   tools.vscode.enable = true;

@@ -13,7 +13,7 @@ in
   imports = [
     # Home modules (explicit)
     ../../../modules/home/theme
-    ../../../modules/home/tools/nixvim
+    ../../../modules/home/tools/nixcats
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/vscode
     ../../../modules/home/term
@@ -46,7 +46,7 @@ in
 
   # Enable tool modules
   #tools.alacritty.enable = true;
-  tools.nixvim.enable = true;
+  tools.nixcats.enable = true;
   tools.obsidian.enable = true;
   tools.vscode.enable = true;
   #xdg.configFile.alacritty.source = lib.mkForce (../../config/alacritty-macbook);

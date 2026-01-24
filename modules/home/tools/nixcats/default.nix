@@ -16,7 +16,7 @@ in
   config = lib.mkIf cfg.enable {
     nixCats = {
       enable = true;
-      packageNames = [ "ncats" ];
+      packageNames = [ "nvim" ];
       luaPath = "${./.}";
 
       categoryDefinitions.replace = { pkgs, ... }: {
@@ -124,10 +124,14 @@ in
       };
 
       packageDefinitions.replace = {
-        ncats = { pkgs, ... }: {
+        nvim = { pkgs, ... }: {
           settings = {
             wrapRc = true;
-            # No aliases - keeps nvim/vim pointing to nixvim
+            aliases = {
+              vim = true;
+              vimdiff = true;
+              vi = true;
+            };
           };
           categories = {
             general = true;

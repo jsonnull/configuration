@@ -6,15 +6,7 @@
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    nixCats = {
-      url = "github:BirdeeHub/nixCats-nvim";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -150,7 +142,6 @@
         extraSpecialArgs = { inherit inputs; };
         modules = [
           inputs.sops-nix.homeManagerModules.sops
-          inputs.nixvim.homeModules.nixvim
           ./hosts/macbook/home
         ];
       };
