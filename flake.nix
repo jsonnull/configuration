@@ -18,8 +18,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    alacritty-theme.url = "github:alexghr/alacritty-theme.nix";
-
     niri = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -85,7 +83,6 @@
       ];
 
       overlays = [
-        inputs.alacritty-theme.overlays.default
         inputs.niri.overlays.niri
         inputs.stable-diffusion-webui-nix.overlays.default
       ];

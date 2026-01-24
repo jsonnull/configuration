@@ -16,7 +16,7 @@
     ../../../modules/home/apps/chrome
     ../../../modules/home/apps/discord
     ../../../modules/home/tools/vscode
-    ../../../modules/home/tools/alacritty
+    ../../../modules/home/tools/ghostty
     ../../../modules/home/tools/nixcats
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/zed
@@ -78,7 +78,7 @@
 
   # Enable tool modules
   tools.dev-general.enable = true;
-  tools.alacritty.enable = true;
+  tools.ghostty.enable = true;
   tools.nixcats.enable = true;
   tools.obsidian.enable = true;
   tools.vscode.enable = true;
