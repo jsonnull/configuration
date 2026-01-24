@@ -28,7 +28,7 @@ require("lze").load({
         },
       })
       vim.keymap.set("n", "<leader>n", ":NvimTreeToggle<cr>", { silent = true, desc = "Toggle NvimTree" })
-      vim.keymap.set("n", "<leader>e", ":NvimTreeFindFileToggle<cr>", { silent = true, desc = "Find file in NvimTree" })
+      vim.keymap.set("n", "<leader>e", ":NvimTreeFindFile<cr>", { silent = true, desc = "Find file in NvimTree" })
     end,
   },
 })
