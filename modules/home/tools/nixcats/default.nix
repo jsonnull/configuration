@@ -112,6 +112,10 @@ in
 
             # Linting
             nvim-lint
+
+            # Completion
+            blink-cmp
+            friendly-snippets
           ];
         };
       };
