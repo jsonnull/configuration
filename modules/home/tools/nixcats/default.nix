@@ -80,6 +80,7 @@ in
               p.xml
               p.yaml
             ]))
+            nvim-treesitter-textobjects
           ];
         };
 
