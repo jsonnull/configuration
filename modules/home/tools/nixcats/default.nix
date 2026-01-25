@@ -59,7 +59,7 @@ in
             vim-startify
 
             # Colorscheme
-            kanso-nvim
+            oxocarbon-nvim
 
             # Git (signs in gutter)
             gitsigns-nvim

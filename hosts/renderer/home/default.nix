@@ -65,6 +65,8 @@
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
 
+  home.file.".local/share/TauonMusicBox/theme/Oxocarbon.ttheme".source = ./tauon/Oxocarbon.ttheme;
+
   #sops.defaultSopsFile = ../../../secrets.yaml;
   #sops.age.keyFile = "/home/${config.home.username}/.config/sops/age/keys.txt";
   #sops.secrets.jira-access-token = { };
