@@ -95,9 +95,22 @@
     enableZshIntegration = true;
     shellWrapperName = "y";
     settings = {
+      manager = {
+        ratio = [ 0 2 3 ];  # hide parent, current:preview = 2:3
+      };
       preview = {
         max_width = 4096;
         max_height = 4096;
+      };
+      opener = {
+        video = [
+          { run = ''vlc "$@"''; orphan = true; desc = "VLC"; }
+        ];
+      };
+      open = {
+        rules = [
+          { mime = "video/*"; use = "video"; }
+        ];
       };
     };
   };

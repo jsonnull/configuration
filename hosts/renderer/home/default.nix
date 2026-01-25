@@ -61,6 +61,8 @@
     localsend
     mullvad-browser
     tor-browser
+    gimp
+    vlc
   ];
 
   home.file.".ssh/allowed_signers".text = "* ${builtins.readFile /home/json/.ssh/id_ed25519.pub}";
