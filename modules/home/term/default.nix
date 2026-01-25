@@ -22,7 +22,6 @@
     pkgs._7zz
     pkgs.unzip
     pkgs.unar
-    pkgs.yazi
   ];
 
   home.sessionVariables = {
@@ -49,7 +48,6 @@
     };
     shellAliases = {
       vim = "nvim";
-      y = "yazi";
     };
   };
 
@@ -90,6 +88,18 @@
     extraOptions = [
       "--group-directories-first"
     ];
+  };
+
+  programs.yazi = {
+    enable = true;
+    enableZshIntegration = true;
+    shellWrapperName = "y";
+    settings = {
+      preview = {
+        max_width = 4096;
+        max_height = 4096;
+      };
+    };
   };
 
   programs.tmux = {
