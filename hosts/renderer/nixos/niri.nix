@@ -43,14 +43,13 @@
       enable = true;
       settings = {
         colors = {
-          background = "#000000ee";
-          text = "#ccccccff";
-          prompt = "#666666ff";
-          placeholder = "#808080ff";
-          selection = "111111ff";
-          selection-text = "ccccccff";
-          selection-match = "ffffffff";
-          border = "#00000000";
+          background = "161616ff";
+          text = "ffffffff";
+          match = "ee5396ff";
+          selection = "262626ff";
+          selection-text = "33b1ffff";
+          selection-match = "ee5396ff";
+          border = "525252ff";
         };
       };
     };
@@ -72,13 +71,13 @@
     services.mako = {
       enable = true;
       settings = {
-        background-color = "#000000";
-        text-color = "#cccccc";
-        border-color = "#666666";
+        background-color = "#161616";
+        text-color = "#f2f4f8";
+        border-color = "#525252";
         border-size = 2;
         default-timeout = 5000;
         "urgency=high" = {
-          border-color = "#ffffff";
+          border-color = "#ee5396";
         };
       };
     };
