@@ -4,10 +4,6 @@
   ...
 }:
 let
-  pkgsMaster = import inputs.nixpkgs-master {
-    system = pkgs.stdenv.hostPlatform.system;
-    #config.allowUnfree = true;
-  };
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
@@ -19,7 +15,6 @@ in
     ];
     openFirewall = true;
     host = "[::]";
-    #package = pkgsMaster.ollama;
   };
 
   networking.firewall.allowedTCPPorts = [
@@ -31,7 +26,6 @@ in
   ];
 
   environment.systemPackages = [
-    pkgsMaster.alpaca
     pkgs.sillytavern
     (pkgs.koboldcpp.override {
       config.cudaSupport = true;
