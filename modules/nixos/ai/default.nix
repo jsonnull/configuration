@@ -27,11 +27,6 @@ in
 
   environment.systemPackages = [
     pkgs.sillytavern
-    (pkgs.koboldcpp.override {
-      config.cudaSupport = true;
-      cudaArches = [ "sm_89" ];
-      koboldLiteSupport = true;
-    })
     pkgs.stable-diffusion-webui.forge.cuda
     llm-agents.claude-code
     llm-agents.qwen-code
