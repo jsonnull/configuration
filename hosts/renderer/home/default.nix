@@ -21,7 +21,7 @@
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/zed
     ../../../modules/home/tools/gamedev
-    ../../../modules/home/tools/_development
+    ../../../modules/home/tools/development
     ../../../modules/home/term
     ../../../modules/home/private
   ];

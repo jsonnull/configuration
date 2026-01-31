@@ -119,6 +119,9 @@ in
             # Completion
             blink-cmp
             friendly-snippets
+
+            # GitHub
+            octo-nvim
           ];
         };
       };
