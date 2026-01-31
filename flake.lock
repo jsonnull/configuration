@@ -257,6 +257,26 @@
         "type": "github"
       }
     },
+    "private": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769892660,
+        "narHash": "sha256-c0grjosk65DOiYExehnprk9s1CJYyB6Sc6JfVU3BxV0=",
+        "owner": "jsonnull",
+        "repo": "private-config-stub",
+        "rev": "5929d6358edec71cd9f5f1b4711a20f4f85530ea",
+        "type": "github"
+      },
+      "original": {
+        "owner": "jsonnull",
+        "repo": "private-config-stub",
+        "type": "github"
+      }
+    },
     "python-flexseal": {
       "inputs": {
         "flake-utils": [
@@ -291,6 +311,7 @@
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-master": "nixpkgs-master",
+        "private": "private",
         "sops-nix": "sops-nix",
         "stable-diffusion-webui-nix": "stable-diffusion-webui-nix"
       }

@@ -36,6 +36,14 @@
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
     };
+
+    # Points to public stub by default; override with real private repo locally:
+    # --override-input private git+https://github.com/jsonnull/private-config
+    # --override-input private path:/home/json/private-config
+    private = {
+      url = "github:jsonnull/private-config-stub";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -106,6 +114,7 @@
           ./modules/nixos/printing
           ./modules/nixos/ai
           ./modules/nixos/vr
+          ./modules/nixos/private
 
           # Host configuration
           ./hosts/renderer/nixos

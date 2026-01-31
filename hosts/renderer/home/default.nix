@@ -23,6 +23,7 @@
     ../../../modules/home/tools/gamedev
     ../../../modules/home/tools/_development
     ../../../modules/home/term
+    ../../../modules/home/private
   ];
 
   # Let Home Manager install and manage itself.

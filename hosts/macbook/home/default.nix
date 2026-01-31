@@ -17,6 +17,7 @@ in
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/vscode
     ../../../modules/home/term
+    ../../../modules/home/private
   ];
 
   # Home Manager needs a bit of information about you and the paths it should manage.
