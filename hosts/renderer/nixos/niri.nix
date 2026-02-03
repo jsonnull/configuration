@@ -97,7 +97,7 @@
 
         layout = {
           gaps = 30;
-          focus-ring.active.color = "#525252";
+          focus-ring.active.color = "#33b1ff";
         };
 
         outputs =
@@ -386,15 +386,10 @@
           "Mod+7".action.focus-workspace = 7;
           "Mod+8".action.focus-workspace = 8;
           "Mod+9".action.focus-workspace = 9;
-          "Mod+Ctrl+1".action.move-column-to-workspace = 1;
-          "Mod+Ctrl+2".action.move-column-to-workspace = 2;
-          "Mod+Ctrl+3".action.move-column-to-workspace = 3;
-          "Mod+Ctrl+4".action.move-column-to-workspace = 4;
-          "Mod+Ctrl+5".action.move-column-to-workspace = 5;
-          "Mod+Ctrl+6".action.move-column-to-workspace = 6;
-          "Mod+Ctrl+7".action.move-column-to-workspace = 7;
-          "Mod+Ctrl+8".action.move-column-to-workspace = 8;
-          "Mod+Ctrl+9".action.move-column-to-workspace = 9;
+          # Direct column width shortcuts
+          "Mod+Shift+1".action.set-column-width = "33.33%"; # 1/3
+          "Mod+Shift+2".action.set-column-width = "50%"; # 1/2
+          "Mod+Shift+3".action.set-column-width = "66.67%"; # 2/3
 
           # Alternatively, there are commands to move just a single window:
           # Mod+Ctrl+1 { move-window-to-workspace 1; }
