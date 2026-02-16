@@ -227,6 +227,8 @@
   #services.gnome3.gnome-keyring.enable = true;
   security.pam.services.sddm.enableGnomeKeyring = true;
 
+  programs.nix-ld.enable = true;
+
   services.mullvad-vpn.enable = true;
   services.mullvad-vpn.package = pkgs.mullvad-vpn;
 
