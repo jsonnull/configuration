@@ -19,6 +19,7 @@ require("lze").load({
         },
         view = {
           width = 40,
+          side = "right",
         },
         git = {
           ignore = false,
