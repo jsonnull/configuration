@@ -64,6 +64,9 @@ in
             # Git (signs in gutter)
             gitsigns-nvim
 
+            # Breadcrumbs
+            dropbar-nvim
+
             # Snacks (has startup features)
             snacks-nvim
 
