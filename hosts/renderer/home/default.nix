@@ -49,6 +49,8 @@
 
   home.packages = with pkgs; [
     prismlauncher
+    gsettings-desktop-schemas
+    glib
     kdePackages.kasts
     novelwriter
     photoqt

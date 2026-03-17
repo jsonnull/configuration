@@ -212,6 +212,9 @@
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
   environment.sessionVariables.GTK_USE_PORTAL = "1";
   #environment.sessionVariables.ELECTRON_OZONE_PLATFORM_HINT = "wayland";
+
+  # Required by Minecraft (Prism Launcher)
+  environment.sessionVariables.GSETTINGS_SCHEMA_DIR = "${pkgs.gtk3}/share/gsettings-schemas/${pkgs.gtk3.name}/glib-2.0/schemas";
   xdg = {
     portal = {
       enable = true;
