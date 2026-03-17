@@ -71,7 +71,7 @@ vim.opt.clipboard = "unnamedplus"
 
 -- Folding (treesitter-based)
 vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.opt.foldlevelstart = 99
 
 -- Background (default to dark, can be overridden)

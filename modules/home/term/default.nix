@@ -99,8 +99,8 @@
         ratio = [ 0 2 3 ];  # hide parent, current:preview = 2:3
       };
       preview = {
-        max_width = 4096;
-        max_height = 4096;
+        max_width = 6144;
+        max_height = 6144;
       };
       opener = {
         video = [
@@ -108,7 +108,7 @@
         ];
       };
       open = {
-        rules = [
+        prepend_rules = [
           { mime = "video/*"; use = "video"; }
         ];
       };

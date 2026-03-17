@@ -10,7 +10,8 @@ let
   };
 in
 {
-  programs.adb.enable = true;
+  # TODO: Replace with pkgs.android-tools
+  #programs.adb.enable = true;
 
   services.monado = {
     enable = true;

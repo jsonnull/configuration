@@ -86,7 +86,7 @@
   tools.ghostty.enable = true;
   tools.nixcats.enable = true;
   tools.obsidian.enable = true;
-  tools.vscode.enable = true;
+  # tools.vscode.enable = true;
   tools.zed.enable = true;
   tools.gamedev.enable = true;
 

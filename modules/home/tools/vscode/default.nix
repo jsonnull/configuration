@@ -41,7 +41,7 @@ in
               name = "claude-code";
               publisher = "anthropic";
               version = "2.0.74";
-              sha256 = "sha256-2GhutC0n56fd3+GwLJQFYKuhUOiYWW6S5M3GlsYOEMM=";
+              sha256 = "sha256-iyWA87mJTvrqbDj5kA9k+d8l+h1KEd1j5oTQtC8a33I=";
             }
             {
               name = "gti-vscode";

@@ -27,7 +27,7 @@ in
 
   environment.systemPackages = [
     pkgs.sillytavern
-    pkgs.stable-diffusion-webui.forge.cuda
+    # pkgs.stable-diffusion-webui.forge.cuda # disabled: sphinx 9.1 incompatible with python 3.11
     llm-agents.claude-code
     llm-agents.qwen-code
   ];
