@@ -120,6 +120,13 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
   end,
 })
 
+-- Jess language
+vim.filetype.add({
+  extension = {
+    jess = "jess",
+  },
+})
+
 --------------------------------------------------------------------------------
 -- Plugin configurations
 --------------------------------------------------------------------------------
