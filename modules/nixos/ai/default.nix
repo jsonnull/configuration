@@ -7,16 +7,6 @@ let
   llm-agents = inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system};
 in
 {
-  services.ollama = {
-    enable = true;
-    loadModels = [
-      #"gemma3:12b"
-      #"gpt-oss:20b"
-    ];
-    openFirewall = true;
-    host = "[::]";
-  };
-
   networking.firewall.allowedTCPPorts = [
     # sillytavern
     8000
