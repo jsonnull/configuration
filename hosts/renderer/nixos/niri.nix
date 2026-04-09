@@ -89,8 +89,17 @@
         };
 
         layout = {
-          gaps = 30;
-          focus-ring.active.color = "#33b1ff";
+          gaps = 40;
+          focus-ring.active.gradient = {
+            from = "rgba(51, 177, 255, 0.6)";
+            to = "transparent";
+            angle = 180;
+          };
+          focus-ring.inactive.gradient = {
+            from = "rgba(82, 82, 82, 0.4)";
+            to = "transparent";
+            angle = 180;
+          };
         };
 
         outputs =
