@@ -22,6 +22,7 @@
     ../../../modules/home/tools/obsidian
     ../../../modules/home/tools/zed
     ../../../modules/home/tools/gamedev
+    ../../../modules/home/tools/waybar
     ../../../modules/home/tools/development
     ../../../modules/home/term
     ../../../modules/home/private
@@ -93,6 +94,7 @@
   # tools.vscode.enable = true;
   tools.zed.enable = true;
   tools.gamedev.enable = true;
+  tools.waybar.enable = true;
 
   programs.git = {
     enable = true;

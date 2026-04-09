@@ -25,7 +25,6 @@
 
   home-manager.users.json = {
     home.packages = with pkgs; [
-      ashell
       swww
       waypaper
       xwayland-satellite
@@ -82,12 +81,6 @@
       };
     };
 
-    xdg.configFile."ashell/config.toml".text = ''
-      [modules]
-      left = [ "SystemInfo" ]
-      right = [ "Clock", "Tray", "Settings" ]
-    '';
-
     programs.niri = {
       settings = {
         input.keyboard.xkb = {
@@ -133,7 +126,9 @@
           };
 
         spawn-at-startup = [
-          # { command = [ "ashell" ]; }
+          { command = [ "waybar" ]; }
+          # TODO: niri 25.08 auto-spawns xwayland-satellite and manages $DISPLAY.
+          # Remove this and the DISPLAY env below once verified.
           {
             command = [
               "xwayland-satellite"
