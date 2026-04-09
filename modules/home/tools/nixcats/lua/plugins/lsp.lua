@@ -86,6 +86,12 @@ vim.lsp.config.yamlls = {}
 
 vim.lsp.config.rust_analyzer = {}
 
+vim.lsp.config.jess_lsp = {
+  cmd = { vim.fn.expand("~/code/jess-lang/target/debug/jess-lsp") },
+  filetypes = { "jess" },
+  root_markers = { ".git" },
+}
+
 -- Enable all configured LSP servers
 vim.lsp.enable({
   "bashls",
@@ -98,6 +104,7 @@ vim.lsp.enable({
   "svelte",
   "yamlls",
   "rust_analyzer",
+  "jess_lsp",
 })
 
 -- Load typescript-tools lazily on TypeScript/JavaScript files
