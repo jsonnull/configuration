@@ -15,6 +15,7 @@
     ../../../modules/home/apps/slack
     ../../../modules/home/apps/chrome
     ../../../modules/home/apps/discord
+    ../../../modules/home/apps/keepassxc
     ../../../modules/home/tools/vscode
     ../../../modules/home/tools/ghostty
     ../../../modules/home/tools/nixcats
@@ -82,6 +83,7 @@
   apps.chrome.enable = true;
   apps.discord.enable = true;
   apps.slack.enable = true;
+  apps.keepassxc.enable = true;
 
   # Enable tool modules
   tools.dev-general.enable = true;
