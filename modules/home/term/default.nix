@@ -123,7 +123,7 @@
     sensibleOnTop = false;
     shell = "${pkgs.zsh}/bin/zsh";
     extraConfig = ''
-      set -g status-style bg=white,fg=black
+      set -g status-style bg=#161616,fg=#525252
 
       set -g default-terminal 'xterm-256color'
       set -as terminal-overrides ',xterm*:Tc:sitm=\E[3m'
