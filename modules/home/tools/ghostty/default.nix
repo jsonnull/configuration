@@ -25,8 +25,8 @@ in
         adjust-cell-width = "-10%";
 
         # Window
-        window-padding-x = 4;
-        window-padding-y = 4;
+        window-padding-x = 8;
+        window-padding-y = 8;
         window-theme = "ghostty";
         window-show-tab-bar = "never";
 
