@@ -22,12 +22,14 @@
     pkgs._7zz
     pkgs.unzip
     pkgs.unar
+    pkgs.nb
   ];
 
   home.sessionVariables = {
     NIXPKGS_ALLOW_UNFREE = "1";
     EDITOR = "nvim";
     TMUX_OVERRIDE_TERM = "false";
+    NB_BROWSER = "xdg-open";
   };
 
   programs.zsh = {
@@ -75,6 +77,8 @@
       ".claude/settings.local.json"
     ];
     settings = {
+      core.autocrlf = "input";
+      core.whitespace = "cr-at-eol";
       user.name = "Jason Nall";
       user.email = "json${"null"}${"@"}${"g"}${"ma"}${"il"}${"."}${"com"}";
       push.default = "current";

@@ -238,7 +238,7 @@
   };
 
   #services.gnome3.gnome-keyring.enable = true;
-  security.pam.services.sddm.enableGnomeKeyring = true;
+  #security.pam.services.sddm.enableGnomeKeyring = true;
 
   programs.nix-ld.enable = true;
 
