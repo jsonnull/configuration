@@ -9,10 +9,10 @@ buildGoModule rec {
   version = "1.36.7";
 
   src = fetchFromGitHub {
-    owner = "777genius";
+    owner = "jsonnull";
     repo = "claude-notifications-go";
-    rev = "v${version}";
-    hash = "sha256-fcLO7+E7oWI1YOwiB6fixnEBQ+pxntDFJ0FrkNEt+Fo=";
+    rev = "5608a3e";
+    hash = "sha256-KbdVZtDV1rRc1RnDgxWJ2mUGc7xeVzBPKHpOmZh8cnc=";
   };
 
   vendorHash = "sha256-uxkp08xQ0BrCcbmNFrG0k1DUFEoywSC3RVSvWno8gbk=";
@@ -25,7 +25,7 @@ buildGoModule rec {
 
   meta = {
     description = "Smart notifications plugin for Claude Code";
-    homepage = "https://github.com/777genius/claude-notifications-go";
+    homepage = "https://github.com/jsonnull/claude-notifications-go";
     license = lib.licenses.mit;
     mainProgram = "claude-notifications";
   };
