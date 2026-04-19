@@ -25,7 +25,7 @@
 
   home-manager.users.json = {
     home.packages = with pkgs; [
-      swww
+      awww
       waypaper
       xwayland-satellite
       wl-clipboard
@@ -144,7 +144,7 @@
               ":1"
             ];
           }
-          { command = [ "swww-daemon" ]; }
+          { command = [ "awww-daemon" ]; }
           { command = [ "waypaper --restore" ]; }
         ];
 
