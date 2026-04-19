@@ -9,9 +9,9 @@
     pkgs.repomix
     pkgs.ripgrep
     pkgs.nodejs_20
-    pkgs.nodePackages.typescript-language-server
-    pkgs.nodePackages.vscode-json-languageserver
-    pkgs.nodePackages.yaml-language-server
+    pkgs.typescript-language-server
+    pkgs.vscode-json-languageserver
+    pkgs.yaml-language-server
     pkgs.gh
     pkgs.graphite-cli
     pkgs.rust-analyzer
