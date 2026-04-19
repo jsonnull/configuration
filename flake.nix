@@ -28,6 +28,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    comfyui-nix = {
+      url = "github:utensils/comfyui-nix";
+    };
+
     "monochrome-vscode-theme" = {
       url = "github:jsonnull/github-vscode-theme-monochrome/main";
       inputs.nixpkgs.follows = "nixpkgs";
