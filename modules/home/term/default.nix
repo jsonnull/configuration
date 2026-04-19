@@ -16,7 +16,7 @@
     pkgs.graphite-cli
     pkgs.rust-analyzer
     pkgs.nil
-    pkgs.nixfmt-rfc-style
+    pkgs.nixfmt
     pkgs.smug
     pkgs.wget
     pkgs._7zz
@@ -72,6 +72,7 @@
 
   programs.git = {
     enable = true;
+    signing.format = null;
     ignores = [
       ".direnv"
       ".claude/settings.local.json"

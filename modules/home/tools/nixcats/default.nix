@@ -34,7 +34,7 @@ in
             yaml-language-server
             rust-analyzer
             # Formatters
-            nixfmt-rfc-style
+            nixfmt
             stylua
             prettierd
             # Linters
