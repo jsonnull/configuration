@@ -5,7 +5,7 @@
 }:
 let
   pkgs-master = import inputs.nixpkgs-master {
-    system = pkgs.system;
+    system = pkgs.stdenv.hostPlatform.system;
     config = pkgs.config;
   };
 in
