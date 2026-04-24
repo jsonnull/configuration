@@ -58,9 +58,6 @@
     enableZshIntegration = true;
     settings = {
       nix_shell.format = "via [$symbol$name](bold blue)";
-      nix_shell.symbol = " ";
-      nodejs.symbol = " ";
-      git_branch.symbol = " ";
     };
   };
 
