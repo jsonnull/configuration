@@ -167,7 +167,7 @@
           # Make these applications pretty
           {
             matches = [
-              { app-id = "com.mitchellh.ghostty"; }
+              { app-id = "kitty"; }
               { app-id = "code"; }
               { app-id = "tauonmb"; }
             ];
@@ -178,7 +178,7 @@
           {
             matches = [
               { app-id = "firefox"; }
-              { app-id = "com.mitchellh.ghostty"; }
+              { app-id = "kitty"; }
               { app-id = "org.kde.dolphin"; }
               { app-id = "obsidian"; }
             ];
@@ -210,7 +210,7 @@
           "Mod+Shift+Slash".action.show-hotkey-overlay = { };
 
           # Suggested binds for running programs: terminal, app launcher, screen locker.
-          "Mod+T".action.spawn = "ghostty";
+          "Mod+T".action.spawn = "kitty";
           "Mod+D".action.spawn = "fuzzel";
           "Super+Alt+L".action.spawn = "swaylock";
 
