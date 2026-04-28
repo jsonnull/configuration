@@ -1,6 +1,7 @@
 {
   pkgs,
   config,
+  lib,
   ...
 }:
 {
@@ -20,7 +21,7 @@
 
   programs.niri = {
     enable = true;
-    package = pkgs.niri;
+    package = pkgs.niri-unstable;
   };
 
   home-manager.users.json = {
@@ -83,6 +84,10 @@
 
     programs.niri = {
       settings = {
+        # Blur isn't yet a first-class option on niri-flake's very-refactor branch,
+        # so the rules live in a raw KDL include.
+        includes = lib.mkAfter [ ./blur.kdl ];
+
         input.keyboard.xkb = {
           layout = "us";
           variant = "dvorak";
@@ -164,15 +169,40 @@
             ];
             block-out-from = "screencast";
           }
-          # Make these applications pretty
+          # Don't draw the focus ring behind transparent windows — it bleeds
+          # through the background otherwise.
           {
             matches = [
               { app-id = "kitty"; }
               { app-id = "code"; }
               { app-id = "tauonmb"; }
             ];
-            opacity = 0.95;
             draw-border-with-background = false;
+          }
+          # kitty handles its own transparency via background_opacity so text
+          # stays crisp; window-level opacity here would dim text too.
+          {
+            matches = [
+              { app-id = "code"; }
+              { app-id = "tauonmb"; }
+            ];
+            opacity = 0.95;
+          }
+          # Rounded corners with content clipped to the rounded geometry.
+          {
+            matches = [
+              { app-id = "kitty"; }
+              { app-id = "firefox"; }
+              { app-id = "tauonmb"; }
+              { app-id = "slack"; }
+            ];
+            geometry-corner-radius = {
+              top-left = 10.0;
+              top-right = 10.0;
+              bottom-right = 10.0;
+              bottom-left = 10.0;
+            };
+            clip-to-geometry = true;
           }
           # Set 1/3 width for these applications
           {

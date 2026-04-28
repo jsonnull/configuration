@@ -18,7 +18,15 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    # Config module is on `very-refactor` (has `includes`, needed for niri 26.04 blur).
+    # Packages stay on `main` so we can use niri-flake's binary cache.
+    # See https://github.com/sodiboo/niri-flake/issues/1721
     niri = {
+      url = "github:sodiboo/niri-flake/very-refactor";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    niri-pkgs = {
       url = "github:sodiboo/niri-flake";
       inputs.nixpkgs.follows = "nixpkgs";
     };
@@ -95,7 +103,7 @@
       ];
 
       overlays = [
-        inputs.niri.overlays.niri
+        inputs.niri-pkgs.overlays.niri
         inputs.stable-diffusion-webui-nix.overlays.default
       ];
 

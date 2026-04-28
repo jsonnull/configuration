@@ -1,0 +1,17 @@
+window-rule {
+    match app-id="^kitty$"
+    match app-id="^tauonmb$"
+
+    background-effect {
+        blur true
+    }
+}
+
+// Fuzzel is a layer-shell, not a regular window, so it needs a layer-rule.
+layer-rule {
+    match namespace="^launcher$"
+
+    background-effect {
+        blur true
+    }
+}

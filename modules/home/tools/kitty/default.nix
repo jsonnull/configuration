@@ -23,6 +23,8 @@ in
 
         # Window
         window_padding_width = 8;
+        background_blur = 1;
+        background_opacity = "0.8";
         hide_window_decorations = "yes";
         tab_bar_style = "hidden";
         confirm_os_window_close = 0;
