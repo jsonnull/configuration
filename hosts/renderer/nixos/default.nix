@@ -46,6 +46,12 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+  boot.plymouth.enable = true;
+  boot.kernelParams = [
+    "quiet"
+    "splash"
+  ];
+
   boot.initrd.luks.devices."luks-9f4a94c8-8b60-405b-bbe9-42c13c394de0".device =
     "/dev/disk/by-uuid/9f4a94c8-8b60-405b-bbe9-42c13c394de0";
 
