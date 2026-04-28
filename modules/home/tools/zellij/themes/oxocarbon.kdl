@@ -1,0 +1,15 @@
+themes {
+    oxocarbon {
+        fg "#f2f4f8"
+        bg "#161616"
+        black "#161616"
+        red "#ee5396"
+        green "#42be65"
+        yellow "#ff7eb6"
+        blue "#78a9ff"
+        magenta "#be95ff"
+        cyan "#3ddbd9"
+        white "#dde1e6"
+        orange "#ff7eb6"
+    }
+}

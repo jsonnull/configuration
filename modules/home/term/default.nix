@@ -17,7 +17,6 @@
     pkgs.rust-analyzer
     pkgs.nil
     pkgs.nixfmt
-    pkgs.smug
     pkgs.wget
     pkgs._7zz
     pkgs.unzip
