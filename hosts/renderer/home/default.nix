@@ -25,6 +25,7 @@
     ../../../modules/home/tools/gamedev
     ../../../modules/home/tools/waybar
     ../../../modules/home/tools/claude
+    ../../../modules/home/tools/codex
     ../../../modules/home/tools/development
     ../../../modules/home/term
     ../../../modules/home/private
@@ -100,6 +101,7 @@
   tools.waybar.enable = true;
   tools.claude.enable = true;
   tools.claude.notifications.enable = true;
+  tools.codex.enable = true;
 
   programs.git = {
     enable = true;
