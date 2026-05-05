@@ -256,6 +256,9 @@
 
   services.hardware.openrgb.enable = true;
 
+  hardware.logitech.wireless.enable = true;
+  hardware.logitech.wireless.enableGraphical = true;
+
   fonts.packages = with pkgs; [
     inter
     nerd-fonts.iosevka
