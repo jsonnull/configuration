@@ -429,6 +429,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-zed": {
+      "locked": {
+        "lastModified": 1778940882,
+        "narHash": "sha256-vomNoamwngyJ0O9BmFH8BZaGjm4VTL9dcV7R+F75uxg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "b3a0792dc5b3a306358af98f93f74f35157c038b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1777826146,
@@ -517,6 +533,7 @@
         "nixCats": "nixCats",
         "nixpkgs": "nixpkgs_3",
         "nixpkgs-master": "nixpkgs-master",
+        "nixpkgs-zed": "nixpkgs-zed",
         "private": "private",
         "sops-nix": "sops-nix",
         "stable-diffusion-webui-nix": "stable-diffusion-webui-nix"

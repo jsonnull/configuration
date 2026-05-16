@@ -6,6 +6,10 @@
 
     nixpkgs-master.url = "github:NixOS/nixpkgs/master";
 
+    # Temporary package set for pulling a newer Zed without moving the
+    # system-wide nixpkgs input or the WiVRn nixpkgs-master input.
+    nixpkgs-zed.url = "github:NixOS/nixpkgs/master";
+
     nixCats.url = "github:BirdeeHub/nixCats-nvim";
 
     home-manager = {

@@ -175,6 +175,7 @@
             matches = [
               { app-id = "kitty"; }
               { app-id = "code"; }
+              { app-id = "dev.zed.Zed"; }
               { app-id = "tauonmb"; }
             ];
             draw-border-with-background = false;
