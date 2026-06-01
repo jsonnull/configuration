@@ -26,6 +26,7 @@
     ../../../modules/home/tools/waybar
     ../../../modules/home/tools/claude
     ../../../modules/home/tools/codex
+    ../../../modules/home/tools/warp-terminal
     ../../../modules/home/tools/development
     ../../../modules/home/term
     ../../../modules/home/private
@@ -102,6 +103,7 @@
   tools.claude.enable = true;
   tools.claude.notifications.enable = true;
   tools.codex.enable = true;
+  tools.warp-terminal.enable = true;
 
   programs.git = {
     enable = true;

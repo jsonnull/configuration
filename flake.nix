@@ -104,6 +104,7 @@
         "vscode"
         "vscode-extension-github-copilot"
         "vscode-extension-ms-vsliveshare-vsliveshare"
+        "warp-terminal"
       ];
 
       overlays = [
