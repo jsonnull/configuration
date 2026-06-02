@@ -178,6 +178,7 @@
   # Load kernel module
   boot.supportedFilesystems = [ "zfs" ];
   boot.zfs.extraPools = [ "storage" ];
+  boot.zfs.forceImportRoot = false;
   networking.hostId = "ad463218";
   boot.extraModulePackages = [
     config.boot.kernelPackages.${pkgs.zfs.kernelModuleAttribute}

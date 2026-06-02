@@ -8,7 +8,7 @@
   home.packages = [
     pkgs.repomix
     pkgs.ripgrep
-    pkgs.nodejs_20
+    pkgs.nodejs_26
     pkgs.typescript-language-server
     pkgs.vscode-json-languageserver
     pkgs.yaml-language-server
@@ -97,7 +97,11 @@
     shellWrapperName = "y";
     settings = {
       manager = {
-        ratio = [ 0 2 3 ];  # hide parent, current:preview = 2:3
+        ratio = [
+          0
+          2
+          3
+        ]; # hide parent, current:preview = 2:3
       };
       preview = {
         max_width = 6144;
@@ -105,12 +109,19 @@
       };
       opener = {
         video = [
-          { run = ''vlc "$@"''; orphan = true; desc = "VLC"; }
+          {
+            run = ''vlc "$@"'';
+            orphan = true;
+            desc = "VLC";
+          }
         ];
       };
       open = {
         prepend_rules = [
-          { mime = "video/*"; use = "video"; }
+          {
+            mime = "video/*";
+            use = "video";
+          }
         ];
       };
     };
