@@ -53,6 +53,11 @@
       url = "github:numtide/llm-agents.nix";
     };
 
+    ccusage = {
+      url = "github:ccusage/ccusage";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     # Points to public stub by default; override with real private repo locally:
     # --override-input private git+https://github.com/jsonnull/private-config
     # --override-input private path:/home/json/private-config

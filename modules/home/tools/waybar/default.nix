@@ -1,10 +1,53 @@
 {
   lib,
+  pkgs,
+  inputs,
   config,
   ...
 }:
 let
   cfg = config.tools.waybar;
+  ccusage = inputs.ccusage.packages.${pkgs.stdenv.hostPlatform.system}.default;
+  agentUsage = pkgs.writeShellScript "waybar-agent-usage" ''
+    today="$(${pkgs.coreutils}/bin/date +%F)"
+
+    if ! usage="$(${ccusage}/bin/ccusage daily --offline --json 2>/dev/null)"; then
+      ${pkgs.coreutils}/bin/printf '{"text":"$--","tooltip":"ccusage unavailable","class":"error"}\n'
+      exit 0
+    fi
+
+    cost="$(${pkgs.jq}/bin/jq --arg today "$today" -r '
+      (.daily // [])
+      | map(select(.period == $today))
+      | first
+      | .totalCost // 0
+    ' <<< "$usage")"
+
+    text="$(${pkgs.coreutils}/bin/printf '$%.2f' "$cost")"
+    tooltip="$(${pkgs.jq}/bin/jq --arg today "$today" -r '
+      def abbreviate:
+        if . >= 1000000000 then
+          "\(((. / 1000000000) * 100 | round / 100))B"
+        elif . >= 1000000 then
+          "\(((. / 1000000) * 100 | round / 100))M"
+        elif . >= 1000 then
+          "\(((. / 1000) * 100 | round / 100))K"
+        else
+          tostring
+        end;
+
+      (.daily // [])
+      | map(select(.period == $today))
+      | first as $row
+      | if $row == null then
+          "No agent usage recorded today"
+        else
+          "Agents: \(($row.metadata.agents // []) | join(", "))\nTokens: \(($row.totalTokens // 0 | abbreviate))\nCost: $\((($row.totalCost // 0) * 100 | round) / 100)"
+        end
+    ' <<< "$usage")"
+
+    ${pkgs.jq}/bin/jq -cn --arg text "$text" --arg tooltip "$tooltip" '{ text: $text, tooltip: $tooltip }'
+  '';
 in
 {
   options.tools.waybar.enable = lib.mkEnableOption "Enable Waybar";
@@ -22,6 +65,7 @@ in
           "niri/workspaces"
         ];
         modules-right = [
+          "custom/agent-usage"
           "tray"
           "clock"
         ];
@@ -41,6 +85,12 @@ in
 
         tray = {
           spacing = 8;
+        };
+
+        "custom/agent-usage" = {
+          exec = "${agentUsage}";
+          interval = 120;
+          return-type = "json";
         };
       };
 
@@ -71,6 +121,16 @@ in
           padding: 0 12px;
           color: #f2f4f8;
           font-weight: 500;
+        }
+
+        #custom-agent-usage {
+          padding: 0 12px;
+          color: #42be65;
+          font-weight: 500;
+        }
+
+        #custom-agent-usage.error {
+          color: #ff8389;
         }
 
         #tray {
