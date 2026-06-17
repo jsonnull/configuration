@@ -24,7 +24,10 @@ in
     xdg.configFile."zed/settings.json" = {
       force = true;
       source = json.generate "zed-settings.json" {
-        agent_servers."codex-acp".type = "registry";
+        agent_servers = {
+          "codex-acp".type = "registry";
+          claude.type = "registry";
+        };
         project_panel.dock = "right";
         outline_panel.dock = "right";
         collaboration_panel.dock = "right";
