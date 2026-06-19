@@ -11,6 +11,7 @@ let
     system = pkgs.stdenv.hostPlatform.system;
     config = pkgs.config;
   };
+  jessZed = inputs.jess-lang.packages.${pkgs.stdenv.hostPlatform.system}.zed;
   json = pkgs.formats.json { };
 in
 {
@@ -18,6 +19,8 @@ in
 
   config = lib.mkIf cfg.enable {
     home.packages = [ pkgs-zed.zed-editor ];
+
+    xdg.dataFile."zed/extensions/installed/jess".source = jessZed;
 
     xdg.configFile."zed/themes/oxocarbon.json".source = ./themes/oxocarbon.json;
 

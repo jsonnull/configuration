@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   pkgs,
   ...
 }:
@@ -223,6 +224,7 @@
 
     nautilus
     v4l-utils
+    inputs.jess-lang.packages.${pkgs.stdenv.hostPlatform.system}.compiler
   ];
 
   # Slack

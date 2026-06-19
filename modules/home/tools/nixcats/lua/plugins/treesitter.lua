@@ -3,17 +3,6 @@
 -- The new nvim-treesitter no longer has a configs module;
 -- highlight/indent are enabled automatically when parsers are available.
 
--- Jess language: register custom tree-sitter parser
--- nvim/parser/jess.so has the compiled grammar, nvim/queries/jess/ has highlights
-vim.opt.runtimepath:append(vim.fn.expand("~/code/jess-lang/nvim"))
-vim.treesitter.language.register("jess", "jess")
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = "jess",
-  callback = function()
-    vim.treesitter.start()
-  end,
-})
-
 -- Textobjects setup (lookahead for select)
 require("nvim-treesitter-textobjects").setup({
   select = {

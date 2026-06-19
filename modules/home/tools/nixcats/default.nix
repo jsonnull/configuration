@@ -92,6 +92,7 @@ in
               p.xml
               p.yaml
             ]))
+            inputs.jess-lang.packages.${pkgs.stdenv.hostPlatform.system}.nvim
             nvim-treesitter-textobjects
           ];
         };
